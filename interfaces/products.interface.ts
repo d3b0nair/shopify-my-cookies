@@ -4,8 +4,8 @@ export interface ProductModel {
   handle: string;
   description?: string;
   images: ImagesEdges;
-  options?: OptionsModel[];
-  variants?: VariantsEdges[];
+  options: OptionsModel[];
+  variants: VariantsEdges;
   priceRange: PriceRange;
 }
 
@@ -42,12 +42,12 @@ export interface ImageModel {
 
 export interface OptionsModel {
   name: string;
-  values?: string[];
+  values: string[];
   id: string;
 }
 
 export interface VariantsEdges {
-  edges: Array<ImageNode>;
+  edges: Array<VariantNode>;
 }
 
 export interface VariantNode {
@@ -55,8 +55,8 @@ export interface VariantNode {
 }
 
 export interface VariantModel {
-  selectedOptions?: SelectedOptionsModel[];
-  image: ImageModel[];
+  selectedOptions: SelectedOptionsModel[];
+  image?: ImageModel;
   title: string;
   id: string;
   priceV2: PriceV2Model;
@@ -68,5 +68,5 @@ export interface SelectedOptionsModel {
 }
 
 export interface PriceV2Model {
-  amount: string;
+  amount: number;
 }

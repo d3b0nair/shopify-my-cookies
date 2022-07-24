@@ -5,11 +5,7 @@ import { ProductCollectionNode } from '../interfaces/collection.interface';
 import { ProductList } from '../components';
 
 const Home: NextPage<HomeProps> = ({ products }: HomeProps): JSX.Element => {
-  return (
-    <div>
-      <ProductList products={products} />
-    </div>
-  );
+  return <ProductList products={products} />;
 };
 
 export async function getStaticProps() {

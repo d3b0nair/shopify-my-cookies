@@ -11,11 +11,8 @@ import { ProductPageComponent } from '../../page-components';
 export default function ProductPage({
   product,
 }: ProductPageProps): JSX.Element {
-  return (
-    <div>
-      <ProductPageComponent product={product} />
-    </div>
-  );
+
+  return <ProductPageComponent product={product} />;
 }
 
 export async function getStaticPaths() {
@@ -28,7 +25,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
@@ -53,7 +50,7 @@ export const getStaticProps: GetStaticProps<ProductPageProps, Params> = async ({
 
 export interface ProductPageProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  product?: ProductModel;
+  product: ProductModel;
 }
 
 interface Params extends ParsedUrlQuery {
