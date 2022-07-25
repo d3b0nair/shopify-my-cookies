@@ -2,8 +2,10 @@
 
 const Footer = (): JSX.Element => {
   return (
-    <footer className="border-b sticky top-0 z-20 bg-white">
-      place holder
+    <footer className="bottom-0 z-20overflow-hidden">
+      <p className="text-center text-offGrey">
+        Copyright © {new Date().getFullYear()} d3b0anir{' '}
+      </p>
     </footer>
   );
 };
