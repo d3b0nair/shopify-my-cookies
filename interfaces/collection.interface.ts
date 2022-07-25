@@ -1,23 +1,10 @@
-import { ProductModel } from './products.interface';
-
-export interface HomePageCollectionModel {
-  data?: HomePageData;
-}
-
-export interface HomePageData {
-  title: string;
-  collection: HomePageCollection;
-}
-
-export interface HomePageCollection {
-  title: string;
-  products: ProductsCollectionEdges;
-}
-
-export interface ProductsCollectionEdges {
-  edges: Array<ProductCollectionNode>;
-}
-
-export interface ProductCollectionNode {
-  node: ProductModel;
+import { IProductModel } from './products.interface';
+export interface IHomePageCollectionModel {
+  data: {
+    title: string;
+    collection: {
+      title: string;
+      products: { edges: Array<{ node: IProductModel }> };
+    };
+  };
 }
