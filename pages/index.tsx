@@ -19,7 +19,7 @@ const Home: NextPage = (): JSX.Element => {
       </div>
       <Image
         className="absolute"
-        src="/Hero.png"
+        src="https://github.com/d3b0nair/shopify-my-cookies/raw/shop-page/public/hero.png"
         alt="Cookie stack"
         layout="responsive"
         width={944}
