@@ -5,9 +5,10 @@ export const ProductOption = ({
   values,
   selectedOptions,
   setOptions,
+  ...props
 }: ProductOptionProps): JSX.Element => {
   return (
-    <fieldset>
+    <fieldset {...props}>
       <legend className="text-xl font-semibold">{name}</legend>
       <div className="inline-flex items-center flex-wrap">
         {values.map((value) => {
