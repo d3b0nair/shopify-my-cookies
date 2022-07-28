@@ -1,15 +1,12 @@
 import { DetailedHTMLProps, FieldsetHTMLAttributes } from 'react';
-import { OptionsModel } from '../../interfaces/products.interface';
 
 export interface ProductOptionProps
-  extends Omit<
-      DetailedHTMLProps<
-        FieldsetHTMLAttributes<HTMLFieldSetElement>,
-        HTMLFieldSetElement
-      >,
-      'name' | 'id'
-    >,
-    OptionsModel {
+  extends DetailedHTMLProps<
+    FieldsetHTMLAttributes<HTMLFieldSetElement>,
+    HTMLFieldSetElement
+  > {
+  name: string;
+  values: string[];
   selectedOptions: { [key: string]: string };
   setOptions: (name: string, value: string) => void;
 }

@@ -1,15 +1,25 @@
-import { useState } from 'react';
-import { ProductOption } from '..';
-import { OptionsModel } from '../../interfaces/products.interface';
+import { useState, useContext } from 'react';
+import { Button, ProductOption } from '..';
 import { floatToUSDCurrency } from '../../utils/helpers';
-import { ProductFormProps } from './ProductForm.props';
+import {
+  allOptionsType,
+  ProductFormProps,
+  IVariant,
+} from './ProductForm.props';
+import { CartContext } from '../../context/shopContext';
+import { IOptionModel } from '../../interfaces/products.interface';
 
-export const ProductForm = ({ product }: ProductFormProps): JSX.Element => {
-  const allVariantOptions =
+export const ProductForm = ({
+  product,
+  ...props
+}: ProductFormProps): JSX.Element => {
+  const { addToCart } = useContext(CartContext);
+
+  const allVariantOptions: Array<IVariant> =
     product.variants.edges &&
     product.variants.edges.map(({ node }) => {
       const variant = node;
-      const allOptions: { [key: string]: string } = {};
+      const allOptions: allOptionsType = {};
 
       variant.selectedOptions.map((option) => {
         allOptions[option.name] = option.value;
@@ -32,7 +42,7 @@ export const ProductForm = ({ product }: ProductFormProps): JSX.Element => {
     defaultValues[item.name] = item.values[0];
   });
 
-  const [selectedVariant, setSelectedVariant] = useState(allVariantOptions);
+  const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0]);
   const [selectedOptions, setSelectedOptions] = useState(defaultValues);
 
   const setOptions = (name: string, value: string): void => {
@@ -42,31 +52,50 @@ export const ProductForm = ({ product }: ProductFormProps): JSX.Element => {
         [name]: value,
       };
     });
+    const selection = {
+      ...selectedOptions,
+      [name]: value,
+    };
+
+    allVariantOptions.map((item) => {
+      if (JSON.stringify(item.options) === JSON.stringify(selection)) {
+        setSelectedVariant(item);
+      }
+    });
   };
 
   return (
-    <div className="rounded-2xl p-4 shadow-2xl flex flex-col w-full md:w-1/3">
-      <h2 className="text-3xl font-bold">{product.title}</h2>
-      <span className="pb-6">
-        {floatToUSDCurrency(product.variants.edges[0].node.priceV2.amount)}
-      </span>
+    <div
+      className="rounded-2xl p-5 shadow-2xl flex flex-col w-full min-h-[24rem] md:w-1/3 justify-between	"
+      {...props}
+    >
       <div>
-        {product.options.map(({ id, name, values }: OptionsModel) => {
-          return name === 'Title' ? null : (
-            <ProductOption
-              key={`option-${id}`}
-              id={id}
-              name={name}
-              values={values}
-              selectedOptions={selectedOptions}
-              setOptions={setOptions}
-            />
-          );
-        })}
+        <h2 className="text-3xl font-bold mt-1 text-primary">{product.title}</h2>
+        <span>
+          {floatToUSDCurrency(product.variants.edges[0].node.priceV2.amount)}
+        </span>
+        <div className="mt-5">
+          {product.options.map(({ id, name, values }: IOptionModel) => {
+            return name === 'Title' ? null : (
+              <ProductOption
+                key={`option-${id}`}
+                id={id}
+                name={name}
+                values={values}
+                selectedOptions={selectedOptions}
+                setOptions={setOptions}
+              />
+            );
+          })}
+        </div>
       </div>
-      <button className="bg-black rounded-lg text-white px-2 py-3 hover:bg-gray-800">
+      <Button
+        onClick={() => {
+          void addToCart(selectedVariant);
+        }}
+      >
         Add To Cart
-      </button>
+      </Button>
     </div>
   );
 };
