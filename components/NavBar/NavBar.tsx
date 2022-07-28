@@ -28,7 +28,7 @@ export const NavBar = ({
           className="cursor-pointer hover:text-primary"
           onClick={() => setCartOpen(!cartOpen)}
         >
-          <MiniCartIcon cartQuantity={cartQuantity} />
+          <MiniCartIcon  cartQuantity={cartQuantity} />
         </a>
       </div>
     </div>

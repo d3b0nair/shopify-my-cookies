@@ -6,6 +6,7 @@ import { CartContext } from '../../context/shopContext';
 import { floatToUSDCurrency } from '../../utils/helpers';
 import { IVariant } from '../ProductForm/ProductForm.props';
 import { Button } from '../index';
+import WowSuchEmptySVG from '../../assets/svg/Doggie.svg';
 
 export const Cart = ({ cart }: { cart: IVariant[] }) => {
   const { cartOpen, setCartOpen } = useContext(CartContext);
@@ -66,88 +67,93 @@ export const Cart = ({ cart }: { cart: IVariant[] }) => {
                       </div>
 
                       <div className="mt-8">
-                        <div className="flow-root">
-                          <ul
-                            role="list"
-                            className="-my-6 divide-y divide-gray-200"
-                          >
-                            {cart.map((product) => (
-                              <li key={product.id} className="flex py-6">
-                                <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <Image
-                                    src={product.image}
-                                    alt={product.title}
-                                    layout="fill"
-                                    objectFit="cover"
-                                  />
-                                </div>
+                        {cartTotal > 0 ? (
+                          <div className="flow-root">
+                            <ul
+                              role="list"
+                              className="-my-6 divide-y divide-gray-200"
+                            >
+                              {cart.map((product) => (
+                                <li key={product.id} className="flex py-6">
+                                  <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                    <Image
+                                      src={product.image}
+                                      alt={product.title}
+                                      layout="fill"
+                                      objectFit="cover"
+                                    />
+                                  </div>
 
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
-                                        <a href={product.image}>
-                                          {product.title}
-                                        </a>
-                                      </h3>
-                                      <p className="ml-4">
-                                        {floatToUSDCurrency(
-                                          product.variantPrice
-                                        )}
+                                  <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                        <h3>
+                                          <a href={product.image}>
+                                            {product.title}
+                                          </a>
+                                        </h3>
+                                        <p className="ml-4">
+                                          {floatToUSDCurrency(
+                                            product.variantPrice
+                                          )}
+                                        </p>
+                                      </div>
+                                      <p className="mt-1 text-sm text-gray-500">
+                                        {product.variantTitle}
                                       </p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                      {product.variantTitle}
-                                    </p>
-                                  </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
-                                      Qty {product.variantQuantity}
-                                    </p>
+                                    <div className="flex flex-1 items-end justify-between text-sm">
+                                      <p className="text-gray-500">
+                                        Qty {product.variantQuantity}
+                                      </p>
 
-                                    <div className="flex">
-                                      <button
-                                        type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
-                                      >
-                                        Remove
-                                      </button>
+                                      <div className="flex">
+                                        <button
+                                          type="button"
+                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        >
+                                          Remove
+                                        </button>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : (
+                          <div>
+                              <WowSuchEmptySVG width="100%" height="100%"/>
+                              <h2 className='text-center mt-10 text-5xl text-primary'>wow such empty</h2>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    {cart.length > 0 ? (
-                      <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                        <div className="flex justify-between text-base font-medium text-gray-900">
-                          <p>Subtotal</p>
-                          <p>{floatToUSDCurrency(cartTotal)}</p>
-                        </div>
-                        <p className="mt-0.5 text-sm text-gray-500">
-                          Shipping and taxes calculated at checkout.
-                        </p>
-                        <div className="mt-6 w-full">
-                          <Button style={{ width: '100%' }}>Checkout</Button>
-                        </div>
-                        <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                          <p>
-                            <span>or </span>
-                            <button
-                              type="button"
-                              className="font-medium text-primary hover:text-secondary"
-                              onClick={() => setCartOpen(false)}
-                            >
-                              Continue Shopping
-                              <span aria-hidden="true"> &rarr;</span>
-                            </button>
-                          </p>
-                        </div>
+                    <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                      <div className="flex justify-between text-base font-medium text-gray-900">
+                        <p>Subtotal</p>
+                        <p>{floatToUSDCurrency(cartTotal)}</p>
                       </div>
-                    ) : null}
+                      <p className="mt-0.5 text-sm text-gray-500">
+                        Shipping and taxes calculated at checkout.
+                      </p>
+                      <div className="mt-6 w-full">
+                        <Button className="w-full">Checkout</Button>
+                      </div>
+                      <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                        <p>
+                          <span>or </span>
+                          <button
+                            type="button"
+                            className="font-medium text-primary hover:text-accent"
+                            onClick={() => setCartOpen(false)}
+                          >
+                            Continue Shopping
+                            <span aria-hidden="true"> &rarr;</span>
+                          </button>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
