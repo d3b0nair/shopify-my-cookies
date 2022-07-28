@@ -6,3 +6,5 @@ export * from './Button/Button';
 export * from './MiniCartIcon/MiniCartIcon';
 export * from './CustomLink/CustomLink';
 export * from './Logo/Logo';
+export * from './NavBar/NavBar';
+export * from './Input/Input';

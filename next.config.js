@@ -6,7 +6,7 @@ const nextConfig = {
     SHOPIFY_STOREFRONT_API: process.env.SHOPIFY_STOREFRONT_API,
     SHOPIFY_STORE_DOMAIN: process.env.SHOPIFY_STORE_DOMAIN,
   },
-  images: { domains: ['cdn.shopify.com', 'github.com'] },
+  images: { domains: ['cdn.shopify.com'] },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

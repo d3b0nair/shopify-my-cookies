@@ -70,7 +70,7 @@ export const ProductForm = ({
       {...props}
     >
       <div>
-        <h2 className="text-3xl font-bold mt-1">{product.title}</h2>
+        <h2 className="text-3xl font-bold mt-1 text-primary">{product.title}</h2>
         <span>
           {floatToUSDCurrency(product.variants.edges[0].node.priceV2.amount)}
         </span>

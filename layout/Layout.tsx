@@ -22,7 +22,7 @@ const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {
   };
   return (
     <>
-      <div className="grid grid-cols-[1fr] mx-4 sm:mx-[10%] font-sans">
+      <div className="grid 2xl:mx-auto max-w-[1600px] max-h-[1000] grid-cols-[1fr] mx-4 sm:mx-[10%] font-sans">
         <a
           className={`${
             isSkipLinkDisplayed
