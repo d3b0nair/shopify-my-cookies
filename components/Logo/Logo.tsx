@@ -6,7 +6,7 @@ export const Logo = (): JSX.Element => {
       <Link href="/" passHref>
         <a className="cursor-pointer">
           <svg
-            className="hover:fill-primary fill-secondary"
+            className="hover:fill-accent fill-primary"
             width={100}
             height={100}
             viewBox="0 0 500 500"

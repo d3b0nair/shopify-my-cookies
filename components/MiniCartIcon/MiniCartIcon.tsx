@@ -13,7 +13,7 @@ export const MiniCartIcon = ({
       {currentPage === homepage ? null : (
         <div
           tabIndex={0}
-          className="relative flex justify-center	items-center stroke-secondary hover:stroke-primary text-md"
+          className="relative flex justify-center	items-center text-primary stroke-primary hover:text-accent hover:stroke-accent text-md"
         >
           <span className="absolute top-1">
             {cartQuantity < 9 ? cartQuantity : '>9'}

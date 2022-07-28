@@ -10,7 +10,7 @@ export const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
   const price = floatToUSDCurrency(product.priceRange.minVariantPrice.amount);
   return (
     <Link href={`/products/${handle}`}>
-      <a className="group hover:text-primary">
+      <a className="group text-primary hover:text-accent">
         <div className="w-full bg-offGrey rounded-3xl overflow-hidden">
           <div className="relative group-hover:opacity-75 h-72">
             <Image
