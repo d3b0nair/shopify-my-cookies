@@ -6,4 +6,6 @@ export interface ButtonProps
     HTMLButtonElement
   > {
   children?: ReactNode;
+  primary?: boolean;
+  transparent?: boolean;
 }

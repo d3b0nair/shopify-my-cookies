@@ -9,13 +9,13 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xs: `@media (min-width: 480px) { ... }`,
+        xs: `@media (min-width: 320px) { ... }`,
       },
       colors: {
         background: '#faf5f1',
         primary: '#61423c',
         secondary: '#ffe0ab75',
-        accent: '#f59e0b',
+        accent: 'pink',
         white: '#f8fafc',
         offGrey: '#c2c2c2',
         grey: '#6b7280',
