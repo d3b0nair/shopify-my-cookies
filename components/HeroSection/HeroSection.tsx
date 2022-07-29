@@ -19,7 +19,7 @@ export const HeroSection = (): JSX.Element => {
             className="mt-0 w-full md:px-6 px-9 md:py-4 py-6 md:text-base lg:text-2xl rounded-full text-offGrey focus:text-primary outline-primary"
             placeholder="Enter your email here..."
           />
-          <ArrowNarrowRightIcon className="absolute top-[24px] right-[20px] sm:top-[24px] sm:right-[15px] md:top-[16px] md:right-[24px] lg:top-[22px] lg:right-[25px] h-9 w-9  stroke-offGrey hover:stroke-accent cursor-pointer" />
+          <ArrowNarrowRightIcon className="absolute top-[20px] right-[20px] sm:top-[20px] sm:right-[15px] md:top-[12px] md:right-[24px] lg:top-[18px] lg:right-[25px] h-9 w-9  stroke-offGrey hover:stroke-accent cursor-pointer" />
         </div>
       </div>
       <div className="relative h-[40vh] md:h-[100%] w-[100%] order-first sm:order-last mb-[25px] sm:mb-0">
