@@ -9,7 +9,7 @@ export const NavBar = ({
   ...props
 }: NavBarProps): JSX.Element => (
   <div
-    className="grid grid-cols-[1fr_4fr_1fr] md:grid-cols-[100px_1fr_44px] items-center justify-between"
+    className="hidden sm:grid grid-cols-[1fr_4fr_1fr] md:grid-cols-[100px_1fr_44px] items-center justify-between"
     {...props}
   >
     <Logo />
@@ -28,7 +28,7 @@ export const NavBar = ({
           className="cursor-pointer hover:text-primary"
           onClick={() => setCartOpen(!cartOpen)}
         >
-          <MiniCartIcon  cartQuantity={cartQuantity} />
+          <MiniCartIcon cartQuantity={cartQuantity} />
         </a>
       </div>
     </div>

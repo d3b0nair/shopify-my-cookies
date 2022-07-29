@@ -14,7 +14,7 @@ export const MiniCartIcon = ({
       {currentPage === homepage ? null : (
         <div
           tabIndex={0}
-          className="relative flex justify-center	items-center text-primary hover:text-accent  text-md hover:stroke-accent stroke-primary"
+          className="relative flex justify-center	items-center text-primary hover:text-accent  text-base hover:stroke-accent stroke-primary"
           {...props}
         >
           <span className="absolute top-1">

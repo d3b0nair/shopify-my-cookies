@@ -22,7 +22,7 @@ const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {
   };
   return (
     <>
-      <div className="grid 2xl:mx-auto max-w-[1600px] max-h-[1000] grid-cols-[1fr] mx-4 sm:mx-[10%] font-sans">
+      <div className="scroll-smooth grid 2xl:mx-auto max-w-none max-h-max	 lg:max-w-[1600px] lg:max-h-[1000px] grid-cols-[1fr] mx-4 sm:mx-20  px-0 2xl:px-20 font-sans">
         <a
           className={`${
             isSkipLinkDisplayed
@@ -38,7 +38,7 @@ const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {
         <div className="min-h-screen" {...props}>
           <Header />
           <main
-            className="focus:outline-8 mt-8 mx-2"
+            className="focus:outline-8 md:mt-8 mx-2 md:mx-auto"
             ref={bodyRef}
             tabIndex={0}
             role="main"
