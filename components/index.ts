@@ -8,6 +8,6 @@ export * from './CustomLink/CustomLink';
 export * from './Logo/Logo';
 export * from './NavBar/NavBar';
 export * from './Input/Input';
-export * from './TextWithMiniIcon/TextWithMiniIcon';
+export * from './IconWithStyle/IconWithStyle';
 export * from './ProductsPreview/ProductsPreview';
 export * from './HeroSection/HeroSection';

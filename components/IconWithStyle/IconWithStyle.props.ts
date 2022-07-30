@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 
-export interface TextWithMiniIconProps
+export interface IconWithStyleProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children?: ReactNode;
 }

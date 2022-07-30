@@ -9,12 +9,12 @@ export const CustomLink = ({
 }: CustomLinkProps): JSX.Element => {
   return (
     <Link href={href} {...props}>
-      <a
-        className={`${
-          className ? className : ''
-        } mr-[5px] xs:mr-[10px] sm:mr-[20px] lg:mr-[45px]`}
-      >
-        <span className="font-semibold leading-loose cursor-pointer hover:text-accent text-lg xs:text-2xl mr-2 xs:mr-8 min-w-[0px] sm:min-w-[100px]">
+      <a>
+        <span
+          className={`${
+            className ? className : ''
+          }  font-semibold leading-loose cursor-pointer hover:text-accent text-lg xs:text-2xl mr-2 xs:mr-8 min-w-[0px] sm:min-w-[100px]`}
+        >
           {children}
         </span>
       </a>

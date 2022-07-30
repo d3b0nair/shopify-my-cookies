@@ -4,12 +4,6 @@ import { Cart } from '../../components/Cart/Cart';
 import { CartContext } from '../../context/shopContext';
 
 const Header = (): JSX.Element => {
-  const menu = [
-    { url: '/', title: 'Home' },
-    { url: '/store', title: 'Store' },
-    { url: '/contact', title: 'Contact' },
-  ];
-
   const { cart, cartOpen, setCartOpen } = useContext(CartContext);
 
   let cartQuantity = 0;
@@ -17,9 +11,8 @@ const Header = (): JSX.Element => {
     return (cartQuantity += item?.variantQuantity);
   });
   return (
-    <header className="top-0 z-20 mt-4 text-primary">
+    <header className="top-0 z-50 mt-4 text-primary sticky sm:relative pt-5 sm:pt-0">
       <NavBar
-        menu={menu}
         cartOpen={cartOpen}
         setCartOpen={setCartOpen}
         cartQuantity={cartQuantity}

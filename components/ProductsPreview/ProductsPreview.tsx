@@ -1,6 +1,6 @@
 import { CustomLink } from '../CustomLink/CustomLink';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { TextWithMiniIcon } from '../TextWithMiniIcon/TextWithMiniIcon';
+import { IconWithStyle } from '../IconWithStyle/IconWithStyle';
 import { ProductPreviewProps } from './ProductsPreview.props';
 import CookieIconSVG from '../../assets/svg/CookieIcon.svg';
 import MiniCartIconSVG from '../../assets/svg/MiniCartDetailed.svg';
@@ -39,7 +39,7 @@ export const ProductsPreview = ({
         </div>
       </div>
       <div className="flex justify-center mt-10">
-        <TextWithMiniIcon
+        <IconWithStyle
           tabIndex={0}
           className={`${!canLoad ? 'cursor-not-allowed' : ''}`}
           onClick={() => {
@@ -48,17 +48,18 @@ export const ProductsPreview = ({
             }
           }}
         >
-          Load more &nbsp;
+          <span>Load more</span>&nbsp;
           <CookieIconSVG height={22} width={22} />
-        </TextWithMiniIcon>
+        </IconWithStyle>
         <CustomLink
-          className="flex items-center pl-4 ml-4 border-l"
+          className="text-primary flex items-center pl-4 ml-4 border-l"
           href={'/store'}
         >
-          <TextWithMiniIcon>
-            Visit store &nbsp;
+          <IconWithStyle>
+            <span>Visit store</span>
+            &nbsp;
             <MiniCartIconSVG height={22} width={22} />
-          </TextWithMiniIcon>
+          </IconWithStyle>
         </CustomLink>
       </div>
     </div>
