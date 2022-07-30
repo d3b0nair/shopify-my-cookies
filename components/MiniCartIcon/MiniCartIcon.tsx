@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import MiniCartIconSVG from '../../assets/svg/MiniCart.svg';
 import { MiniCartProps } from './MiniCart.props';
+import { ShoppingCartIcon } from '@heroicons/react/outline';
 
 export const MiniCartIcon = ({
   cartQuantity,
@@ -14,13 +14,13 @@ export const MiniCartIcon = ({
       {currentPage === homepage ? null : (
         <div
           tabIndex={0}
-          className="relative flex justify-center	items-center text-primary hover:text-accent  text-base hover:stroke-accent stroke-primary"
+          className="hidden sm:border-0 border-primary p-1 sm:bg-transparent sm:p-0 rounded-full relative sm:flex justify-center	items-center text-red hover:text-accent  text-base hover:stroke-accent stroke-primary"
           {...props}
         >
           <span className="absolute top-1">
             {cartQuantity < 9 ? cartQuantity : '>9'}
           </span>
-          <MiniCartIconSVG width={44} height={44} />
+          <ShoppingCartIcon width={44} height={44} />
         </div>
       )}
     </>

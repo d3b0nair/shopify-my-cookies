@@ -1,10 +1,10 @@
-import { TextWithMiniIconProps } from './TextWithMiniIcon.props';
+import { IconWithStyleProps } from './IconWithStyle.props';
 
-export const TextWithMiniIcon = ({
+export const IconWithStyle = ({
   children,
   className,
   ...props
-}: TextWithMiniIconProps): JSX.Element => {
+}: IconWithStyleProps): JSX.Element => {
   return (
     <div
       className={`${

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import LogoSVG from '../../assets/svg/Logo.svg';
-export const Logo = (): JSX.Element => {
+export const Logo = ({ ...props }): JSX.Element => {
   return (
-    <div>
+    <div {...props}>
       <Link href="/" passHref>
         <a className="cursor-pointer">
           <LogoSVG
