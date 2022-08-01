@@ -4,6 +4,7 @@ import { menuList, mobileMenuList } from '../../utils/helpers';
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XCircleIcon } from '@heroicons/react/outline';
+import { useRouter } from 'next/router';
 
 export const NavBar = ({
   cartOpen,
@@ -11,6 +12,7 @@ export const NavBar = ({
   cartQuantity,
   ...props
 }: NavBarProps): JSX.Element => {
+  const router = useRouter();
   return (
     <nav
       className="bottom-0 flex justify-end sm:grid grid-cols-[1fr_4fr_1fr] md:grid-cols-[100px_1fr_44px] items-center sm:justify-between"
@@ -43,20 +45,17 @@ export const NavBar = ({
       <Popover className="sm:hidden block">
         {({ open }: { open: boolean }) => (
           <>
-            <Popover.Button className="bg-background rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-out duration-100">
-              {open ? (
-                <XCircleIcon
-                  className="stroke-grey hover:stroke-accent"
-                  width={44}
-                  height={44}
-                />
-              ) : (
-                <MenuIcon
-                  className="stroke-grey hover:stroke-accent"
-                  width={44}
-                  height={44}
-                />
-              )}
+            <Popover.Button className="bg-background rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-in-out duration-300 text-grey hover:text-accent">
+              <XCircleIcon
+                className={`${open ? '' : 'hidden'}`}
+                width={44}
+                height={44}
+              />
+              <MenuIcon
+                className={`${open ? 'hidden' : ''}`}
+                width={44}
+                height={44}
+              />
             </Popover.Button>
             <Transition
               show={open}
@@ -70,7 +69,7 @@ export const NavBar = ({
             >
               <Popover.Panel
                 static
-                className="flex border sm:border-0 border-accent fixed left-0 bottom-0 bg-background w-full text-center rounded-full mb-6 pt-2"
+                className="flex border sm:border-0 border-accent fixed left-0 bottom-0 bg-background text-center rounded-full mb-6 pt-2 w-[90%] ml-[5%]"
               >
                 {mobileMenuList.map(({ url, title, Icon }, index) => {
                   const centerOfList = Math.round(menuList.length / 2);
@@ -91,13 +90,16 @@ export const NavBar = ({
                       <span>{title}</span>
                     </>
                   );
-                  const linkStyle =
-                    'flex flex-col items-center mr-0 hover:text-accent text-offGrey';
+                  const linkStyle = `flex flex-col items-center mr-0 hover:text-accent ${
+                    router.asPath === url ? 'text-accent stroke-accent' : ''
+                  }`;
                   return (
                     <IconWithStyle
                       style={{ order: order, width: size }}
                       key={`key-link-${index}`}
-                      className={'justify-center'}
+                      className={
+                        'justify-center hover:text-accent hover:stroke-accent text-offGrey stroke-grey'
+                      }
                     >
                       {url === '' ? (
                         <a
