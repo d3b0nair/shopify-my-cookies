@@ -2,6 +2,10 @@ import { HomeIcon as HomePageIcon } from '@heroicons/react/outline';
 import { ShoppingBagIcon as StorePageIcon } from '@heroicons/react/outline';
 import { ChatAlt2Icon as ContactIcon } from '@heroicons/react/outline';
 import { ShoppingCartIcon as CartIcon } from '@heroicons/react/outline';
+import heroImage0 from '../public/hero.png';
+import heroImage1 from '../public/hero1.png';
+import heroImage2 from '../public/hero2.png';
+import heroImage3 from '../public/hero3.png';
 
 export const floatToUSDCurrency = (value: number): string =>
   new Intl.NumberFormat('en-US', {
@@ -10,7 +14,8 @@ export const floatToUSDCurrency = (value: number): string =>
     minimumFractionDigits: 2,
   }).format(value);
 
-const iconStyle = 'hover:stroke-accent stroke-grey hover:scale-110 ease-out duration-100';
+const iconStyle = 'hover:stroke-accent hover:scale-110 ease-out duration-100';
+const menuIconColor = '';
 
 export const menuList: Array<{
   url: string;
@@ -20,17 +25,38 @@ export const menuList: Array<{
   {
     url: '/',
     title: 'Home',
-    Icon: <HomePageIcon className={iconStyle} height={32} width={32} />,
+    Icon: (
+      <HomePageIcon
+        stroke={menuIconColor}
+        className={iconStyle}
+        height={32}
+        width={32}
+      />
+    ),
   },
   {
     url: '/store',
     title: 'Store',
-    Icon: <StorePageIcon className={iconStyle} height={32} width={32} />,
+    Icon: (
+      <StorePageIcon
+        stroke={menuIconColor}
+        className={iconStyle}
+        height={32}
+        width={32}
+      />
+    ),
   },
   {
     url: '/contact',
     title: 'Contact',
-    Icon: <ContactIcon className={iconStyle} height={32} width={32} />,
+    Icon: (
+      <ContactIcon
+        stroke={menuIconColor}
+        className={iconStyle}
+        height={32}
+        width={32}
+      />
+    ),
   },
 ];
 
@@ -39,6 +65,15 @@ export const mobileMenuList = [
   {
     url: '',
     title: 'Cart',
-    Icon: <CartIcon className={iconStyle} height={32} width={32} />,
+    Icon: (
+      <CartIcon
+        stroke={menuIconColor}
+        className={iconStyle}
+        height={32}
+        width={32}
+      />
+    ),
   },
 ];
+
+export const heroImages = [heroImage0, heroImage1, heroImage2, heroImage3];

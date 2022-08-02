@@ -1,42 +1,10 @@
 import Image from 'next/image';
-import { Input } from '../../components';
-import heroImage from '../../public/hero.png';
-import {
-  ArrowNarrowRightIcon as SendIcon,
-  CheckIcon as SuccessIcon,
-  XIcon as ErrorIcon,
-} from '@heroicons/react/outline';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { HeroBackdrop, HeroSubscriptionForm } from '../../components';
+import { heroImages } from '../../utils/helpers';
 
 export const HeroSection = (): JSX.Element => {
-  interface IFormInput {
-    email: string;
-  }
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    clearErrors,
-  } = useForm<IFormInput>();
-
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  useEffect(() => {
-    if (errors.email) {
-      setIsSuccess(false);
-    }
-  }, [errors.email]);
-
-  const onSubmit: SubmitHandler<IFormInput> = ({ email }) => {
-    console.log(`Simulating subscribing ${email} to newsletter`);
-    setIsSuccess(true);
-    reset();
-  };
-
-  const actionButtonStyle =
-    'absolute top-[24px] right-[20px] sm:top-[24px] sm:right-[15px] md:top-[16px] md:right-[24px] lg:top-[22px] lg:right-[25px] h-9 w-9 cursor-pointer';
+  const [selectedImage, setSelectedImage] = useState<number>(0);
 
   return (
     <>
@@ -48,55 +16,23 @@ export const HeroSection = (): JSX.Element => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua!
         </h2>
-        <form
-          className="relative w-full"
-          onSubmit={(e) => {
-            handleSubmit(onSubmit)(e).catch((err) => {
-              console.log(err);
-            });
-          }}
-        >
-          <Input
-            error={errors.email}
-            type="email"
-            {...register('email', {
-              required: {
-                value: true,
-                message: 'Enter an email address',
-              },
-              pattern: {
-                value:
-                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                message: 'Please enter a valid email address',
-              },
-            })}
-            className="mt-0 w-full md:px-6 px-9 md:py-4 py-6 md:text-base lg:text-2xl rounded-full text-offGrey focus:text-primary outline-primary"
-            placeholder="Enter your email here..."
-          />
-          <button role="button" type="submit" onClick={() => clearErrors()}>
-            {isSuccess ? (
-              <SuccessIcon
-                className={`${actionButtonStyle} stroke-green-300`}
-              />
-            ) : errors.email ? (
-              <ErrorIcon className={`${actionButtonStyle} stroke-red-400`} />
-            ) : (
-              <SendIcon
-                className={`${actionButtonStyle} stroke-offGrey hover:stroke-accent`}
-              />
-            )}
-          </button>
-        </form>
+        <HeroSubscriptionForm />
       </div>
-      <div className="relative h-[25vh] md:h-[100%] w-[100%] order-first sm:order-last mb-[25px] sm:mb-0">
-        <Image
-          className="sm:object-right-top md:object-right-top xl:object-right-bottom"
-          src={heroImage}
-          alt="Stack of cookie"
-          layout="fill"
-          objectFit="contain"
-          placeholder="blur"
+      <div className="flex relative h-[100%] w-[100%] order-first sm:order-last">
+        <HeroBackdrop
+          imageSelector={setSelectedImage}
+          selectedImage={selectedImage}
+          imageQty={heroImages.length}
         />
+        <div className="h-[35vh] sm:h-full w-full sm:w-[75%] lg:w-[60%] xl:w-[75%] relative">
+          <Image
+            className="object-center"
+            src={heroImages[selectedImage]}
+            alt="Cookie sample"
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
       </div>
     </>
   );
