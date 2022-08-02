@@ -9,7 +9,7 @@ export const ProductOption = ({
 }: ProductOptionProps): JSX.Element => {
   return (
     <fieldset {...props}>
-      <legend className="text-xl font-semibold text-primary">{name}</legend>
+      <legend className="text-xl font-semibold text-darkestGrey">{name}</legend>
       <div className="inline-flex items-center flex-wrap">
         {values.map((value) => {
           const checked = selectedOptions[name] === value;
@@ -32,8 +32,8 @@ export const ProductOption = ({
                 className={`p-2 my-3 text-lg rounded-full block cursor-pointer mr-3 ${
                   checked
                     ? 'text-white bg-primary'
-                    : 'text-darkestGrey bg-secondary'
-                }`}
+                    : 'text-darkestGrey bg-offSecondary'
+                } hover:text-white  hover:bg-orange-800 focus:bg-orange-800 active:bg-orange-900`}
               >
                 <span className="px-2">{value}</span>
               </div>

@@ -1,6 +1,6 @@
 import { CustomLink, Logo, MiniCartIcon, IconWithStyle } from '..';
 import { NavBarProps } from './NavBar.props';
-import { menuList, mobileMenuList } from '../../utils/helpers';
+import { menuList, mobileMenuList } from '../../utils/menuBuilder';
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XCircleIcon } from '@heroicons/react/outline';
@@ -101,7 +101,7 @@ export const NavBar = ({
                         'justify-center hover:text-accent hover:stroke-accent text-offGrey stroke-grey'
                       }
                     >
-                      {url === '' ? (
+                      {url === '#cart' ? (
                         <a
                           className={linkStyle}
                           onClick={() => setCartOpen(!cartOpen)}

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { floatToUSDCurrency } from '../../utils/helpers';
 import { ProductCardProps } from './ProductCard.props';
+import { RippleEffect } from '..';
 
 export const ProductCard = ({
   product,
@@ -19,8 +20,13 @@ export const ProductCard = ({
         } group text-primary hover:text-accent`}
       >
         <div className="w-full bg-offGrey rounded-3xl overflow-hidden">
-          <div className="relative group-hover:opacity-75 h-72">
+          <div className="relative group-hover:opacity-75 group-active:opacity-60 h-72">
             <Image src={url} alt={altText} layout="fill" objectFit="cover" />
+            <RippleEffect
+              duration={800}
+              bgColor={'bg-background'}
+              rippleSize={100}
+            />
           </div>
         </div>
         <h3 className="mt-4 text-lg font-medium">{title}</h3>

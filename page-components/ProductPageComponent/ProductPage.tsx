@@ -8,11 +8,11 @@ export const ProductPageComponent = ({
 }: ProductPageComponentProps): JSX.Element => {
   return (
     <div
-      className="flex flex-col justify-center items-center space-y-8 md:flex-row md:items-start md:space-y-0 md:space-x-4 lg:space-x-8 max-w-6xl w-11/12 mx-auto"
+      className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] max-w-[864px] gap-[20px] mx-auto mt-8 md:mt-0"
       {...props}
     >
-      <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl md:w-1/2">
-        <div className="relative h-[24rem] w-full">
+      <div className="w-full rounded-2xl overflow-hidden shadow-2xl">
+        <div className="h-[20rem] xs:h-[32rem] md:h-full relative">
           <Image
             src={product.images.edges[0].node.url}
             alt={product.images.edges[0].node.altText}

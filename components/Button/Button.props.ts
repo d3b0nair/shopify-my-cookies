@@ -8,4 +8,6 @@ export interface ButtonProps
   children?: ReactNode;
   primary?: boolean;
   transparent?: boolean;
+  ripple?: boolean;
+  standart?: boolean;
 }

@@ -13,14 +13,31 @@ module.exports = {
       },
       colors: {
         background: '#faf5f1',
-        primary: '#81574F',
-        secondary: '#e7bc8f',
-        offSecondary: '#ffe0ab',
-        accent: 'pink',
+        primary: '#c2410c',
+        secondary: '#f97316',
+        offSecondary: '#fed7aa',
+        accent: '#f87171',
+        accentDarker: '#ef4444',
+        accentLighter: '#fca5a5',
         white: '#f8fafc',
         offGrey: '#c2c2c2',
         grey: '#6b7280',
         darkestGrey: '#111827',
+      },
+      animation: {
+        ripple: 'ripple 1s',
+      },
+      keyframes: {
+        ripple: {
+          '0%': {
+            transform: 'scale(0)',
+            opacity: 1,
+          },
+          '100%': {
+            transform: 'scale(2)',
+            opacity: 0,
+          },
+        },
       },
     },
   },
