@@ -11,3 +11,5 @@ export * from './Input/Input';
 export * from './IconWithStyle/IconWithStyle';
 export * from './ProductsPreview/ProductsPreview';
 export * from './HeroSection/HeroSection';
+export * from './HeroBackdrop/HeroBackdrop';
+export * from './HeroSubscriptionForm/HeroSubscriptionForm';
