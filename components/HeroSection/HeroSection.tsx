@@ -31,6 +31,7 @@ export const HeroSection = (): JSX.Element => {
             alt="Cookie sample"
             layout="fill"
             objectFit="contain"
+            placeholder="blur"
           />
         </div>
       </div>
