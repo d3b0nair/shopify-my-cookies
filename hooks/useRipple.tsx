@@ -15,8 +15,8 @@ export default function useRipple(duration: number, customSize?: number) {
       if (rippleCount > 0) {
         bounce = setTimeout(() => {
           cleanUpFunction();
-          clearTimeout(bounce);
         }, duration);
+        clearTimeout(bounce);
       }
 
       return () => clearTimeout(bounce);
