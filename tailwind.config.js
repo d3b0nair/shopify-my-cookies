@@ -26,6 +26,7 @@ module.exports = {
       },
       animation: {
         ripple: 'ripple 1s',
+        bounceWithOpacity: 'bounceWithOpacity 700ms forwards',
       },
       keyframes: {
         ripple: {
@@ -36,6 +37,27 @@ module.exports = {
           '100%': {
             transform: 'scale(2)',
             opacity: 0,
+          },
+        },
+        bounceWithOpacity: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(-25%)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.76, 0.81)',
+          },
+          '25%': {
+            transform: 'translateY(0%)',
+            animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+          },
+          '75%': {
+            opacity: 1,
+            transform: 'translateY(-25%)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.76, 0.81)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0%)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.76, 0.81)',
           },
         },
       },
