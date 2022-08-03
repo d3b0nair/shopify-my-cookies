@@ -66,30 +66,35 @@ export const ProductForm = ({
 
   return (
     <div
-      className="rounded-2xl p-5 shadow-2xl flex flex-col w-full min-h-[24rem] md:w-1/3 justify-between	"
+      className="rounded-2xl p-5 shadow-2xl flex flex-col w-full justify-between	bg-violet-50"
       {...props}
     >
       <div>
-        <h2 className="text-3xl font-bold mt-1 text-primary">{product.title}</h2>
-        <span>
+        <h2 className="text-3xl font-bold my-1 text-primary">
+          {product.title}
+        </h2>
+        <span className="text-2xl">
           {floatToUSDCurrency(product.variants.edges[0].node.priceV2.amount)}
         </span>
-        <div className="mt-5">
-          {product.options.map(({ id, name, values }: IOptionModel) => {
-            return name === 'Title' ? null : (
-              <ProductOption
-                key={`option-${id}`}
-                id={id}
-                name={name}
-                values={values}
-                selectedOptions={selectedOptions}
-                setOptions={setOptions}
-              />
-            );
-          })}
-        </div>
+      </div>
+      <div className="my-5">
+        {product.options.map(({ id, name, values }: IOptionModel) => {
+          return name === 'Title' ? null : (
+            <ProductOption
+              key={`option-${id}`}
+              id={id}
+              name={name}
+              values={values}
+              selectedOptions={selectedOptions}
+              setOptions={setOptions}
+            />
+          );
+        })}
       </div>
       <Button
+        standart
+        primary
+        ripple
         onClick={() => {
           void addToCart(selectedVariant);
         }}

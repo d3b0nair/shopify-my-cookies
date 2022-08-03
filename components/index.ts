@@ -13,3 +13,7 @@ export * from './ProductsPreview/ProductsPreview';
 export * from './HeroSection/HeroSection';
 export * from './HeroBackdrop/HeroBackdrop';
 export * from './HeroSubscriptionForm/HeroSubscriptionForm';
+export * from './RippleEffect/RippleEffect';
+export * from './CartContainer/CartContainer';
+export * from './CartListSection/CartListSection';
+export * from './CartPriceSection/CartPriceSection';

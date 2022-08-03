@@ -20,7 +20,7 @@ export const MiniCartIcon = ({
           <span className="absolute top-1">
             {cartQuantity < 9 ? cartQuantity : '>9'}
           </span>
-          <ShoppingCartIcon width={44} height={44} />
+          <ShoppingCartIcon strokeWidth={1} width={44} height={44} />
         </div>
       )}
     </>

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { HeroBackdrop, HeroSubscriptionForm } from '../../components';
-import { heroImages } from '../../utils/helpers';
+import { heroImages } from '../../utils/heroList';
 
 export const HeroSection = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState<number>(0);
