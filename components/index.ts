@@ -17,3 +17,5 @@ export * from './RippleEffect/RippleEffect';
 export * from './CartContainer/CartContainer';
 export * from './CartListSection/CartListSection';
 export * from './CartPriceSection/CartPriceSection';
+export * from './NavBarDesktop/NavBarDesktop';
+export * from './NavBarResponsive/NavBarResponsive';
