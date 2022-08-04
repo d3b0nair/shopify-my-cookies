@@ -4,7 +4,11 @@ import { floatToUSDCurrency } from '../../utils/helpers';
 import { Button, CustomLink } from '../index';
 import { CartListSectionProps } from './CartListSection.props';
 
-export const CartListSection = ({ cart, cartTotal, setCartOpen }: CartListSectionProps) => {
+export const CartListSection = ({
+  cart,
+  cartTotal,
+  setCartOpen,
+}: CartListSectionProps) => {
   return (
     <div className="mt-8">
       {cartTotal > 0 ? (
@@ -20,7 +24,6 @@ export const CartListSection = ({ cart, cartTotal, setCartOpen }: CartListSectio
                     objectFit="cover"
                   />
                 </div>
-
                 <div className="ml-4 flex flex-1 flex-col">
                   <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">

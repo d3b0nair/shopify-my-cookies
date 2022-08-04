@@ -50,6 +50,7 @@ export const getProductsInCollection = async (): Promise<
           node {
             id
             title
+            description
             handle
             priceRange {
               minVariantPrice {

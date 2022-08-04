@@ -1,15 +1,14 @@
-import { ProductCard } from '../../components';
+import { CookieFlavorsCarousel, Logo } from '../../components';
 import { StorePageProps } from './StorePage.props';
 
 export const StorePage = ({ products, ...props }: StorePageProps) => {
   return (
-    <div {...props}>
-      <h2 className="text-2xl font-extrabold mb-6 ml-4 text-primary">Cookies</h2>
-      <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        {products.map((product) => (
-          <ProductCard key={product.node.id} product={product.node} />
-        ))}
-      </div>
+    <div className="flex flex-col mt-3 sm:mt-0" {...props}>
+      <Logo className="block sm:hidden mx-auto" />
+      <h2 className="text-center md:mx-0 text-2xl md:text-3xl lg:text-6xl font-bold my-5 sm:mb-20 text-primary">
+        Cookie Flavors
+      </h2>
+      <CookieFlavorsCarousel products={products} />
     </div>
   );
 };

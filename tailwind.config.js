@@ -13,11 +13,10 @@ module.exports = {
       },
       colors: {
         background: '#faf5f1',
-        primary: '#c2410c',
+        primary: '#f87171',
         secondary: '#f97316',
         offSecondary: '#fed7aa',
-        accent: '#f87171',
-        accentDarker: '#ef4444',
+        accent: '#ef4444',
         accentLighter: '#fca5a5',
         white: '#f8fafc',
         offGrey: '#c2c2c2',
@@ -26,9 +25,31 @@ module.exports = {
       },
       animation: {
         ripple: 'ripple 1s',
+        SlideFromTop: 'SlideFromTop 700ms forwards',
+        SlideFromBottom: 'SlideFromBottom 700ms forwards',
         bounceWithOpacity: 'bounceWithOpacity 700ms forwards',
       },
       keyframes: {
+        SlideFromTop: {
+          '0%': {
+            transform: 'translateY(-50%)',
+            opacity: 0.3,
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1,
+          },
+        },
+        SlideFromBottom: {
+          '0%': {
+            transform: 'translateY(50%)',
+            opacity: 0.3,
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1,
+          },
+        },
         ripple: {
           '0%': {
             transform: 'scale(0)',
