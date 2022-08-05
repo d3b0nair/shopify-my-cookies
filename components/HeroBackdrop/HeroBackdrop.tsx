@@ -11,7 +11,7 @@ export const HeroBackdrop = (): JSX.Element => {
   const [slideDirection, setSlideDirection] = useState<string>('');
 
   const arrowContainerStyle =
-    'flex items-center flex-col z-30 hover:text-darkestGrey stroke-background hover:stroke-darkestGrey cursor-pointer leading-none md:mr-4';
+    'flex items-center flex-col z-30 hover:text-darkestGrey cursor-pointer leading-none md:mr-4';
   const arrowIconStyle = 'h-10 w-[60px] lg:h-20 xl:h-28 xl:w-28 my-4';
   const textStyle = 'writing-vertical-lr rotate-180';
 
@@ -42,7 +42,6 @@ export const HeroBackdrop = (): JSX.Element => {
           tabIndex={0}
         >
           <ArrowNarrowUpIcon
-            stroke=""
             strokeWidth={1}
             className={arrowIconStyle}
           />
@@ -55,7 +54,6 @@ export const HeroBackdrop = (): JSX.Element => {
         >
           <span className={textStyle}>NEXT</span>
           <ArrowNarrowDownIcon
-            stroke=""
             strokeWidth={1}
             className={arrowIconStyle}
           />

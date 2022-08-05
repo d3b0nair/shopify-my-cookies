@@ -48,7 +48,11 @@ export const NavBarResponsive = ({
             {children}
           </a>
         ) : (
-          <CustomLink className={linkStyle} href={url}>
+          <CustomLink
+            aria-current={router.asPath === url ? 'page' : ''}
+            className={linkStyle}
+            href={url}
+          >
             {children}
           </CustomLink>
         )}

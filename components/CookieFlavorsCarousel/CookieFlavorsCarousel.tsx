@@ -3,7 +3,7 @@ import {
   ArrowNarrowLeftIcon,
 } from '@heroicons/react/outline';
 import { useState } from 'react';
-import { ProductCard } from '..';
+import { Paginator, ProductCard } from '..';
 import { CookieFlavorsCarouselProps } from './CookieFlavorsCarousel.props';
 
 export const CookieFlavorsCarousel = ({
@@ -11,7 +11,7 @@ export const CookieFlavorsCarousel = ({
   className,
   ...props
 }: CookieFlavorsCarouselProps): JSX.Element => {
-  const [index, setIndex] = useState<number>(Math.round(products.length / 2));
+  const [index, setIndex] = useState<number>(2);
   const [grabbing, setGrabbing] = useState<boolean>(false);
   const transitionDuration = 300;
 
@@ -80,66 +80,78 @@ export const CookieFlavorsCarousel = ({
     'hidden md:block absolute top-[50%] -translate-y-2/4 z-30';
 
   return (
-    <div
-      style={{ transformStyle: 'preserve-3d' }}
-      className={`${className ? className : ''} relative w-full h-[550px]`}
-      {...props}
-    >
+    <div {...props} className={className ? className : ''}>
       <div
-        className={`${IconContainerStyles} left-[-5%] 2xl:left-0`}
-        onClick={slideLeft}
+        style={{ transformStyle: 'preserve-3d' }}
+        className="relative w-full h-[550px]"
       >
-        <ArrowNarrowLeftIcon
-          className={arrowStyles}
-          stroke=""
-          strokeWidth={1}
-        />
-      </div>
-      {products.map((product, i) => {
-        let position: string;
-        if (Math.abs(index - i) < 2) {
-          position =
-            i === index ? 'activeCard' : i > index ? 'nextCard' : 'prevCard';
-        } else {
-          position = 'hidden';
-        }
-        return (
-          <ProductCard
-            currentIndex={i}
-            selectedCard={index}
-            cardStyle={position}
-            key={product.node.id}
-            product={product.node}
-            transitionDuration={transitionDuration}
-            onClick={() => {
-              return !grabbing
-                ? position === 'prevCard'
-                  ? slideLeft()
-                  : position === 'nextCard'
-                  ? slideRight()
-                  : null
-                : null;
-            }}
-            handleMouseDown={
-              position === 'activeCard'
-                ? handleMouseDown
-                : () => {
-                    return;
-                  }
-            }
+        <div
+          tabIndex={0}
+          className={`${IconContainerStyles} left-[-5%] 2xl:left-0`}
+          onClick={slideLeft}
+        >
+          <ArrowNarrowLeftIcon
+            className={arrowStyles}
+            stroke=""
+            strokeWidth={1}
           />
-        );
-      })}
-      <div
-        className={`${IconContainerStyles} right-[-5%] 2xl:right-0`}
-        onClick={slideRight}
-      >
-        <ArrowNarrowRightIcon
-          stroke=""
-          strokeWidth={1}
-          className={arrowStyles}
-        />
+          <span className="sr-only">Previous Product</span>
+        </div>
+        {products.map((product, i) => {
+          let position: string;
+          if (Math.abs(index - i) < 2) {
+            position =
+              i === index ? 'activeCard' : i > index ? 'nextCard' : 'prevCard';
+          } else {
+            position = 'hidden';
+          }
+          return (
+            <ProductCard
+              currentIndex={i}
+              selectedCard={index}
+              cardStyle={position}
+              key={product.node.id}
+              product={product.node}
+              transitionDuration={transitionDuration}
+              onClick={() => {
+                return !grabbing
+                  ? position === 'prevCard'
+                    ? slideLeft()
+                    : position === 'nextCard'
+                    ? slideRight()
+                    : null
+                  : null;
+              }}
+              handleMouseDown={
+                position === 'activeCard'
+                  ? handleMouseDown
+                  : () => {
+                      return;
+                    }
+              }
+            />
+          );
+        })}
+        <div
+          tabIndex={0}
+          className={`${IconContainerStyles} right-[-5%] 2xl:right-0`}
+          onClick={slideRight}
+        >
+          <ArrowNarrowRightIcon
+            stroke=""
+            strokeWidth={1}
+            className={arrowStyles}
+          />
+          <span className="sr-only">Next Product</span>
+        </div>
       </div>
+      <Paginator
+        dataLength={products.length}
+        activeIndex={index}
+        selectProduct={setIndex}
+        slideRight={slideRight}
+        slideLeft={slideLeft}
+      />
     </div>
   );
 };

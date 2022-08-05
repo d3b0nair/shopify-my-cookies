@@ -33,8 +33,11 @@ export const ProductCard = ({
     'z-[3] left-[50%] scale-100 translate-x-[-50%] bottom-[60px] translate-y-[30px] cursor-grab active:cursor-grabbing';
 
   const cardHiddenStyle = `z-[3] pointer-events-none scale-75 opacity-[0.4]	${
-    direction ? 'left-[200%] sm:left-[150%]' : 'left-[-100%] sm:left-[-50%]'
+    direction ?  'left-[200%] sm:left-[150%]' : 'left-[-100%] sm:left-[-50%]'
   }`;
+
+  const titleStyle =
+    'mt-4 text-xl text-accent hover:text-accentLighter font-bold ';
 
   const pickCardStyle =
     cardStyle === 'hidden'
@@ -47,6 +50,7 @@ export const ProductCard = ({
 
   return (
     <article
+      tabIndex={cardStyle !== 'hidden' ? 0 : -1}
       style={{ transitionDuration: `${transitionDuration}ms` }}
       className={`${pickCardStyle} absolute h-[500px] w-[300px] transition-[left,bottom,scale,transform]`}
       {...props}
@@ -70,11 +74,13 @@ export const ProductCard = ({
               />
             </div>
           </div>
-          <Link href={`/products/${handle}`}>
-            <a>
-              <h3 className="mt-4 text-xl text-accent hover:text-accentLighter font-bold">{title}</h3>
-            </a>
-          </Link>
+          {cardStyle === 'activeCard' ? (
+            <Link href={`/products/${handle}`}>
+              <h3 className={`${titleStyle} cursor-pointer`}>{title}</h3>
+            </Link>
+          ) : (
+            <h3 className={`${titleStyle}`}>{title}</h3>
+          )}
           <p className="mt-2 text-sm text-darkestGrey">{description}</p>
           <p className="mt-2 text-xl text-grey font-bold">{price}+</p>
         </div>

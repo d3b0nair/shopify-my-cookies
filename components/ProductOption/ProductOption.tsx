@@ -33,7 +33,7 @@ export const ProductOption = ({
                   checked
                     ? 'text-white bg-primary'
                     : 'text-darkestGrey bg-offSecondary'
-                } hover:text-white  hover:bg-orange-800 focus:bg-orange-800 active:bg-orange-900`}
+                } hover:text-white  hover:bg-red-400 focus:bg-red-400 active:bg-red-500`}
               >
                 <span className="px-2">{value}</span>
               </div>
