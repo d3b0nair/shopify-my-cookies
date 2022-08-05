@@ -34,6 +34,10 @@ export const CookieFlavorsCarousel = ({
         slideRight();
         if (index === products.length - 1) {
           card.style.left = '0';
+        } else {
+          setTimeout(() => {
+            card.style.left = '0';
+          }, 100);
         }
         onMouseUp();
         return;
@@ -43,6 +47,10 @@ export const CookieFlavorsCarousel = ({
         setGrabbing(true);
         if (index === 0) {
           card.style.left = '0';
+        } else {
+          setTimeout(() => {
+            card.style.left = '0';
+          }, 100);
         }
         onMouseUp();
         return;
@@ -54,8 +62,9 @@ export const CookieFlavorsCarousel = ({
       const quickReleaseLeft = offset < 0 && offset > -50;
       const quickReleaseRight = offset > 0 && offset < 50;
       if (quickReleaseLeft || quickReleaseRight) {
-        card.style.left = '0';
+        card.style.left = 'unset';
       }
+
       document.onmousemove = null;
       document.onmouseup = null;
     }
