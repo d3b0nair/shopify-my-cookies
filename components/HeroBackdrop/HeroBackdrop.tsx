@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export const HeroBackdrop = (): JSX.Element => {
-  const [selectedImage, setSelectedImage] = useState<number>(3);
+  const [selectedImage, setSelectedImage] = useState<number>(0);
   const [slideDirection, setSlideDirection] = useState<string>('');
 
   const arrowContainerStyle =
