@@ -8,7 +8,7 @@ import {
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 
-const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {
+const Layout = ({ children }: LayoutProps): JSX.Element => {
   const [isSkipLinkDisplayed, setIsSkipLinkDisplayed] =
     useState<boolean>(false);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {
   };
   return (
     <>
-      <div className="scroll-smooth grid 2xl:mx-auto max-w-none max-h-max	 lg:max-w-[1600px] lg:max-h-[1000px] grid-cols-[1fr] mx-4 sm:mx-20  px-0 2xl:px-20 font-sans">
+      <div className="scroll-smooth 2xl:mx-auto max-w-none max-h-max px-6 md:px-14 xl:px-24 font-sans overflow-hidden">
         <a
           className={`${
             isSkipLinkDisplayed
@@ -35,10 +35,10 @@ const Layout = ({ children, ...props }: LayoutProps): JSX.Element => {
         >
           Skip to main content
         </a>
-        <div className="min-h-screen" {...props}>
+        <div className="min-h-screen">
           <Header />
           <main
-            className="focus:outline-8 md:mt-8 mx-2 md:mx-auto"
+            className="focus:outline-8 md:mt-8 max-w-[1600px] mx-auto"
             ref={bodyRef}
             tabIndex={0}
             role="main"

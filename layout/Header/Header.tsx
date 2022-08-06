@@ -11,7 +11,7 @@ const Header = (): JSX.Element => {
     return (cartQuantity += item?.variantQuantity);
   });
   return (
-    <header className="top-0 z-50 mt-4 text-primary sticky sm:relative pt-5 sm:pt-0">
+    <header className="top-0 z-50 mt-4 text-primary fixed sm:relative pt-5 sm:pt-0 max-w-[1600px] max-h-[800px] mx-auto">
       <NavBar
         cartOpen={cartOpen}
         setCartOpen={setCartOpen}

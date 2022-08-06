@@ -7,7 +7,9 @@ const Store: NextPage<StoreProps> = ({
   products,
   ...props
 }: StoreProps): JSX.Element => {
-  return <StorePage products={products} {...props} />;
+  return (
+    <StorePage products={products} {...props} />
+  );
 };
 
 export default Store;
