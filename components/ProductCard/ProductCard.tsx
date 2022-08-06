@@ -9,7 +9,7 @@ export const ProductCard = ({
   cardStyle,
   currentIndex,
   selectedCard,
-  handleMouseDown,
+  onPointerEvent,
   transitionDuration,
   className,
   ...props
@@ -33,7 +33,7 @@ export const ProductCard = ({
     'z-[3] left-[50%] scale-100 translate-x-[-50%] bottom-[60px] translate-y-[30px] cursor-grab active:cursor-grabbing';
 
   const cardHiddenStyle = `z-[3] pointer-events-none scale-75 opacity-[0.4]	${
-    direction ?  'left-[200%] sm:left-[150%]' : 'left-[-100%] sm:left-[-50%]'
+    direction ? 'left-[200%] sm:left-[150%]' : 'left-[-100%] sm:left-[-50%]'
   }`;
 
   const titleStyle =
@@ -57,7 +57,8 @@ export const ProductCard = ({
     >
       <div
         style={{ transitionProperty: 'left' }}
-        onMouseDown={handleMouseDown}
+        onMouseDown={onPointerEvent}
+        onTouchStart={onPointerEvent}
         className={`${
           className ? className : ''
         } text-primary hover:text-accent absolute`}

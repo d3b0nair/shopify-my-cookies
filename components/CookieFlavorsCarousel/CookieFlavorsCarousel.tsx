@@ -15,21 +15,36 @@ export const CookieFlavorsCarousel = ({
   const [grabbing, setGrabbing] = useState<boolean>(false);
   const transitionDuration = 300;
 
-  function handleMouseDown(evt: React.MouseEvent<HTMLDivElement>) {
-    const card = evt.currentTarget;
-    const initialX = evt.clientX;
+  const onPointerEvent = (
+    evt: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+  ) => {
+    function isMouseEvent(
+      e: React.MouseEvent | React.TouchEvent
+    ): e is React.MouseEvent<HTMLDivElement> {
+      return e.type === 'mousedown';
+    }
+
+    const card = evt.currentTarget as HTMLElement;
+    const initialX = isMouseEvent(evt) ? evt.clientX : evt.touches[0].clientX;
+
     let offset = 0;
 
-    document.onmousemove = onMouseMove;
-    document.onmouseup = onMouseUp;
+    document.onmousemove = onPointerMove;
+    document.onmouseup = onPointerEnd;
+    document.ontouchmove = onPointerMove;
+    document.ontouchend = onPointerEnd;
 
     const preventOnClickEvent = () => {
       setGrabbing(true);
       setTimeout(() => setGrabbing(false), transitionDuration);
     };
 
-    function onMouseMove(e: MouseEvent) {
-      offset = e.clientX - initialX;
+    function onPointerMove(e: MouseEvent | TouchEvent) {
+      function isMouseEvent(e: MouseEvent | TouchEvent): e is MouseEvent {
+        return e.type === 'mousemove';
+      }
+      const clientX = isMouseEvent(e) ? e.clientX : e.touches[0].clientX;
+      offset = clientX - initialX;
       if (offset <= -50) {
         slideRight();
         if (index === products.length - 1) {
@@ -39,7 +54,7 @@ export const CookieFlavorsCarousel = ({
             card.style.left = '0';
           }, 100);
         }
-        onMouseUp();
+        onPointerEnd();
         return;
       }
       if (offset >= 50) {
@@ -52,12 +67,12 @@ export const CookieFlavorsCarousel = ({
             card.style.left = '0';
           }, 100);
         }
-        onMouseUp();
+        onPointerEnd();
         return;
       }
       card.style.left = `${offset}px`;
     }
-    function onMouseUp() {
+    function onPointerEnd() {
       preventOnClickEvent();
       const quickReleaseLeft = offset < 0 && offset > -50;
       const quickReleaseRight = offset > 0 && offset < 50;
@@ -67,8 +82,10 @@ export const CookieFlavorsCarousel = ({
 
       document.onmousemove = null;
       document.onmouseup = null;
+      document.ontouchmove = null;
+      document.ontouchend = null;
     }
-  }
+  };
 
   const slideLeft = () => {
     if (index - 1 >= 0) {
@@ -131,9 +148,9 @@ export const CookieFlavorsCarousel = ({
                     : null
                   : null;
               }}
-              handleMouseDown={
+              onPointerEvent={
                 position === 'activeCard'
-                  ? handleMouseDown
+                  ? onPointerEvent
                   : () => {
                       return;
                     }

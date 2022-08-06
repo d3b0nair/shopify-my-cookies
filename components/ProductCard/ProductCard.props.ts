@@ -1,4 +1,9 @@
-import { DetailedHTMLProps, HTMLAttributes, MouseEvent } from 'react';
+import {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  MouseEvent,
+  TouchEvent,
+} from 'react';
 import { IProductModel } from '../../interfaces/products.interface';
 
 export interface ProductCardProps
@@ -8,6 +13,8 @@ export interface ProductCardProps
   cardStyle?: string;
   currentIndex: number;
   selectedCard: number;
-  handleMouseDown?: (evt: MouseEvent<HTMLDivElement>) => void;
+  onPointerEvent?: (
+    evt: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+  ) => void;
   transitionDuration: number;
 }
