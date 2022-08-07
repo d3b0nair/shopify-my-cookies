@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 export const ProductCard = ({
   product,
   cardStyle,
+  cardsLength,
   currentIndex,
   selectedCard,
   onPointerEvent,
@@ -23,21 +24,47 @@ export const ProductCard = ({
     selectedCard > currentIndex ? setDirection(false) : setDirection(true);
   }, [currentIndex, direction, selectedCard]);
 
-  const nextCardStyle =
-    'cursor-zoom-in	bottom-0 opacity-[0.8] sm:opacity-[0.4] hover:opacity-[1] z-[2] scale-[80%] hover:scale-[90%] bottom-[100px] translate-y-[0] left-[100%] translate-x-[-100%] xl:left-[90%] xl:translate-x-[-90%] 2xl:left-[80%] 2xl:translate-x-[-80%]';
+  const middleOfCards = Math.round(cardsLength / 2);
+  const removeNextCardOnSmallScreen =
+    selectedCard === 0 || selectedCard === cardsLength - 1
+      ? 'hidden sm:block'
+      : '';
+  const removePreviousCardOnSmallScreen =
+    selectedCard === cardsLength || selectedCard === 1 ? 'hidden sm:block' : '';
+  const scalePreviousCardOnSmallScree =
+    middleOfCards > currentIndex
+      ? 'scale-[105%]'
+      : middleOfCards === currentIndex
+      ? 'scale-[105%]'
+      : 'scale-[110%]';
+  const scaleNextCardOnSmallScree =
+    middleOfCards > currentIndex
+      ? 'scale-[105%]'
+      : middleOfCards === currentIndex
+      ? 'scale-[105%]'
+      : 'scale-[110%]';
 
-  const prevCardStyle =
-    'cursor-zoom-in	z-[1] opacity-[0.4] hover:opacity-[1] scale-[80%] hover:scale-[90%] bottom-[100px] translate-y-[0] left-[1%] translate-x-[-1%] lg:left-[-1%] lg:translate-x-[-1%] xl:left-[11%] xl:translate-x-[-11%] 2xl:left-[20%] 2xl:translate-x-[-20%]';
+  const centerCardOnSmallScreen = `left-[50%] translate-x-[-50%]`;
 
-  const activeCardStyle =
-    'z-[3] left-[50%] scale-100 translate-x-[-50%] bottom-[60px] translate-y-[30px] cursor-grab active:cursor-grabbing';
+  const globalSideCardStyle = `top-0 cursor-zoom-in sm:opacity-[0.4] hover:opacity-[1] sm:scale-[80%] hover:scale-[90%]`;
 
-  const cardHiddenStyle = `z-[3] pointer-events-none scale-75 opacity-[0.4]	${
-    direction ? 'left-[200%] sm:left-[150%]' : 'left-[-100%] sm:left-[-50%]'
+  const positionCardOnRight = `sm:left-[100%] sm:translate-x-[-100%] xl:left-[90%] xl:translate-x-[-90%] 2xl:left-[80%] 2xl:translate-x-[-80%]`;
+
+  const positionCardOnLeft = `sm:left-[1%] sm:translate-x-[-1%] lg:left-[-1%] lg:translate-x-[-1%] xl:left-[11%] xl:translate-x-[-11%] 2xl:left-[20%] 2xl:translate-x-[-20%]`;
+
+  const nextCardStyle = `${removeNextCardOnSmallScreen} ${centerCardOnSmallScreen} ${globalSideCardStyle} z-[1] sm:z-[2] ${scaleNextCardOnSmallScree} ${positionCardOnRight}`;
+
+  const prevCardStyle = `${removePreviousCardOnSmallScreen} ${centerCardOnSmallScreen} ${globalSideCardStyle} z-[2] sm:z-[1] ${scalePreviousCardOnSmallScree} ${positionCardOnLeft}`;
+
+  const activeCardStyle = `${centerCardOnSmallScreen} z-[3] scale-100 top-0 translate-y-[0] sm:top-[50px] cursor-grab active:cursor-grabbing`;
+
+  const cardHiddenStyle = `z-[3] pointer-events-none scale-[80%] opacity-[0.4]	${
+    direction ? `left-[200%] sm:left-[150%]` : `left-[-100%] sm:left-[-50%]`
   }`;
 
-  const titleStyle =
-    'mt-4 text-xl text-accent hover:text-accentLighter font-bold ';
+  const titleStyle = `mt-4 text-xl text-accent hover:text-accentLighter font-bold`;
+
+  const cardSizeStyle = `h-[400px] sm:h-[450px] w-[250px] lg:h-[500px] lg:w-[300px]`;
 
   const pickCardStyle =
     cardStyle === 'hidden'
@@ -52,7 +79,7 @@ export const ProductCard = ({
     <article
       tabIndex={cardStyle !== 'hidden' ? 0 : -1}
       style={{ transitionDuration: `${transitionDuration}ms` }}
-      className={`${pickCardStyle} absolute h-[500px] w-[300px] transition-[left,bottom,scale,transform]`}
+      className={`${pickCardStyle} ${cardSizeStyle} absolute  transition-[left,top,scale,transform]`}
       {...props}
     >
       <div
@@ -63,9 +90,11 @@ export const ProductCard = ({
           className ? className : ''
         } text-primary hover:text-accent absolute`}
       >
-        <div className="shadow-[0_35px_60px_-15px_#c9a197] rounded-2xl p-5 flex flex-col justify-between	bg-white h-[500px] w-[300px] select-none">
+        <div
+          className={`${cardSizeStyle} shadow-[0_35px_60px_-15px_#c9a197] rounded-2xl p-5 flex flex-col justify-between	bg-white select-none`}
+        >
           <div className="w-full bg-offGrey rounded-3xl overflow-hidden">
-            <div className="relative group-hover:opacity-75 group-active:opacity-60 w-full min-h-[250px]">
+            <div className="relative w-full min-h-[200px] sm:min-h-[250px]">
               <Image
                 className="pointer-events-none"
                 src={url}

@@ -109,7 +109,7 @@ export const CookieFlavorsCarousel = ({
     <div {...props} className={className ? className : ''}>
       <div
         style={{ transformStyle: 'preserve-3d' }}
-        className="relative w-full h-[550px]"
+        className="relative w-full h-[450px] sm:h-[500px] lg:h-[550px]"
       >
         <div
           tabIndex={0}
@@ -135,6 +135,7 @@ export const CookieFlavorsCarousel = ({
             <ProductCard
               currentIndex={i}
               selectedCard={index}
+              cardsLength={products.length - 1}
               cardStyle={position}
               key={product.node.id}
               product={product.node}
