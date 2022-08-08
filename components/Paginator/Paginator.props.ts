@@ -12,4 +12,5 @@ export interface PaginatorProps
   selectProduct: Dispatch<SetStateAction<number>>;
   slideRight: () => void;
   slideLeft: () => void;
+  isSmallSize?: boolean;
 }

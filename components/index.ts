@@ -19,5 +19,7 @@ export * from './CartPriceSection/CartPriceSection';
 export * from './CartListItem/CartListItem';
 export * from './NavBarDesktop/NavBarDesktop';
 export * from './NavBarResponsive/NavBarResponsive';
-export * from './CookieFlavorsCarousel/CookieFlavorsCarousel';
+export * from './Carousel/Carousel';
 export * from './Paginator/Paginator';
+export * from './RecommendedList/RecommendedList';
+export * from './CarouselSliderButton/CarouselSliderButton';

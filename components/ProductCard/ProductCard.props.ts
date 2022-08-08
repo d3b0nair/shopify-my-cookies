@@ -8,9 +8,9 @@ import { IProductModel } from '../../interfaces/products.interface';
 
 export interface ProductCardProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  product: IProductModel;
+  product: Omit<IProductModel, 'variants' | 'options'>;
   className?: string;
-  cardStyle?: string;
+  cardStyle: 'activeCard' | 'prevCard' | 'nextCard' | 'hidden';
   cardsLength: number;
   currentIndex: number;
   selectedCard: number;
@@ -18,4 +18,5 @@ export interface ProductCardProps
     evt: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
   ) => void;
   transitionDuration: number;
+  isSmallSize?: boolean;
 }

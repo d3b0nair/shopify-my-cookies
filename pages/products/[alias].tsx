@@ -1,4 +1,8 @@
-import { getAllProducts, getProduct } from '../../lib/shopify';
+import {
+  getAllProducts,
+  getProduct,
+  getRecomendedProducts,
+} from '../../lib/shopify';
 import type {
   GetStaticPaths,
   GetStaticProps,
@@ -8,11 +12,18 @@ import type {
 import { IProductModel } from '../../interfaces/products.interface';
 import { ParsedUrlQuery } from 'querystring';
 import { ProductPageComponent } from '../../page-components';
+import { RecommendedList } from '../../components';
 
 const ProductPage: NextPage<ProductPageProps> = ({
   selectedProduct,
+  recomendedProducts,
 }): JSX.Element => {
-  return <ProductPageComponent product={selectedProduct} />;
+  return (
+    <div className="flex flex-col">
+      <ProductPageComponent product={selectedProduct} />
+      <RecommendedList selectedProduct={selectedProduct} recomendedProducts={recomendedProducts} />
+    </div>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -36,17 +47,28 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({
     };
   }
   const productHandle = params.alias;
+  const recommendedProductsList = await getRecomendedProducts(
+    productHandle.toString()
+  );
   const selectedProduct = await getProduct(productHandle.toString());
-  if (!selectedProduct) {
+  if (!selectedProduct || !recommendedProductsList) {
     return {
       notFound: true,
     };
   }
-  return { props: { selectedProduct: selectedProduct } };
+  return {
+    props: {
+      selectedProduct: selectedProduct,
+      recomendedProducts: recommendedProductsList,
+    },
+  };
 };
 
 interface ProductPageProps {
   selectedProduct: IProductModel;
+  recomendedProducts: {
+    node: Omit<IProductModel, 'variants' | 'options'>;
+  }[];
 }
 
 export default ProductPage;

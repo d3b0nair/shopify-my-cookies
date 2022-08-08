@@ -89,6 +89,7 @@ export const ShopProvider = ({
       updateCart(newCart);
     }
   };
+
   const removeCartItem = (itemToRemove: string) => {
     const updatedCart = cart.filter((item) => item.id !== itemToRemove);
 

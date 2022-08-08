@@ -8,11 +8,16 @@ export const Paginator = ({
   selectProduct,
   slideLeft,
   slideRight,
+  isSmallSize,
 }: PaginatorProps) => {
   const iconSize = 'h-4 w-4';
-  const defaultStyle =
-    'py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700  cursor-pointer';
+  const defaultStyle = `${
+    isSmallSize ? 'py-1 px-2' : 'py-2 px-3'
+  }  leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700  cursor-pointer`;
+  const arrowAdditionalClasses = `flex flex-col justify-center`;
+
   const dots = [];
+
   for (let index = 0; index < dataLength; index++) {
     dots.push(
       <a
@@ -37,7 +42,7 @@ export const Paginator = ({
       aria-label="Pagination"
     >
       <a
-        className={`${defaultStyle} rounded-l-md`}
+        className={`${defaultStyle} rounded-l-md ${arrowAdditionalClasses}`}
         onClick={() => slideLeft()}
         tabIndex={0}
       >
@@ -47,7 +52,7 @@ export const Paginator = ({
       {dots.map((dot) => dot)}
       <a
         tabIndex={0}
-        className={`${defaultStyle} rounded-r-md`}
+        className={`${defaultStyle} rounded-r-md ${arrowAdditionalClasses}`}
         onClick={() => slideRight()}
       >
         <span className="sr-only">Next</span>
