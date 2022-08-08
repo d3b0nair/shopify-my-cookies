@@ -11,6 +11,7 @@ export interface ProductCardProps
   product: IProductModel;
   className?: string;
   cardStyle?: string;
+  cardsLength: number;
   currentIndex: number;
   selectedCard: number;
   onPointerEvent?: (
