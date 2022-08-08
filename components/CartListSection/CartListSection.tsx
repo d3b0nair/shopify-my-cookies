@@ -7,17 +7,21 @@ export const CartListSection = ({
   cart,
   cartTotal,
   setCartOpen,
+  removeCartItem,
+  updateQty,
 }: CartListSectionProps) => {
   return (
     <div className="mt-8">
       {cartTotal > 0 ? (
         <div className="flow-root">
           <ul role="list" className="-my-6 divide-y divide-gray-200">
-            {cart.map((product) => (
+            {cart.map((product, i) => (
               <CartListItem
-                key={`CartItem-${product.id}`}
+                key={`CartItem-${product.id} ${i}}`}
                 product={product}
                 setCartOpen={setCartOpen}
+                removeCartItem={removeCartItem}
+                updateQty={updateQty}
               />
             ))}
           </ul>

@@ -8,7 +8,7 @@ export const ProductPageComponent = ({
 }: ProductPageComponentProps): JSX.Element => {
   return (
     <div
-      className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] max-w-[864px] gap-[20px] mx-auto mt-8 md:mt-0"
+      className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] max-w-[864px] gap-[20px] mx-auto mt-28 sm:mt-8 md:mt-0"
       {...props}
     >
       <div className="w-full rounded-2xl overflow-hidden shadow-2xl">

@@ -58,8 +58,8 @@ export const ProductCard = ({
 
   const activeCardStyle = `${centerCardOnSmallScreen} z-[3] scale-100 top-0 translate-y-[0] sm:top-[50px] cursor-grab active:cursor-grabbing`;
 
-  const cardHiddenStyle = `z-[3] pointer-events-none scale-[80%] opacity-[0.4]	${
-    direction ? `left-[200%] sm:left-[150%]` : `left-[-100%] sm:left-[-50%]`
+  const cardHiddenStyle = `z-[3] pointer-events-none scale-[80%] opacity-[0]	${
+    direction ? `left-[200%] sm:left-[150%]` : `left-[-100%] sm:left-[-50%] transition-none`
   }`;
 
   const titleStyle = `mt-4 text-xl text-accent hover:text-accentLighter font-bold`;
