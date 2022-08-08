@@ -5,7 +5,10 @@ import {
   IlineItemsModel,
 } from '../interfaces/checkout.interface';
 import { IHomePageCollectionModel } from '../interfaces/collection.interface';
-import { IProductModel } from '../interfaces/products.interface';
+import {
+  IProductModel,
+  IRecommendedProducts,
+} from '../interfaces/products.interface';
 import {
   IallProductsQuery,
   getProductQueryType,
@@ -194,4 +197,51 @@ export const updateCheckout = async (
   const res: IcheckoutLineItemsReplaceModel = await shopifyData(query);
 
   return res.data ? res.data.checkoutLineItemsReplace.checkout : {};
+};
+
+export const getRecomendedProducts = async (
+  handle: string
+): Promise<
+  {
+    node: Omit<IProductModel, 'variants' | 'options'>;
+  }[]
+> => {
+  const query = `{
+    product(handle: "${handle}") {
+      collections(first: 1) {
+        edges {
+          node {
+            products(first: 5) {
+              edges {
+                node {
+                  id
+                  title
+                  description
+                  handle
+                  priceRange {
+                    minVariantPrice {
+                      amount
+                    }
+                  }
+                  images(first: 5) {
+                    edges {
+                      node {
+                        url
+                        altText
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  `;
+  const res: IRecommendedProducts = await shopifyData(query);
+
+  return res.data.product.collections.edges[0].node.products.edges;
 };

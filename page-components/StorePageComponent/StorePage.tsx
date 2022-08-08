@@ -1,4 +1,4 @@
-import { CookieFlavorsCarousel, Logo } from '../../components';
+import {Carousel, Logo } from '../../components';
 import { StorePageProps } from './StorePage.props';
 
 export const StorePage = ({ products, ...props }: StorePageProps) => {
@@ -8,7 +8,7 @@ export const StorePage = ({ products, ...props }: StorePageProps) => {
       <h2 className="text-center mb-4 sm:mb-0 md:mx-0 text-lg sm:text-2xl md:text-3xl 2xl:text-6xl font-bold text-primary">
         Cookie Flavors
       </h2>
-      <CookieFlavorsCarousel products={products} />
+      <Carousel products={products} />
     </div>
   );
 };

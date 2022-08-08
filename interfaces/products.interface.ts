@@ -46,3 +46,21 @@ export interface IVariantModel {
     amount: number;
   };
 }
+
+export interface IRecommendedProducts {
+  data: {
+    product: {
+      collections: {
+        edges: Array<{
+          node: {
+            products: {
+              edges: Array<{
+                node: Omit<IProductModel, 'variants' | 'options'>;
+              }>;
+            };
+          };
+        }>;
+      };
+    };
+  };
+}

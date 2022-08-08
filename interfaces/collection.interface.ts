@@ -4,7 +4,9 @@ export interface IHomePageCollectionModel {
     title: string;
     collection: {
       title: string;
-      products: { edges: Array<{ node: IProductModel }> };
+      products: {
+        edges: Array<{ node: Omit<IProductModel, 'variants' | 'options'> }>;
+      };
     };
   };
 }
