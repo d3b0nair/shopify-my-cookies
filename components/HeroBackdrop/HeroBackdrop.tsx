@@ -41,10 +41,7 @@ export const HeroBackdrop = (): JSX.Element => {
           onClick={prevImage}
           tabIndex={0}
         >
-          <ArrowNarrowUpIcon
-            strokeWidth={1}
-            className={arrowIconStyle}
-          />
+          <ArrowNarrowUpIcon strokeWidth={1} className={arrowIconStyle} />
           <span className={textStyle}>PREVIOUS</span>
         </div>
         <div
@@ -53,10 +50,7 @@ export const HeroBackdrop = (): JSX.Element => {
           tabIndex={0}
         >
           <span className={textStyle}>NEXT</span>
-          <ArrowNarrowDownIcon
-            strokeWidth={1}
-            className={arrowIconStyle}
-          />
+          <ArrowNarrowDownIcon strokeWidth={1} className={arrowIconStyle} />
         </div>
       </div>
       <div className="h-[50vh] min-h-[265px] sm:h-full w-full sm:w-[75%] lg:w-[60%] xl:w-[75%] relative">
@@ -78,6 +72,7 @@ export const HeroBackdrop = (): JSX.Element => {
                   alt="Cookie sample"
                   layout="fill"
                   objectFit="contain"
+                  quality={80}
                 />
               </div>
             ) : null;

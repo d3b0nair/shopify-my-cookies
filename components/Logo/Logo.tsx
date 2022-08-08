@@ -10,6 +10,7 @@ export const Logo = ({ ...props }): JSX.Element => {
             width={100}
             height={100}
           />
+          <span className='sr-only'>Logo</span>
         </a>
       </Link>
     </div>

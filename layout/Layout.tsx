@@ -23,7 +23,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   return (
     <>
       <div className="scroll-smooth 2xl:mx-auto max-w-none max-h-max px-6 md:px-14 xl:px-24 font-sans overflow-hidden">
-        <a
+        <span
           className={`${
             isSkipLinkDisplayed
               ? 'h-auto'
@@ -34,7 +34,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
           tabIndex={0}
         >
           Skip to main content
-        </a>
+        </span>
         <div className="min-h-screen">
           <Header />
           <main

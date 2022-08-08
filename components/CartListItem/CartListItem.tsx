@@ -26,7 +26,7 @@ export const CartListItem = ({
       }, 2000);
     }
     return () => clearTimeout(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qty]);
 
   const handleOnChange = (evt: React.FormEvent<HTMLInputElement>) => {
@@ -64,7 +64,10 @@ export const CartListItem = ({
         <div>
           <div className="flex justify-between items-center text-base font-medium text-gray-900">
             <h3>
-              <CustomLink href={`/products/${product.handle}`}>
+              <CustomLink
+                href={`/products/${product.handle}`}
+                className="text-sm sm:text-md"
+              >
                 <span onClick={() => setCartOpen(false)}>{product.title}</span>
               </CustomLink>
             </h3>
@@ -72,9 +75,9 @@ export const CartListItem = ({
           </div>
           <p className="mt-1 text-sm text-gray-500">{product.variantTitle}</p>
         </div>
-        <div className="flex flex-1 items-end justify-between text-sm">
+        <div className="flex sm:flex-1 flex-col justify-between text-sm">
           <fieldset>
-            <div className="flex items-center">
+            <div className="flex flex-row items-center">
               <legend className="text-gray-500 mr-4">Qty:</legend>
               <button onClick={decreaseQty}>
                 <MinusIcon strokeWidth={1} className={`${iconSize}`} />
@@ -96,12 +99,12 @@ export const CartListItem = ({
               </button>
             </div>
           </fieldset>
-          <div className="flex">
+          <div className="flex self-end">
             <Button
               onClick={() => void removeCartItem(product.id)}
               transparent
               type="button"
-              className="font-medium text-base"
+              className="font-medium text-base mt-6 sm:mt-0"
             >
               Remove
             </Button>

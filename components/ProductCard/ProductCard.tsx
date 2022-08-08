@@ -65,9 +65,10 @@ export const ProductCard = ({
                 draggable="false"
                 className="pointer-events-none"
                 src={url}
-                alt={altText}
+                alt={altText ? altText : 'product image'}
                 layout="fill"
                 objectFit="cover"
+                quality={80}
               />
             </div>
           </div>

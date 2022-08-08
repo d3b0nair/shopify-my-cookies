@@ -59,10 +59,15 @@ export const HeroSubscriptionForm = () => {
             message: 'Please enter a valid email address',
           },
         })}
-        className="mt-0 w-full md:px-6 px-9 md:py-4 py-6 md:text-base lg:text-2xl rounded-full text-offGrey focus:text-black outline-primary"
+        className="mt-0 w-full md:px-6 px-9 md:py-4 py-6 md:text-base lg:text-2xl rounded-full text-grey focus:text-black outline-primary"
         placeholder="Enter your email here..."
       />
-      <button role="button" type="submit" onClick={() => clearErrors()}>
+      <button
+        aria-label="subscripe email address"
+        role="button"
+        type="submit"
+        onClick={() => clearErrors()}
+      >
         {isSuccess ? (
           <SuccessIcon className={`${actionButtonStyle} stroke-green-300`} />
         ) : errors.email ? (
