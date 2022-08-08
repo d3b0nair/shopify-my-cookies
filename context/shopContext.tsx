@@ -101,12 +101,11 @@ export const ShopProvider = ({
 
   const updateQty = (itemToUpdate: IVariant, qty: number) => {
     let updatedCart = [...cart];
+
     cart.map((item) => {
       if (item.id === itemToUpdate.id) {
         item.variantQuantity = qty;
         updatedCart = [...cart];
-      } else {
-        updatedCart = [...cart, itemToUpdate];
       }
     });
     updateCart(updatedCart);

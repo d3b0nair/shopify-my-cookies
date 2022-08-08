@@ -23,10 +23,11 @@ export const CartListItem = ({
     } else {
       timer = setTimeout(() => {
         updateQty(product, qty);
-      }, 1000);
-      return () => clearTimeout(timer);
+      }, 2000);
     }
-  }, [product, qty, removeCartItem, updateQty]);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qty]);
 
   const handleOnChange = (evt: React.FormEvent<HTMLInputElement>) => {
     evt.preventDefault();
