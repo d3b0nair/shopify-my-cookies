@@ -65,9 +65,19 @@ export const ProductCard = ({
                 draggable="false"
                 className="pointer-events-none"
                 src={url}
-                alt={altText}
+                alt={altText ? altText : 'product image'}
                 layout="fill"
                 objectFit="cover"
+                quality={
+                  cardStyle === 'activeCard' ? (isSmallSize ? 40 : 80) : 1
+                }
+                priority={
+                  cardStyle === 'activeCard'
+                    ? isSmallSize
+                      ? false
+                      : true
+                    : false
+                }
               />
             </div>
           </div>
@@ -95,3 +105,4 @@ export const ProductCard = ({
     </article>
   );
 };
+export default ProductCard;

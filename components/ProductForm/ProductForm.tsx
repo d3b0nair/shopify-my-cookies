@@ -104,3 +104,4 @@ export const ProductForm = ({
     </div>
   );
 };
+export default ProductForm;

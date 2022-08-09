@@ -20,7 +20,7 @@ export const Paginator = ({
 
   for (let index = 0; index < dataLength; index++) {
     dots.push(
-      <a
+      <span
         key={`paginator-${index}`}
         tabIndex={0}
         onClick={() => selectProduct(index)}
@@ -31,7 +31,7 @@ export const Paginator = ({
         } ${defaultStyle}`}
       >
         {index + 1}
-      </a>
+      </span>
     );
   }
 
@@ -41,23 +41,23 @@ export const Paginator = ({
       className="relative z-0 flex my-0 sm:my-16 justify-center rounded-md -space-x-px"
       aria-label="Pagination"
     >
-      <a
+      <span
         className={`${defaultStyle} rounded-l-md ${arrowAdditionalClasses}`}
         onClick={() => slideLeft()}
         tabIndex={0}
       >
         <span className="sr-only">Previous</span>
         <ChevronLeftIcon className={iconSize} />
-      </a>
+      </span>
       {dots.map((dot) => dot)}
-      <a
+      <span
         tabIndex={0}
         className={`${defaultStyle} rounded-r-md ${arrowAdditionalClasses}`}
         onClick={() => slideRight()}
       >
         <span className="sr-only">Next</span>
         <ChevronRightIcon className={iconSize} />
-      </a>
+      </span>
     </nav>
   );
 };

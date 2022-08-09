@@ -25,12 +25,12 @@ export const NavBarDesktop = ({
       </div>
       <div>
         <div>
-          <a
+          <span
             className="cursor-pointer hover:text-primary"
             onClick={() => setCartOpen(!cartOpen)}
           >
             <MiniCartIcon cartQuantity={cartQuantity} />
-          </a>
+          </span>
         </div>
       </div>
     </>

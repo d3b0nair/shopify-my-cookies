@@ -63,13 +63,14 @@ export const NavBarResponsive = ({
   const buttonStyle = `bg-zinc-50 rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-in-out duration-300 text-grey hover:text-accent`;
 
   const OpenButton = () => (
-    <Popover.Button className={buttonStyle}>
+    <Popover.Button aria-label="open navigation" className={buttonStyle}>
       <OpenIcon width={44} height={44} />
     </Popover.Button>
   );
 
   const CloseButton = ({ open }: { open: boolean }) => (
     <button
+      aria-label="close navigation"
       className={`${
         open ? 'opacity-1' : 'opacity-0'
       }  ${buttonStyle} absolute bottom-[20%] right-1/2 translate-x-1/2`}
