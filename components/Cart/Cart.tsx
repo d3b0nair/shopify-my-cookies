@@ -4,7 +4,7 @@ import { CartContext } from '../../context/shopContext';
 import { IVariant } from '../ProductForm/ProductForm.props';
 
 export const Cart = ({ cart }: { cart: IVariant[] }) => {
-  const { cartOpen, setCartOpen, removeCartItem, updateQty } =
+  const { cartOpen, setCartOpen, removeCartItem, updateQty, checkOutUrl } =
     useContext(CartContext);
   let cartTotal = 0;
   cart.map((item) => {
@@ -18,6 +18,7 @@ export const Cart = ({ cart }: { cart: IVariant[] }) => {
       setCartOpen={setCartOpen}
       removeCartItem={removeCartItem}
       updateQty={updateQty}
+      checkOutUrl={checkOutUrl}
     />
   );
 };
