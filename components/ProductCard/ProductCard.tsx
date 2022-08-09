@@ -68,7 +68,16 @@ export const ProductCard = ({
                 alt={altText ? altText : 'product image'}
                 layout="fill"
                 objectFit="cover"
-                quality={80}
+                quality={
+                  cardStyle === 'activeCard' ? (isSmallSize ? 40 : 80) : 1
+                }
+                priority={
+                  cardStyle === 'activeCard'
+                    ? isSmallSize
+                      ? false
+                      : true
+                    : false
+                }
               />
             </div>
           </div>
@@ -96,3 +105,4 @@ export const ProductCard = ({
     </article>
   );
 };
+export default ProductCard;

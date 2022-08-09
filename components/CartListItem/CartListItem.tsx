@@ -58,6 +58,7 @@ export const CartListItem = ({
           alt={product.title}
           layout="fill"
           objectFit="cover"
+          quality={40}
         />
       </div>
       <div className="ml-4 flex flex-1 flex-col">

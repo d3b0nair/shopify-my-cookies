@@ -72,7 +72,8 @@ export const HeroBackdrop = (): JSX.Element => {
                   alt="Cookie sample"
                   layout="fill"
                   objectFit="contain"
-                  quality={80}
+                  placeholder="blur"
+                  priority
                 />
               </div>
             ) : null;

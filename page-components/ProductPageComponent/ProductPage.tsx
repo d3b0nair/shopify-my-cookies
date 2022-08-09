@@ -1,6 +1,11 @@
 import Image from 'next/image';
-import { ProductForm } from '../../components';
 import { ProductPageComponentProps } from './ProductPage.props';
+
+import dynamic from 'next/dynamic';
+
+const DynamicProductForm = dynamic(
+  () => import('../../components/ProductForm/ProductForm')
+);
 
 export const ProductPageComponent = ({
   product,
@@ -19,10 +24,12 @@ export const ProductPageComponent = ({
             alt={altText ? altText : 'product image'}
             layout="fill"
             objectFit="cover"
+            quality={80}
+            priority
           />
         </div>
       </div>
-      <ProductForm product={product} />
+      <DynamicProductForm product={product} />
     </div>
   );
 };

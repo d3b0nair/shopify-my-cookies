@@ -1,7 +1,11 @@
-import { useContext } from 'react';
-import { NavBar } from '../../components';
-import { Cart } from '../../components/Cart/Cart';
+import { Suspense, useContext } from 'react';
 import { CartContext } from '../../context/shopContext';
+import dynamic from 'next/dynamic';
+import { NavBar } from '../../components';
+
+const DynamicCart = dynamic(() => import('../../components/Cart/Cart'), {
+  suspense: true,
+});
 
 const Header = (): JSX.Element => {
   const { cart, cartOpen, setCartOpen } = useContext(CartContext);
@@ -17,7 +21,9 @@ const Header = (): JSX.Element => {
         setCartOpen={setCartOpen}
         cartQuantity={cartQuantity}
       />
-      <Cart cart={cart} />
+      <Suspense fallback={`Loading...`}>
+        <DynamicCart cart={cart} />
+      </Suspense>
     </header>
   );
 };

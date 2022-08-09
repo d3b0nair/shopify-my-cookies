@@ -21,3 +21,4 @@ export const Cart = ({ cart }: { cart: IVariant[] }) => {
     />
   );
 };
+export default Cart;
