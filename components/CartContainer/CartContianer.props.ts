@@ -14,4 +14,5 @@ export interface CartContianerProps
   setCartOpen: Dispatch<SetStateAction<boolean>>;
   removeCartItem: (itemToRemove: string) => void;
   updateQty: (itemToUpdate: IVariant, qty: number) => void;
+  checkOutUrl?: string;
 }

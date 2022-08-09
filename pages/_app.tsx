@@ -12,10 +12,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Shopify My Cookies</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:site_name" content="Shopify My Cookies" />
         <meta charSet="UTF-8" />
-        <meta property="og:locale" content="us_US" />
+        <meta property="og:locale" content="en_US" />
         <meta
           name="description"
+          content="All kinds of cookies! Wide variety of options that satisfies the most picky person."
+        />
+        <meta
+          property="og:description"
           content="All kinds of cookies! Wide variety of options that satisfies the most picky person."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
