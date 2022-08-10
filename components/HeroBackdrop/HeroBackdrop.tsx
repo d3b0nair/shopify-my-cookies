@@ -8,15 +8,13 @@ import { useState } from 'react';
 
 export const HeroBackdrop = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState<number>(0);
-  const [slideDirection, setSlideDirection] = useState<string>('');
 
   const arrowContainerStyle =
-    'flex items-center flex-col z-30 hover:text-darkestGrey cursor-pointer leading-none md:mr-4';
+    'flex items-center flex-col z-30 text-white transition-colors cursor-pointer leading-none mr-[5%] sm:mr-[15%] md:mr-[15%] lg:mr-[20%] xl:mr-[15%] hover:text-secondary';
   const arrowIconStyle = 'h-10 w-[60px] lg:h-20 xl:h-28 xl:w-28 my-4';
-  const textStyle = 'writing-vertical-lr rotate-180';
+  const textStyle = 'writing-vertical-lr rotate-180 text-md sm:text-2xl md:text-3xl lg:text-4xl';
 
   const nextImage = () => {
-    setSlideDirection('up');
     if (selectedImage < heroImages.length - 1) {
       setSelectedImage(selectedImage + 1);
     } else {
@@ -25,7 +23,6 @@ export const HeroBackdrop = (): JSX.Element => {
   };
 
   const prevImage = () => {
-    setSlideDirection('down');
     if (selectedImage > 0) {
       setSelectedImage(selectedImage - 1);
     } else {
@@ -35,7 +32,10 @@ export const HeroBackdrop = (): JSX.Element => {
 
   return (
     <>
-      <div className="flex text-base sm:text-lg md:text-xl xl:text-3xl 2xl:text-4xl text-background bg-primary flex-col justify-between absolute right-0 items-end w-[60%] h-full select-none">
+      <div
+        style={{ borderRadius: '0% 100% 0% 100% / 0% 0% 100% 100%' }}
+        className="z-30 flex text-white bg-accentLighter flex-col justify-evenly absolute  items-end top-[-17%] right-[-12%] w-[112%] h-[117%] sm:right-[-38%] sm:top-[-59%] sm:w-[202%] md:w-[200%] lg:w-[191%] sm:h-[159%] 2xl:w-[171%] 2xl:right-[-40%] select-none"
+      >
         <div
           className={`${arrowContainerStyle} mb-1 sm:mb-0`}
           onClick={prevImage}
@@ -53,26 +53,21 @@ export const HeroBackdrop = (): JSX.Element => {
           <ArrowNarrowDownIcon strokeWidth={1} className={arrowIconStyle} />
         </div>
       </div>
-      <div className="h-[50vh] min-h-[265px] sm:h-full w-full sm:w-[75%] lg:w-[60%] xl:w-[75%] relative">
+      <div className="z-30 min-h-[265px] sm:h-full w-full sm:w-[75%] lg:w-[60%] xl:w-[75%] relative">
         {selectedImage >= 0 &&
           heroImages.map((imageUrl, index) => {
             return index === selectedImage ? (
               <div
                 key={`selectedImageContainer${new Date().getTime().toString()}`}
-                className={`${
-                  slideDirection === 'down'
-                    ? 'animate-SlideFromTop sm:animate-SlideFromBottom'
-                    : 'animate-SlideFromTop'
-                }  w-full h-full`}
+                className="animate-ZoomIn w-full h-full"
               >
                 <Image
                   key={`selectedImage${new Date().getTime().toString()}`}
-                  className={'object-center'}
+                  className={'object-center md:object-left lg:object-right'}
                   src={imageUrl}
                   alt="Cookie sample"
                   layout="fill"
                   objectFit="contain"
-                  placeholder="blur"
                   priority
                 />
               </div>

@@ -70,7 +70,7 @@ export const ProductForm = ({
       {...props}
     >
       <div>
-        <h2 className="text-3xl font-bold my-1 text-primary">
+        <h2 className="text-3xl font-bold my-1 text-accent">
           {product.title}
         </h2>
         <span className="text-2xl">
@@ -95,6 +95,7 @@ export const ProductForm = ({
         standart
         primary
         ripple
+        className='bg-primary hover:bg-accent'
         onClick={() => {
           void addToCart(selectedVariant);
         }}

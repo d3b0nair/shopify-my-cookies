@@ -12,7 +12,7 @@ export const CarouselSliderButton = ({
   const arrowStyles = `
     ${
       isSmallSize ? 'hidden' : 'h-10 w-[60px] lg:h-20 xl:h-28 xl:w-28'
-    }  my-4 stroke-primary cursor-pointer hover:stroke-accent`;
+    }  my-4 stroke-primary cursor-pointer hover:stroke-accent transition-colors`;
   const IconContainerStyles =
     'hidden md:block absolute top-[50%] -translate-y-2/4 z-30';
 

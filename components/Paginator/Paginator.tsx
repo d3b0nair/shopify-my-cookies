@@ -13,7 +13,7 @@ export const Paginator = ({
   const iconSize = 'h-4 w-4';
   const defaultStyle = `${
     isSmallSize ? 'py-1 px-2' : 'py-2 px-3'
-  }  leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700  cursor-pointer`;
+  } leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700  cursor-pointer`;
   const arrowAdditionalClasses = `flex flex-col justify-center`;
 
   const dots = [];
@@ -38,7 +38,7 @@ export const Paginator = ({
   return (
     <nav
       tabIndex={0}
-      className="relative z-0 flex my-0 sm:my-16 justify-center rounded-md -space-x-px"
+      className="relative z-0 flex my-0 sm:my-16 justify-center rounded-md -space-x-px "
       aria-label="Pagination"
     >
       <span

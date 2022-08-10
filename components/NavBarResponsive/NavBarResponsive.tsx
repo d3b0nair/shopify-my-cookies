@@ -3,7 +3,6 @@ import {
   XCircleIcon as CloseIcon,
   MenuIcon as OpenIcon,
 } from '@heroicons/react/outline';
-import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { CustomLink, IconWithStyle } from '..';
 import { mobileMenuList, menuList } from '../../utils/menuBuilder';
@@ -12,9 +11,8 @@ import { NavBarProps } from '../NavBar/NavBar.props';
 export const NavBarResponsive = ({
   setCartOpen,
   cartOpen,
+  currentPage,
 }: Omit<NavBarProps, 'cartQuantity'>) => {
-  const router = useRouter();
-
   const MenuList = mobileMenuList.map(({ url, title, Icon }, index) => {
     const centerOfList = Math.round(menuList.length / 2);
     const assignOrder =
@@ -29,7 +27,7 @@ export const NavBarResponsive = ({
       </>
     );
     const linkStyle = `flex flex-col items-center mr-0 hover:text-accent ${
-      router.asPath === url ? 'text-accent stroke-accent' : ''
+      currentPage === url ? 'text-accent stroke-accent' : ''
     }`;
     return (
       <IconWithStyle
@@ -49,7 +47,7 @@ export const NavBarResponsive = ({
           </a>
         ) : (
           <CustomLink
-            aria-current={router.asPath === url ? 'page' : ''}
+            aria-current={currentPage === url ? 'page' : ''}
             className={linkStyle}
             href={url}
           >
@@ -80,7 +78,7 @@ export const NavBarResponsive = ({
   );
 
   return (
-    <Popover className="sm:hidden block">
+    <Popover className="md:hidden block fixed">
       {({ open }: { open: boolean }) => (
         <>
           <OpenButton />
@@ -110,7 +108,7 @@ export const NavBarResponsive = ({
           >
             <Popover.Panel
               static
-              className="flex  fixed left-0 bottom-0 bg-zinc-50 text-center rounded-full mb-6 pt-2 w-[90%] ml-[5%]"
+              className="flex fixed left-0 bottom-0 bg-zinc-50 text-center rounded-full mb-6 pt-2 w-[90%] ml-[5%]"
             >
               {MenuList}
             </Popover.Panel>

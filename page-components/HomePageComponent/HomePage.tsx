@@ -1,11 +1,17 @@
-import { Carousel, HeroSection } from '../../components';
+import { Carousel, FeaturesInfo, HeroSection } from '../../components';
 import { HomePageProps } from './HomePage.props';
 
 export const HomePage = ({ products }: HomePageProps): JSX.Element => {
   return (
-    <div className="grid items-center min-h-[1px] xl:min-h-[620px] md:h-auto 2xl:max-w-[1600px] 2xl:max-h-[1000px] mt-8 md:mt-[50px] grid-cols-[1fr] sm:grid-cols-[1fr_1fr] xl:grid-cols-[605px_1fr] text-primary gap-x-0 sm:gap-x-5">
-      <HeroSection />
-      <Carousel className="sm:hidden block" products={products} />
+    <div className="h-full w-full">
+      <HeroSection className="h-[100vh] md:h-[calc(100vh-86px)] mb-[86px] md:mb-[0] self-start" />
+      <div className="lg:min-h-[100vh] lg:mb-[5vh]">
+        <h2 className="mb-16 md:mb-0 text-center text-lg md:text-xl lg:text-4xl font-bold text-accent">
+          BEST SELLERS
+        </h2>
+        <Carousel products={products} />
+        <FeaturesInfo />
+      </div>
     </div>
   );
 };

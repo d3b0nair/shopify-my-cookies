@@ -48,7 +48,7 @@ export const CartListItem = ({
     }
   };
 
-  const iconSize = 'w-4 h-4';
+  const iconClasses = 'w-4 h-4 hover:stroke-accent active:stroke-accent';
 
   return (
     <li key={product.id} className="flex py-6">
@@ -69,7 +69,12 @@ export const CartListItem = ({
                 href={`/products/${product.handle}`}
                 className="text-sm sm:text-md"
               >
-                <span onClick={() => setCartOpen(false)}>{product.title}</span>
+                <span
+                  className="text-primary hover:text-accent"
+                  onClick={() => setCartOpen(false)}
+                >
+                  {product.title}
+                </span>
               </CustomLink>
             </h3>
             <p className="ml-4">{floatToUSDCurrency(product.variantPrice)}</p>
@@ -81,7 +86,7 @@ export const CartListItem = ({
             <div className="flex flex-row items-center">
               <legend className="text-gray-500 mr-4">Qty:</legend>
               <button onClick={decreaseQty}>
-                <MinusIcon strokeWidth={1} className={`${iconSize}`} />
+                <MinusIcon strokeWidth={1} className={`${iconClasses}`} />
                 <span className="sr-only">Decrease product quantity</span>
               </button>
               <Input
@@ -95,7 +100,7 @@ export const CartListItem = ({
                 onChange={handleOnChange}
               />
               <button onClick={increaseQty}>
-                <PlusIcon strokeWidth={1} className={`${iconSize}`} />
+                <PlusIcon strokeWidth={1} className={`${iconClasses}`} />
                 <span className="sr-only">Increase product quantity</span>
               </button>
             </div>
@@ -105,7 +110,7 @@ export const CartListItem = ({
               onClick={() => void removeCartItem(product.id)}
               transparent
               type="button"
-              className="font-medium text-base mt-6 sm:mt-0"
+              className="font-medium text-base mt-6 sm:mt-0 text-primary"
             >
               Remove
             </Button>

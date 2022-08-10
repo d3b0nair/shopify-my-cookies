@@ -6,33 +6,42 @@ export const NavBarDesktop = ({
   setCartOpen,
   cartOpen,
   cartQuantity,
+  currentPage,
 }: NavBarProps) => {
   return (
     <>
-      <Logo className="hidden sm:block" />
-      <div className="hidden sm:block ml-[5px] sm:ml-[20px] md:ml-[45px]">
-        {menuList.map(({ url, title }, index) => {
-          return (
-            <CustomLink
-              className="text-primary mr-[5px] xs:mr-[10px] sm:mr-[20px] lg:mr-[45px]"
-              key={`key-link-${index}`}
-              href={url}
-            >
-              {title}
-            </CustomLink>
-          );
-        })}
-      </div>
-      <div>
-        <div>
-          <span
-            className="cursor-pointer hover:text-primary"
-            onClick={() => setCartOpen(!cartOpen)}
-          >
-            <MiniCartIcon cartQuantity={cartQuantity} />
-          </span>
+      <Logo
+        styles={{ transitionProperty: 'color' }}
+        className={`hidden md:block  ${
+          currentPage === '/'
+            ? 'hover:fill-accent hover:text-accent  text-darkestGrey'
+            : 'hover:fill-secondary hover:text-secondary fill-white text-white'
+        }`}
+      />
+      <div className="hidden md:flex justify-center">
+        <div className="ml-[5px] sm:ml-[20px] md:ml-[45px]">
+          {menuList.map(({ url, title }, index) => {
+            return (
+              <CustomLink
+                className="text-white text-2xl mr-[5px] sm:mr-[20px] lg:mr-[45px]"
+                key={`key-link-${index}`}
+                href={url}
+              >
+                {title}
+              </CustomLink>
+            );
+          })}
         </div>
+        <span
+          className="cursor-pointer hover:text-primary hidden md:block"
+          onClick={() => setCartOpen(!cartOpen)}
+        >
+          {currentPage === '/' ? null : (
+            <MiniCartIcon cartQuantity={cartQuantity} />
+          )}
+        </span>
       </div>
+      {currentPage === '/' ? <span></span> : null}
     </>
   );
 };

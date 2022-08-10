@@ -32,8 +32,8 @@ export const ProductOption = ({
                 className={`p-2 my-3 text-lg rounded-full block cursor-pointer mr-3 ${
                   checked
                     ? 'text-white bg-primary'
-                    : 'text-darkestGrey bg-offSecondary'
-                } hover:text-white  hover:bg-red-400 focus:bg-red-400 active:bg-red-500`}
+                    : 'text-darkestGrey bg-gray-200'
+                } hover:text-white  hover:bg-red-600 focus:bg-red-600 active:bg-red-700`}
               >
                 <span className="px-2">{value}</span>
               </div>
