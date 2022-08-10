@@ -26,7 +26,7 @@ export const NavBarResponsive = ({
         <span>{title}</span>
       </>
     );
-    const linkStyle = `flex flex-col items-center mr-0 hover:text-accent ${
+    const linkStyle = `flex flex-col items-center mr-0 hover:!text-accent ${
       currentPage === url ? 'text-accent stroke-accent' : ''
     }`;
     return (
