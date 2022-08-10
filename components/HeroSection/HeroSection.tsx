@@ -17,7 +17,7 @@ export const HeroSection = ({
       } grid items-center grid-cols-[1fr] sm:grid-cols-[1fr_1fr] text-primary gap-x-0 sm:gap-x-28`}
       {...props}
     >
-      <div className="z-40 flex flex-col md:h-auto justify-center md:justify-start lg:justify-center">
+      <div className="z-[31] flex flex-col md:h-auto justify-center md:justify-start lg:justify-center">
         <h1 className="text-center sm:text-left md:mx-0 text-2xl md:text-3xl lg:text-6xl font-bold text-accent">
           Grab Best Cookies
         </h1>

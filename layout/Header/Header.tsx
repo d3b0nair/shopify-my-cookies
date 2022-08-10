@@ -17,7 +17,7 @@ const Header = (): JSX.Element => {
   const currentPage = useRouter().asPath;
   return (
     <header
-      className={`top-0 z-40 fixed sm:relative w-full py-8 ${
+      className={`top-0 z-[40] fixed sm:relative w-full py-8 ${
         currentPage !== '/' ? 'md:bg-accentLighter' : ''
       }`}
     >
