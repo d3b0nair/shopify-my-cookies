@@ -78,7 +78,7 @@ export const NavBarResponsive = ({
   );
 
   return (
-    <Popover className="md:hidden block fixed z-[9999]">
+    <Popover className="md:hidden block fixed z-[9999] top-[25px]">
       {({ open }: { open: boolean }) => (
         <>
           <OpenButton />
