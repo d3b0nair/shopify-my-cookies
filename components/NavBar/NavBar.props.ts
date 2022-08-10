@@ -10,4 +10,5 @@ export interface NavBarProps
   cartOpen: boolean;
   setCartOpen: Dispatch<SetStateAction<boolean>>;
   cartQuantity: number;
+  currentPage?: string;
 }

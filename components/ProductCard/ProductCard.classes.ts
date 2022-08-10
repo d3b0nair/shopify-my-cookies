@@ -42,7 +42,7 @@ export const createProductCardClasses = (
   const positionCardOnLeft = ` ${
     isSmallSize
       ? `${centerCardOnSmallScreen} sm:left-[20%] sm:translate-x-[-20%]`
-      : 'sm:left-[1%] sm:translate-x-[-1%] lg:left-[-1%] lg:translate-x-[-1%] xl:left-[11%] xl:translate-x-[-11%] 2xl:left-[20%] 2xl:translate-x-[-20%]'
+      : 'sm:left-[0%] sm:translate-x-[0%] lg:left-[0%] lg:translate-x-[0%] xl:left-[10%] xl:translate-x-[-10%] 2xl:left-[20%] 2xl:translate-x-[-20%]'
   }`;
 
   const nextCardStyle = `${removeNextCardOnSmallScreen} ${centerCardOnSmallScreen} ${globalSideCardStyle} z-[1] sm:z-[2] ${scaleNextCardOnSmallScree} ${positionCardOnRight}`;
@@ -59,7 +59,7 @@ export const createProductCardClasses = (
 
   const titleStyle = `${
     isSmallSize ? 'text-md mt-2' : 'text-xl mt-4'
-  } text-accent hover:text-accentLighter font-bold`;
+  } text-accent hover:text-accentLighter font-bold transition-colors`;
 
   const cardSizeStyle = `${
     isSmallSize

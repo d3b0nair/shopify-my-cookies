@@ -45,7 +45,7 @@ export const ProductCard = ({
     <article
       tabIndex={cardStyle !== 'hidden' ? 0 : -1}
       style={{ transitionDuration: `${transitionDuration}ms` }}
-      className={`${cardClasses.selectCardTypeClass} ${cardClasses.setCardSizeClass} absolute select-none transition-[left,top,scale,transform]`}
+      className={`${cardClasses.selectCardTypeClass} ${cardClasses.setCardSizeClass} absolute select-none transition-[left,top,scale,transform,opacity]`}
       {...props}
     >
       <div

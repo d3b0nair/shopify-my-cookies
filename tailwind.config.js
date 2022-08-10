@@ -8,13 +8,10 @@ module.exports = {
   ],
   theme: {
     extend: {
-      screens: {
-        xs: `@media (min-width: 320px) { ... }`,
-      },
       colors: {
         background: '#faf5f1',
         primary: '#f87171',
-        secondary: '#f97316',
+        secondary: '#00FFFF',
         offSecondary: '#fed7aa',
         accent: '#ef4444',
         accentLighter: '#fca5a5',
@@ -25,29 +22,18 @@ module.exports = {
       },
       animation: {
         ripple: 'ripple 1s',
-        SlideFromTop: 'SlideFromTop 700ms forwards',
-        SlideFromBottom: 'SlideFromBottom 700ms forwards',
+        ZoomIn: 'ZoomIn 900ms forwards',
         bounceWithOpacity: 'bounceWithOpacity 700ms forwards',
       },
       keyframes: {
-        SlideFromTop: {
+        ZoomIn: {
           '0%': {
-            transform: 'translateY(-50%)',
-            opacity: 0.3,
+            opacity: 0,
+            transform: 'scale(0)',
           },
           '100%': {
-            transform: 'translateY(0)',
             opacity: 1,
-          },
-        },
-        SlideFromBottom: {
-          '0%': {
-            transform: 'translateY(50%)',
-            opacity: 0.3,
-          },
-          '100%': {
-            transform: 'translateY(0)',
-            opacity: 1,
+            transform: 'scale(1)',
           },
         },
         ripple: {
