@@ -67,14 +67,19 @@ export const SubscriptionForm = () => {
         role="button"
         type="submit"
         onClick={() => clearErrors()}
+        className="transition-all"
       >
         {isSuccess ? (
-          <SuccessIcon className={`${actionButtonStyle} stroke-green-300`} />
+          <SuccessIcon
+            className={`${actionButtonStyle} stroke-green-300 hover:stroke-green-400 active:stroke-green-400`}
+          />
         ) : errors.email ? (
-          <ErrorIcon className={`${actionButtonStyle} stroke-red-400`} />
+          <ErrorIcon
+            className={`${actionButtonStyle} stroke-red-400 hover:stroke-red-500 active:stroke-red-600`}
+          />
         ) : (
           <SendIcon
-            className={`${actionButtonStyle} stroke-offGrey hover:stroke-accentLighter`}
+            className={`${actionButtonStyle} stroke-offGrey hover:stroke-accentLighter active:stroke-accent`}
           />
         )}
       </button>

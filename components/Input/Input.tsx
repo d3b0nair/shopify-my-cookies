@@ -19,12 +19,16 @@ export const Input = forwardRef<
         />
         {error && (
           <span
-            className="text-red-300 flex justify-center md:justify-start lg:text-xl"
+            className="text-red-800 flex justify-center md:justify-start"
             role="alert"
           >
-            <ExclamationCircleIcon width={22} height={22} />
+            <ExclamationCircleIcon
+              className="self-center"
+              width={22}
+              height={22}
+            />
             &nbsp;
-            {error.message}
+            <span>{error.message}</span>
           </span>
         )}
       </div>

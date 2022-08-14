@@ -17,7 +17,7 @@ export type lineItemsType = {
   options: Array<IOptionModel>;
   title: string;
   variantPrice: string;
-  variantQuantity: number;
+  quantity: number;
   variantTitle: string;
 };
 

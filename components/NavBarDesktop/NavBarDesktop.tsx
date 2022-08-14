@@ -14,8 +14,8 @@ export const NavBarDesktop = ({
         styles={{ transitionProperty: 'color' }}
         className={`hidden md:block  ${
           currentPage === '/'
-            ? 'hover:fill-accent hover:text-accent  text-darkestGrey'
-            : 'hover:fill-secondary hover:text-secondary fill-white text-white'
+            ? 'hover:fill-accent hover:text-accent  text-darkestGrey active:fill-primary active:text-primary'
+            : 'hover:fill-secondary hover:text-secondary fill-white text-white active:text-offSecondary active:fill-offSecondary'
         }`}
       />
       <div className="hidden md:flex justify-center">

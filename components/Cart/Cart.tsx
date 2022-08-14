@@ -4,11 +4,17 @@ import { CartContext } from '../../context/shopContext';
 import { IVariant } from '../ProductForm/ProductForm.props';
 
 export const Cart = ({ cart }: { cart: IVariant[] }) => {
-  const { cartOpen, setCartOpen, removeCartItem, updateQty, checkOutUrl } =
-    useContext(CartContext);
+  const {
+    cartOpen,
+    setCartOpen,
+    removeCartItem,
+    updateQty,
+    checkOutUrl,
+    resetCart,
+  } = useContext(CartContext);
   let cartTotal = 0;
   cart.map((item) => {
-    cartTotal += item?.variantPrice * item?.variantQuantity;
+    cartTotal += item?.variantPrice * item?.quantity;
   });
   return (
     <CartContainer
@@ -19,6 +25,7 @@ export const Cart = ({ cart }: { cart: IVariant[] }) => {
       removeCartItem={removeCartItem}
       updateQty={updateQty}
       checkOutUrl={checkOutUrl}
+      resetCart={resetCart}
     />
   );
 };

@@ -9,7 +9,7 @@ export const MiniCartIcon = ({
     <>
       <div
         tabIndex={0}
-        className="hidden sm:border-0 sm:p-0 rounded-full relative sm:flex justify-center	items-center transition-colors  text-white hover:text-secondary text-base active:text-secondary"
+        className="hidden sm:border-0 sm:p-0 rounded-full relative sm:flex justify-center	items-center transition-colors  text-white hover:text-secondary text-base active:text-offSecondary"
         {...props}
       >
         <span className="absolute top-1">

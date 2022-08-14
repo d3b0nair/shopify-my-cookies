@@ -4,3 +4,7 @@ export const floatToUSDCurrency = (value: number): string =>
     currency: 'USD',
     minimumFractionDigits: 2,
   }).format(value);
+
+export const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};

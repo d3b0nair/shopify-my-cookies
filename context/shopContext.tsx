@@ -16,8 +16,9 @@ type CartContextType = {
   cartOpen: boolean;
   setCartOpen: Dispatch<SetStateAction<boolean>>;
   checkOutUrl: string;
-  removeCartItem: (itemToRemove: string) => void;
-  updateQty: (itemToUpdate: IVariant, qty: number) => void;
+  removeCartItem: (itemToRemove: string) => Promise<void>;
+  updateQty: (itemToUpdate: IVariant, qty: number) => Promise<void>;
+  resetCart: () => void;
 };
 
 const CartContext = createContext<CartContextType>({} as CartContextType);
@@ -30,7 +31,6 @@ export const ShopProvider = ({
   const [cartOpen, setCartOpen] = useState<boolean>(false);
   const [checkOutId, setCheckOutId] = useState<string>('');
   const [checkOutUrl, setCheckOutUrl] = useState<string>('');
-
   useEffect(() => {
     if (localStorage.local_checkout) {
       const cartObject = JSON.parse(localStorage.local_checkout as string) as [
@@ -50,12 +50,9 @@ export const ShopProvider = ({
     }
   }, []);
 
-  const updateCart = (newCart: IVariant[]) => {
+  const updateCart = async (newCart: IVariant[]) => {
     setCart(newCart);
-    const newCheckout = async () => {
-      return await updateCheckout(checkOutId, newCart);
-    };
-
+    const newCheckout = await updateCheckout(checkOutId, newCart);
     const cartObject = JSON.stringify([newCart, newCheckout]);
     localStorage.setItem('local_checkout', cartObject);
   };
@@ -63,10 +60,9 @@ export const ShopProvider = ({
   const addToCart = async (newItem: IVariant) => {
     if (cart.length === 0) {
       setCart([newItem]);
-      const checkout = await createCheckout(
-        newItem.id,
-        newItem.variantQuantity
-      );
+      const checkout = await createCheckout([
+        { id: newItem.id, quantity: newItem.quantity },
+      ]);
       setCheckOutId(checkout.id);
       setCheckOutUrl(checkout.webUrl);
 
@@ -76,40 +72,44 @@ export const ShopProvider = ({
       );
     } else {
       let newCart = [...cart];
-
       cart.map((item) => {
         if (item.id === newItem.id) {
-          item.variantQuantity++;
-          newCart = [...cart];
-        } else {
-          newCart = [...cart, newItem];
+          newItem.quantity = item.quantity + newItem.quantity;
         }
       });
-
-      updateCart(newCart);
+      const sanitizedCart = cart.filter((item) => item.id !== newItem.id);
+      newCart = [...sanitizedCart, newItem];
+      await updateCart(newCart);
     }
   };
 
-  const removeCartItem = (itemToRemove: string) => {
+  const removeCartItem = async (itemToRemove: string) => {
     const updatedCart = cart.filter((item) => item.id !== itemToRemove);
 
-    updateCart(updatedCart);
+    await updateCart(updatedCart);
 
     if (cart.length === 1) {
       setCartOpen(false);
     }
   };
 
-  const updateQty = (itemToUpdate: IVariant, qty: number) => {
+  const updateQty = async (itemToUpdate: IVariant, qty: number) => {
     let updatedCart = [...cart];
 
     cart.map((item) => {
       if (item.id === itemToUpdate.id) {
-        item.variantQuantity = qty;
+        item.quantity = qty;
         updatedCart = [...cart];
       }
     });
-    updateCart(updatedCart);
+    await updateCart(updatedCart);
+  };
+
+  const resetCart = () => {
+    setCheckOutId('');
+    setCheckOutUrl('');
+    setCart([]);
+    localStorage.removeItem('local_checkout');
   };
 
   return (
@@ -122,6 +122,7 @@ export const ShopProvider = ({
         checkOutUrl,
         removeCartItem,
         updateQty,
+        resetCart,
       }}
       {...props}
     >

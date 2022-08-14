@@ -12,7 +12,7 @@ module.exports = {
         background: '#faf5f1',
         primary: '#f87171',
         secondary: '#00FFFF',
-        offSecondary: '#fed7aa',
+        offSecondary: '#00eaff',
         accent: '#ef4444',
         accentLighter: '#fca5a5',
         white: '#f8fafc',
@@ -24,6 +24,8 @@ module.exports = {
         ripple: 'ripple 1s',
         ZoomIn: 'ZoomIn 900ms forwards',
         bounceWithOpacity: 'bounceWithOpacity 700ms forwards',
+        showUpSection: 'showUpSection 0.3s linear forwards',
+        showDownSection: 'showDownSection 0.3s linear forwards',
       },
       keyframes: {
         ZoomIn: {
@@ -65,6 +67,26 @@ module.exports = {
             opacity: 1,
             transform: 'translateY(0%)',
             animationTimingFunction: 'cubic-bezier(0, 0, 0.76, 0.81)',
+          },
+        },
+        showUpSection: {
+          '0%': {
+            transform: 'translateY(60px)',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translateY(0px)',
+            opacity: 1,
+          },
+        },
+        showDownSection: {
+          '0%': {
+            transform: 'translateY(-160px)',
+            opacity: 0,
+          },
+          '100%': {
+            transform: 'translateY(0px)',
+            opacity: 1,
           },
         },
       },

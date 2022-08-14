@@ -10,9 +10,10 @@ export const HeroBackdrop = (): JSX.Element => {
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
   const arrowContainerStyle =
-    'flex items-center flex-col z-30 text-white transition-colors cursor-pointer leading-none mr-[5%] sm:mr-[15%] md:mr-[15%] lg:mr-[20%] xl:mr-[15%] hover:text-secondary';
+    'flex items-center flex-col z-30 text-white transition-colors cursor-pointer leading-none mr-[5%] sm:mr-[15%] md:mr-[15%] lg:mr-[20%] xl:mr-[15%] hover:text-secondary active:text-offSecondary';
   const arrowIconStyle = 'h-10 w-[60px] lg:h-20 xl:h-28 xl:w-28 my-4';
-  const textStyle = 'writing-vertical-lr rotate-180 text-md sm:text-2xl md:text-3xl lg:text-4xl';
+  const textStyle =
+    'writing-vertical-lr rotate-180 text-md sm:text-2xl md:text-3xl lg:text-4xl';
 
   const nextImage = () => {
     if (selectedImage < heroImages.length - 1) {
@@ -58,12 +59,14 @@ export const HeroBackdrop = (): JSX.Element => {
           heroImages.map((imageUrl, index) => {
             return index === selectedImage ? (
               <div
-                key={`selectedImageContainer${new Date().getTime().toString()}`}
-                className="animate-ZoomIn w-full h-full"
+                key={`selectedImageContainer-${new Date().getTime().toString()}`}
+                className="relative animate-ZoomIn w-full h-full opacity-0"
               >
                 <Image
-                  key={`selectedImage${new Date().getTime().toString()}`}
-                  className={'object-center md:object-left lg:object-right'}
+                  key={`selectedImage-${new Date().getTime().toString()}`}
+                  className={
+                    'object-center md:object-left lg:object-right'
+                  }
                   src={imageUrl}
                   alt="Cookie sample"
                   layout="fill"

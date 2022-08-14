@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   ICheckoutCreateMutationModel,
   ICheckoutModel,
   IcheckoutLineItemsReplaceModel,
-  IlineItemsModel,
 } from '../interfaces/checkout.interface';
 import { IHomePageCollectionModel } from '../interfaces/collection.interface';
 import {
@@ -15,6 +16,7 @@ import {
   IProductsInCollection,
   IgetAllProductsReturn,
 } from '../interfaces/shopify.interface';
+import { sleep } from '../utils/helpers';
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN as string;
 const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_API as string;
@@ -34,9 +36,32 @@ async function shopifyData<T>(query: string): Promise<T> {
   };
   try {
     const data = await fetch(URL, options).then((res) => {
-      return res.json() as Promise<T>;
+      return res.json();
     });
-    return data;
+    if (data.errors) {
+      let i = 0;
+      let newData;
+      while (
+        data.errors[0].message ===
+        'Too many requests. Please try again in a few seconds'
+      ) {
+        i++;
+        await sleep(1000 * i);
+        newData = await fetch(URL, options).then((res) => {
+          return res.json();
+        });
+      }
+      if (newData.data) {
+        return newData as Promise<T>;
+      } else {
+        if (typeof data.errors[0].message === 'string') {
+          throw new Error(data.errors[0].message as string);
+        } else {
+          throw new Error(`Shopify data not fetched`);
+        }
+      }
+    }
+    return data as Promise<T>;
   } catch (err) {
     throw new Error(`Shopify data not fetched`);
   }
@@ -146,12 +171,17 @@ export const getProduct = async (handle: string): Promise<IProductModel> => {
 };
 
 export const createCheckout = async (
-  id: string,
-  quantity: number
+  lineItems: Array<{ id: string; quantity: number }>
 ): Promise<Omit<ICheckoutModel, 'lineItems'>> => {
+  const lineItemsObject = lineItems.map((item) => {
+    return `{
+      variantId: "${item.id}",
+      quantity: ${item.quantity}
+    }`;
+  });
   const query = `
   mutation {
-    checkoutCreate(input: {lineItems: [{variantId: "${id}", quantity: ${quantity}}]}) {
+    checkoutCreate(input: {lineItems: [${lineItemsObject.toString()}],}) {
       checkout {
         id
         webUrl
@@ -161,23 +191,26 @@ export const createCheckout = async (
   `;
   const res: Omit<ICheckoutCreateMutationModel, 'lineItems'> =
     await shopifyData(query);
+
   return res.data.checkoutCreate.checkout;
 };
 
 export const updateCheckout = async (
-  id: string,
-  lineItems: Array<{ id: string; variantQuantity: number }>
-): Promise<IlineItemsModel | Record<string, unknown>> => {
+  checkoutId: string,
+  lineItems: Array<{ id: string; quantity: number }>
+) => {
   const lineItemsObject = lineItems.map((item) => {
     return `{
       variantId: "${item.id}",
-      quantity: ${item.variantQuantity}
+      quantity: ${item.quantity}
     }`;
   });
-
-  const query = `
+  if (!checkoutId) {
+    await createCheckout(lineItems);
+  } else {
+    const query = `
   mutation {
-    checkoutLineItemsReplace(lineItems: [${lineItemsObject.toString()}], checkoutId: "${id}"){
+    checkoutLineItemsReplace(lineItems: [${lineItemsObject.toString()}], checkoutId: "${checkoutId}"){
       checkout{
         id
         webUrl
@@ -194,9 +227,9 @@ export const updateCheckout = async (
     }
   }
   `;
-  const res: IcheckoutLineItemsReplaceModel = await shopifyData(query);
-
-  return res.data ? res.data.checkoutLineItemsReplace.checkout : {};
+    const res: IcheckoutLineItemsReplaceModel = await shopifyData(query);
+    return res.data.checkoutLineItemsReplace.checkout;
+  }
 };
 
 export const getRecomendedProducts = async (

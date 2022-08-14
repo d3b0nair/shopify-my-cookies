@@ -11,6 +11,6 @@ export interface CartListSectionProps
   cart: IVariant[];
   cartTotal: number;
   setCartOpen: Dispatch<SetStateAction<boolean>>;
-  removeCartItem: (itemToRemove: string) => void;
-  updateQty: (itemToUpdate: IVariant, qty: number) => void;
+  removeCartItem: (itemToRemove: string) => Promise<void>;
+  updateQty: (itemToUpdate: IVariant, qty: number) => Promise<void>;
 }

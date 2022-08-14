@@ -12,13 +12,15 @@ const Header = (): JSX.Element => {
   const { cart, cartOpen, setCartOpen } = useContext(CartContext);
   let cartQuantity = 0;
   cart.map((item) => {
-    return (cartQuantity += item?.variantQuantity);
+    return (cartQuantity += item?.quantity);
   });
   const currentPage = useRouter().asPath;
   return (
     <header
-      className={`top-0 z-[40] fixed sm:relative w-full py-8 ${
-        currentPage !== '/' ? 'md:bg-accentLighter' : ''
+      className={`top-0 z-[40] fixed sm:relative w-full  ${
+        currentPage !== '/'
+          ? 'md:bg-accentLighter py-1'
+          : 'md:animate-showDownSection py-8'
       }`}
     >
       <div className="sm:pt-0 max-w-[1600px] max-h-[86px] px-6 md:px-14 xl:px-24 mx-auto">

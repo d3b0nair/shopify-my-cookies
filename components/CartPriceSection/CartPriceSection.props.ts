@@ -10,4 +10,5 @@ export interface CartPriceSectionProps
   cartTotal: number;
   setCartOpen: Dispatch<SetStateAction<boolean>>;
   checkOutUrl?: string;
+  resetCart: () => void;
 }

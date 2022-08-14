@@ -1,6 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
-
-import { ShoppingBagIcon, TruckIcon, GiftIcon } from '@heroicons/react/outline';
+import { featuresList } from '../../utils/featuresList';
 
 export const FeaturesInfo = ({
   className,
@@ -42,33 +41,44 @@ export const FeaturesInfo = ({
       <span className="mt-2 text-sm xl:text-base text-grey">{children}</span>
     );
   };
+
+  const Feature = ({
+    title,
+    description,
+    icon,
+    className,
+  }: IFeatureComponent) => {
+    return (
+      <FeatureContainer className={`${className ? className : ''}`}>
+        <IconContainer>{icon}</IconContainer>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </FeatureContainer>
+    );
+  };
   return (
     <div
       className={`${
         className ? className : ''
       } hidden md:flex flex-row w-full justify-around max-w-[980px] mx-auto bg-white rounded-full shadow-inner`}
     >
-      <FeatureContainer className="border-r-2">
-        <IconContainer>
-          <ShoppingBagIcon strokeWidth={1} />
-        </IconContainer>
-        <Title>NEW PICK UP SERVICE</Title>
-        <Description>Get it fresh</Description>
-      </FeatureContainer>
-      <FeatureContainer>
-        <IconContainer>
-          <TruckIcon strokeWidth={1} />
-        </IconContainer>
-        <Title>FREE DELIVERY</Title>
-        <Description>Delivered to your door step</Description>
-      </FeatureContainer>
-      <FeatureContainer className="border-l-2">
-        <IconContainer>
-          <GiftIcon strokeWidth={1} />
-        </IconContainer>
-        <Title>SPECIAL GIFT WRAPS</Title>
-        <Description>Send a sweet surprise</Description>
-      </FeatureContainer>
+      {featuresList.map(({ title, description, icon }, i) => {
+        return (
+          <Feature
+            key={`feature-${title}`}
+            className={`${
+              i === 0
+                ? 'border-r-2'
+                : i === featuresList.length - 1
+                ? 'border-l-2'
+                : ''
+            }`}
+            title={title}
+            description={description}
+            icon={icon}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -76,4 +86,10 @@ export const FeaturesInfo = ({
 interface ISimpleDivComponent
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children?: ReactNode;
+}
+
+interface IFeatureComponent extends ISimpleDivComponent {
+  title: string;
+  description: string;
+  icon: JSX.Element;
 }

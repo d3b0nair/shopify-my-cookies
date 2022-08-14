@@ -13,6 +13,7 @@ export const CartContainer = ({
   removeCartItem,
   updateQty,
   checkOutUrl,
+  resetCart,
 }: CartContianerProps) => {
   return (
     <Transition.Root show={cartOpen} as={Fragment}>
@@ -82,6 +83,7 @@ export const CartContainer = ({
                       checkOutUrl={checkOutUrl}
                       cartTotal={cartTotal}
                       setCartOpen={setCartOpen}
+                      resetCart={resetCart}
                     />
                   </div>
                 </Dialog.Panel>

@@ -22,7 +22,7 @@ const Footer = (): JSX.Element => {
   };
   const IconContainer = ({ children }: ISimpleDivComponent): JSX.Element => {
     return (
-      <div className="w-[44px] h-[44px] transition-all hover:scale-110 hover:cursor-pointer ml-4">
+      <div className="w-[44px] h-[44px] transition-all hover:scale-110 active:scale-100 hover:cursor-pointer ml-4">
         {children}
       </div>
     );

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Button, ProductOption } from '..';
 import { floatToUSDCurrency } from '../../utils/helpers';
 import {
@@ -14,6 +14,9 @@ export const ProductForm = ({
   ...props
 }: ProductFormProps): JSX.Element => {
   const { addToCart } = useContext(CartContext);
+
+  const [variantQuantity, setVariantQuantity] = useState<number>(0);
+  const [isAddingItemToCart, setIsAddingItemToCart] = useState<boolean>(false);
 
   const allVariantOptions: Array<IVariant> =
     product.variants.edges &&
@@ -33,7 +36,7 @@ export const ProductForm = ({
         options: allOptions,
         variantTitle: variant.title,
         variantPrice: variant.priceV2.amount,
-        variantQuantity: 1,
+        quantity: 1,
       };
     });
 
@@ -44,6 +47,22 @@ export const ProductForm = ({
 
   const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0]);
   const [selectedOptions, setSelectedOptions] = useState(defaultValues);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    if (isAddingItemToCart && variantQuantity > 0) {
+      timer = setTimeout(() => {
+        void addToCart({
+          ...selectedVariant,
+          quantity: variantQuantity,
+        });
+        setVariantQuantity(0);
+        setIsAddingItemToCart(false);
+      }, 300);
+    }
+
+    return () => clearTimeout(timer);
+  }, [addToCart, isAddingItemToCart, selectedVariant, variantQuantity]);
 
   const setOptions = (name: string, value: string): void => {
     setSelectedOptions((prevState) => {
@@ -59,6 +78,7 @@ export const ProductForm = ({
 
     allVariantOptions.map((item) => {
       if (JSON.stringify(item.options) === JSON.stringify(selection)) {
+        setVariantQuantity(0);
         setSelectedVariant(item);
       }
     });
@@ -70,9 +90,7 @@ export const ProductForm = ({
       {...props}
     >
       <div>
-        <h2 className="text-3xl font-bold my-1 text-accent">
-          {product.title}
-        </h2>
+        <h2 className="text-3xl font-bold my-1 text-accent">{product.title}</h2>
         <span className="text-2xl">
           {floatToUSDCurrency(product.variants.edges[0].node.priceV2.amount)}
         </span>
@@ -95,9 +113,10 @@ export const ProductForm = ({
         standart
         primary
         ripple
-        className='bg-primary hover:bg-accent'
+        className="bg-primary hover:bg-accent"
         onClick={() => {
-          void addToCart(selectedVariant);
+          setVariantQuantity(variantQuantity + 1);
+          setIsAddingItemToCart(true);
         }}
       >
         Add To Cart

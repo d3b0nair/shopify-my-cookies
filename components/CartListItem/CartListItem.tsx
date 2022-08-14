@@ -3,7 +3,7 @@ import { PlusIcon, MinusIcon } from '@heroicons/react/outline';
 import { floatToUSDCurrency } from '../../utils/helpers';
 import { Button, CustomLink, Input } from '../index';
 import { CartListItemProps } from './CartListItem.props';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export const CartListItem = ({
   product,
@@ -11,39 +11,49 @@ export const CartListItem = ({
   removeCartItem,
   updateQty,
 }: CartListItemProps): JSX.Element => {
-  const [qty, setQty] = useState<number>(product.variantQuantity);
+  const [qty, setQty] = useState<number>(product.quantity);
+  const [isChangingQty, setIsChangingQty] = useState<boolean>(false);
 
   const minQty = 0;
   const maxQty = 99;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
-    if (qty === 0) {
-      removeCartItem(product.id);
-    } else {
-      timer = setTimeout(() => {
-        updateQty(product, qty);
-      }, 2000);
+    if (isChangingQty) {
+      if (qty === 0) {
+        timer = setTimeout(() => {
+          void removeCartItem(product.id);
+          setIsChangingQty(false);
+        }, 200);
+      } else {
+        timer = setTimeout(() => {
+          void updateQty(product, qty);
+          setIsChangingQty(false);
+        }, 300);
+      }
     }
+
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [qty]);
+  }, [isChangingQty, product, qty, removeCartItem, updateQty]);
 
   const handleOnChange = (evt: React.FormEvent<HTMLInputElement>) => {
     evt.preventDefault();
     const value = parseInt(evt.currentTarget.value);
     if (value && value < maxQty && value > minQty) {
+      setIsChangingQty(true);
       setQty(value);
     }
   };
 
   const increaseQty = () => {
     if (qty < 99) {
+      setIsChangingQty(true);
       setQty(qty + 1);
     }
   };
   const decreaseQty = () => {
     if (qty > 0) {
+      setIsChangingQty(true);
       setQty(qty - 1);
     }
   };
@@ -95,7 +105,7 @@ export const CartListItem = ({
                 max={maxQty}
                 name="quantity"
                 type="number"
-                placeholder={product.variantQuantity.toString()}
+                placeholder={product.quantity.toString()}
                 value={qty}
                 onChange={handleOnChange}
               />
@@ -107,7 +117,9 @@ export const CartListItem = ({
           </fieldset>
           <div className="flex self-end">
             <Button
-              onClick={() => void removeCartItem(product.id)}
+              onClick={() => {
+                void removeCartItem(product.id);
+              }}
               transparent
               type="button"
               className="font-medium text-base mt-6 sm:mt-0 text-primary"

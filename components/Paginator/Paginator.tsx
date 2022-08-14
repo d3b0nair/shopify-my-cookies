@@ -11,10 +11,12 @@ export const Paginator = ({
   isSmallSize,
 }: PaginatorProps) => {
   const iconSize = 'h-4 w-4';
-  const defaultStyle = `${
+  const defaultClasses = `${
     isSmallSize ? 'py-1 px-2' : 'py-2 px-3'
-  } leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700  cursor-pointer`;
+  } leading-tight  cursor-pointer border border-gray-300`;
   const arrowAdditionalClasses = `flex flex-col justify-center`;
+  const standartDot =
+    'text-gray-500 bg-white hover:bg-gray-100 active:bg-gray-200 hover:text-gray-700';
 
   const dots = [];
 
@@ -26,9 +28,9 @@ export const Paginator = ({
         onClick={() => selectProduct(index)}
         className={`${
           index === activeIndex
-            ? 'text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 font-bold'
-            : ''
-        } ${defaultStyle}`}
+            ? 'text-red-500 hover:text-red-600 active:text-red-400 bg-red-50 hover:bg-red-100 active:bg-red-50 font-bold'
+            : standartDot
+        } ${defaultClasses}`}
       >
         {index + 1}
       </span>
@@ -42,7 +44,7 @@ export const Paginator = ({
       aria-label="Pagination"
     >
       <span
-        className={`${defaultStyle} rounded-l-md ${arrowAdditionalClasses}`}
+        className={`${defaultClasses} ${standartDot} rounded-l-md ${arrowAdditionalClasses}`}
         onClick={() => slideLeft()}
         tabIndex={0}
       >
@@ -52,7 +54,7 @@ export const Paginator = ({
       {dots.map((dot) => dot)}
       <span
         tabIndex={0}
-        className={`${defaultStyle} rounded-r-md ${arrowAdditionalClasses}`}
+        className={`${defaultClasses} ${standartDot} rounded-r-md ${arrowAdditionalClasses}`}
         onClick={() => slideRight()}
       >
         <span className="sr-only">Next</span>

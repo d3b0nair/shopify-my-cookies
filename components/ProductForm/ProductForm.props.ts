@@ -13,7 +13,7 @@ export interface IVariant {
   image: string;
   options: allOptionsType;
   title: string;
-  variantQuantity: number;
+  quantity: number;
   variantPrice: number;
   variantTitle: string;
 }

@@ -24,3 +24,4 @@ export * from './Paginator/Paginator';
 export * from './RecommendedList/RecommendedList';
 export * from './CarouselSliderButton/CarouselSliderButton';
 export * from './FeaturesInfo/FeaturesInfo';
+export * from './AnimateWithInView/AnimateWithInView';

@@ -5,13 +5,8 @@ export const Logo = ({ ...props }): JSX.Element => {
     <div {...props}>
       <Link href="/" passHref>
         <span className="cursor-pointer grid grid-cols-[54px_1fr] gap-x-3 items-center">
-          <span>
-            <LogoSVG
-              width={54}
-              height={54}
-            />
-          </span>
-          <h1 className='font-semibold text-xl'>Shopify My Cookies</h1>
+            <LogoSVG width={54} height={54} />
+          <h1 className="font-semibold text-xl">Shopify My Cookies</h1>
         </span>
       </Link>
     </div>

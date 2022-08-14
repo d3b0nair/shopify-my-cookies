@@ -8,5 +8,5 @@ export interface shopContextProps
 
 export interface cartType {
   id: string;
-  variantQuantity: number;
+  quantity: number;
 }

@@ -7,9 +7,10 @@ export const CartPriceSection = ({
   cartTotal,
   setCartOpen,
   checkOutUrl,
+  resetCart,
 }: CartPriceSectionProps) => {
   const CheckOutButton = () => (
-    <Button standart primary ripple className="w-full">
+    <Button standart primary ripple className="w-full" onClick={resetCart}>
       Checkout
     </Button>
   );
