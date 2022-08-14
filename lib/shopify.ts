@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   ICheckoutCreateMutationModel,
   ICheckoutModel,
@@ -35,8 +33,12 @@ async function shopifyData<T>(query: string): Promise<T> {
     body: JSON.stringify({ query }),
   };
   try {
+    interface IRes {
+      data: unknown | null;
+      errors?: [{ message: string }];
+    }
     const data = await fetch(URL, options).then((res) => {
-      return res.json();
+      return res.json() as Promise<IRes>;
     });
     if (data.errors) {
       let i = 0;
@@ -48,20 +50,20 @@ async function shopifyData<T>(query: string): Promise<T> {
         i++;
         await sleep(1000 * i);
         newData = await fetch(URL, options).then((res) => {
-          return res.json();
+          return res.json() as Promise<IRes>;
         });
       }
-      if (newData.data) {
-        return newData as Promise<T>;
+      if (newData && newData.data) {
+        return newData as unknown as Promise<T>;
       } else {
         if (typeof data.errors[0].message === 'string') {
-          throw new Error(data.errors[0].message as string);
+          throw new Error(data.errors[0].message);
         } else {
           throw new Error(`Shopify data not fetched`);
         }
       }
     }
-    return data as Promise<T>;
+    return data as unknown as Promise<T>;
   } catch (err) {
     throw new Error(`Shopify data not fetched`);
   }
