@@ -54,9 +54,7 @@ export const HeroSection = ({
           </CustomLink>
         </div>
       </div>
-      <div className="flex relative h-[75%] w-full order-first sm:order-last animate-showDownSection opacity-0">
         <HeroBackdrop />
-      </div>
     </div>
   );
 };
