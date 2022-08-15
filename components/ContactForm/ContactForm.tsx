@@ -43,11 +43,11 @@ export const ContactForm = () => {
         });
       }}
     >
-      <div className="text-center md:text-left">
-        <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold text-primary">
+      <div className="text-center lg:text-left">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-primary">
           Get in touch with us
         </h1>
-        <p className="my-8 text-md lg:text-xl text-darkestGrey">
+        <p className="my-8 text-md lg:text-lg xl:text-xl text-darkestGrey">
           Our friendly team would love to hear from you!
         </p>
       </div>
@@ -60,7 +60,7 @@ export const ContactForm = () => {
           type={'firstName'}
           error={errors.firstName}
         >
-          <CustomInput placeholder={'First name'} />
+          <CustomInput id="firstName" placeholder={'First name'} />
         </FieldWithController>
         <FieldWithController
           required
@@ -70,7 +70,7 @@ export const ContactForm = () => {
           type={'lastName'}
           error={errors.lastName}
         >
-          <CustomInput placeholder={'Last name'} />
+          <CustomInput id="lastName" placeholder={'Last name'} />
         </FieldWithController>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-0 md:gap-x-2 mb-0 xl:mb-4">
@@ -87,7 +87,7 @@ export const ContactForm = () => {
           }}
           error={errors.email}
         >
-          <CustomInput placeholder={'Enter your email'} />
+          <CustomInput id="email" placeholder={'Enter your email'} />
         </FieldWithController>
         <FieldWithController
           required
@@ -101,7 +101,7 @@ export const ContactForm = () => {
           }}
           error={errors.phone}
         >
-          <CustomInput placeholder={'Enter your phone number'} />
+          <CustomInput id="phone" placeholder={'Enter your phone number'} />
         </FieldWithController>
       </div>
       <FieldWithController
@@ -112,7 +112,7 @@ export const ContactForm = () => {
         type={'message'}
         error={errors.message}
       >
-        <CustomTextArea placeholder={'Write your message'} />
+        <CustomTextArea id="message" placeholder={'Write your message'} />
       </FieldWithController>
       <Button
         standart

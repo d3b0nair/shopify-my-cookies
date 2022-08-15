@@ -15,7 +15,7 @@ export const FieldWithController = ({
   return (
     <span className={`${className ? className : ''}`}>
       {label && (
-        <label htmlFor={type} className="text-darkestGrey">
+        <label htmlFor={type} className="text-darkestGrey font-semibold">
           {label}
         </label>
       )}
