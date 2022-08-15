@@ -4,7 +4,7 @@ import {
   MenuIcon as OpenIcon,
 } from '@heroicons/react/outline';
 import { Fragment } from 'react';
-import { CustomLink, IconWithStyle } from '..';
+import { CustomLink, IconWithStyle, Logo } from '..';
 import { mobileMenuList, menuList } from '../../utils/menuBuilder';
 import { NavBarProps } from '../NavBar/NavBar.props';
 
@@ -58,12 +58,19 @@ export const NavBarResponsive = ({
     );
   });
 
-  const buttonStyle = `bg-zinc-50 rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-in-out duration-300 text-grey hover:text-accent`;
+  const buttonStyle = `bg-zinc-50 fixed rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-in-out duration-300 text-grey hover:text-accent`;
 
   const OpenButton = () => (
-    <Popover.Button aria-label="open navigation" className={buttonStyle}>
-      <OpenIcon width={44} height={44} />
-    </Popover.Button>
+    <div className={`${currentPage !== '/' ? 'my-4' : ''}`}>
+      <div className={`${currentPage !== '/' ? 'flex flex-row-reverse' : ''}`}>
+        <Popover.Button aria-label="open navigation" className={buttonStyle}>
+          <OpenIcon width={44} height={44} />
+        </Popover.Button>
+      </div>
+      {currentPage !== '/' ? (
+        <Logo className="flex justify-center sm:justify-start fill-accent stroke-accentLighter w-full" />
+      ) : null}
+    </div>
   );
 
   const CloseButton = ({ open }: { open: boolean }) => (
@@ -71,14 +78,14 @@ export const NavBarResponsive = ({
       aria-label="close navigation"
       className={`${
         open ? 'opacity-1' : 'opacity-0'
-      }  ${buttonStyle} absolute bottom-[20%] right-1/2 translate-x-1/2`}
+      }  ${buttonStyle} absolute bottom-0 mb-32 right-1/2 translate-x-1/2`}
     >
       <CloseIcon width={44} height={44} />
     </button>
   );
 
   return (
-    <Popover className="md:hidden block fixed z-[9999] top-[25px]">
+    <Popover className="md:hidden block z-[9999] w-full">
       {({ open }: { open: boolean }) => (
         <>
           <OpenButton />

@@ -1,11 +1,12 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
-import { FieldError } from 'react-hook-form';
 
-export interface InputProps
+export interface CustomInputProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
-  heroStyle?: boolean;
-  error?: FieldError;
+  id?: string | undefined;
+  placeholder?: string | undefined;
+  value?: string | undefined;
+  isForSubscribtionForm?: boolean;
 }
