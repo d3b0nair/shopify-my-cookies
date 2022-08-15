@@ -25,3 +25,5 @@ export * from './RecommendedList/RecommendedList';
 export * from './CarouselSliderButton/CarouselSliderButton';
 export * from './FeaturesInfo/FeaturesInfo';
 export * from './AnimateWithInView/AnimateWithInView';
+export * from './ContactFormMap/ContactFormMap';
+export * from './FormInput/FormInput';
