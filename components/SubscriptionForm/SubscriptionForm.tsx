@@ -3,17 +3,20 @@ import {
   CheckIcon as SuccessIcon,
   XIcon as ErrorIcon,
 } from '@heroicons/react/outline';
-import { Input } from '..';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { CustomInput, FieldWithController } from '..';
+import {
+  useForm,
+  SubmitHandler,
+  Control as ControlType,
+} from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
 export const SubscriptionForm = () => {
   interface IFormInput {
     email: string;
   }
-
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -45,23 +48,19 @@ export const SubscriptionForm = () => {
         });
       }}
     >
-      <Input
+      <FieldWithController
+        required
+        control={control as unknown as ControlType}
+        type={'email'}
+        customPattern={{
+          value:
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          message: 'Please enter a valid email address',
+        }}
         error={errors.email}
-        type="email"
-        {...register('email', {
-          required: {
-            value: true,
-            message: 'Enter an email address',
-          },
-          pattern: {
-            value:
-              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-            message: 'Please enter a valid email address',
-          },
-        })}
-        className="mt-0 w-full md:px-6 px-9 md:py-4 py-6 rounded-full text-sm text-grey focus:text-black outline-primary"
-        placeholder="Enter your email here..."
-      />
+      >
+        <CustomInput isForSubscribtionForm placeholder={'Enter your email'} />
+      </FieldWithController>
       <button
         aria-label="subscripe email address"
         role="button"
