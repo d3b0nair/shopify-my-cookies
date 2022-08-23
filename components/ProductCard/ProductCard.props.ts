@@ -4,11 +4,11 @@ import {
   MouseEvent,
   TouchEvent,
 } from 'react';
-import { IProductModel } from '../../interfaces/products.interface';
+import { IProduct } from '../../interfaces/products.interface';
 
 export interface ProductCardProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  product: Omit<IProductModel, 'variants' | 'options'>;
+  product: IProduct | Omit<IProduct, 'variants' | 'options'>;
   className?: string;
   cardStyle: 'activeCard' | 'prevCard' | 'nextCard' | 'hidden';
   cardsLength: number;

@@ -6,7 +6,7 @@ export const RecommendedList = ({
   selectedProduct,
 }: RecommendedListProps): JSX.Element => {
   const products = recomendedProducts.filter(
-    (item) => item.node.id !== selectedProduct.id
+    (item) => item.id !== selectedProduct.id
   );
   return (
     <div className="flex flex-col">

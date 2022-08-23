@@ -1,14 +1,14 @@
 import type { NextPage } from 'next';
 import { getProductsInCollection } from '../lib/shopify';
 import { HomePage } from '../page-components';
-import { StoreProps } from './store';
+import { HomePageProps } from '../page-components/HomePageComponent/HomePage.props';
 
-const Home: NextPage<StoreProps> = ({ products }: StoreProps): JSX.Element => {
+const Home: NextPage<HomePageProps> = ({ products }: HomePageProps): JSX.Element => {
   return <HomePage products={products} />;
 };
 
 export async function getStaticProps() {
-  const products = await getProductsInCollection();
+  const products = await getProductsInCollection('best-sellers');
   if (!products) {
     return {
       notFound: true,

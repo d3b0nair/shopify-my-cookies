@@ -1,30 +1,3 @@
-export interface IProductModel {
-  id: string;
-  title: string;
-  handle: string;
-  description?: string;
-  images: {
-    edges: Array<{
-      node: IImageModel;
-    }>;
-  };
-  options: Array<IOptionModel>;
-  variants: {
-    edges: Array<{
-      node: IVariantModel;
-    }>;
-  };
-  priceRange: {
-    minVariantPrice: {
-      amount: number;
-    };
-  };
-}
-export interface IProductsListModel {
-  edges: Array<{
-    node: IProductModel;
-  }>;
-}
 export interface IImageModel {
   url: string;
   altText: string;
@@ -47,20 +20,17 @@ export interface IVariantModel {
   };
 }
 
-export interface IRecommendedProducts {
-  data: {
-    product: {
-      collections: {
-        edges: Array<{
-          node: {
-            products: {
-              edges: Array<{
-                node: Omit<IProductModel, 'variants' | 'options'>;
-              }>;
-            };
-          };
-        }>;
-      };
+export interface IProduct {
+  id: string;
+  title: string;
+  handle: string;
+  description?: string | undefined;
+  options: Array<IOptionModel>;
+  priceRange: {
+    minVariantPrice: {
+      amount: number;
     };
   };
+  variants: Array<IVariantModel>;
+  images: Array<IImageModel>;
 }

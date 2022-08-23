@@ -1,6 +1,31 @@
-import { IOptionModel, IProductModel } from './products.interface';
+import { IImageModel, IOptionModel, IVariantModel } from './products.interface';
 
-export type getProductQueryType = { data: { product: IProductModel } };
+export interface IShopifyProductModel {
+  id: string;
+  title: string;
+  handle: string;
+  description?: string;
+  images: {
+    edges: [
+      {
+        node: IImageModel;
+      }
+    ];
+  };
+  options: Array<IOptionModel>;
+  variants: {
+    edges: Array<{
+      node: IVariantModel;
+    }>;
+  };
+  priceRange: {
+    minVariantPrice: {
+      amount: number;
+    };
+  };
+}
+
+export type getProductQueryType = { data: { product: IShopifyProductModel } };
 
 export interface IallProductsQuery {
   data: { products: { edges: Array<IgetAllProductsReturn> } };
@@ -10,17 +35,20 @@ export interface IgetAllProductsReturn {
   node: { handle: string; id: string };
 }
 
-export type lineItemsType = {
-  handle: string;
-  id: string;
-  image: string;
-  options: Array<IOptionModel>;
-  title: string;
-  variantPrice: string;
-  quantity: number;
-  variantTitle: string;
-};
-
-export interface IProductsInCollection {
-  node: Omit<IProductModel, 'description' | 'options' | 'variants'>;
+export interface IRecommendedProducts {
+  data: {
+    product: {
+      collections: {
+        edges: Array<{
+          node: {
+            products: {
+              edges: Array<{
+                node: Omit<IShopifyProductModel, 'variants' | 'options'>;
+              }>;
+            };
+          };
+        }>;
+      };
+    };
+  };
 }

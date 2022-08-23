@@ -1,9 +1,9 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
-import { IProductModel } from '../../interfaces/products.interface';
+import { IProduct } from '../../interfaces/products.interface';
 
 export interface ProductFormProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  product: IProductModel;
+  product: IProduct;
   children?: ReactNode;
 }
 
