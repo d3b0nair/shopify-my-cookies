@@ -11,7 +11,7 @@ export const ProductPageComponent = ({
   product,
   ...props
 }: ProductPageComponentProps): JSX.Element => {
-  const { altText, url } = product.images.edges[0].node;
+  const { altText, url } = product.images[0];
   return (
     <div
       className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] max-w-[864px] gap-[20px] mx-auto mt-28"

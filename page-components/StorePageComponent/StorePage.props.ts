@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { IProductModel } from '../../interfaces/products.interface';
+import { IProduct } from '../../interfaces/products.interface';
 
 export interface StorePageProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  products: Array<{ node: IProductModel }>;
+  collections: Array<{ collectionHandle: string; products: IProduct[] }>;
 }

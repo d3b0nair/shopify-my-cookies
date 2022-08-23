@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { IProductModel } from '../../interfaces/products.interface';
+import { IProduct } from '../../interfaces/products.interface';
 
 export interface ProductPageComponentProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  product: IProductModel;
+  product: IProduct;
 }

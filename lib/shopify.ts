@@ -1,18 +1,15 @@
 import {
   ICheckoutCreateMutationModel,
-  ICheckoutModel,
   IcheckoutLineItemsReplaceModel,
 } from '../interfaces/checkout.interface';
-import { IHomePageCollectionModel } from '../interfaces/collection.interface';
 import {
-  IProductModel,
+  IAllCollections,
+  IHomePageCollectionModel,
+} from '../interfaces/collection.interface';
+import {
   IRecommendedProducts,
-} from '../interfaces/products.interface';
-import {
   IallProductsQuery,
   getProductQueryType,
-  IProductsInCollection,
-  IgetAllProductsReturn,
 } from '../interfaces/shopify.interface';
 import { sleep } from '../utils/helpers';
 
@@ -69,11 +66,9 @@ async function shopifyData<T>(query: string): Promise<T> {
   }
 }
 
-export const getProductsInCollection = async (): Promise<
-  Array<IProductsInCollection> | Record<string, never>
-> => {
+export const getProductsInCollection = async (handle: string) => {
   const query = `{
-    collection(handle: "frontpage") {
+    collection(handle: "${handle}") {
       title
       products(first: 25) {
         edges {
@@ -103,13 +98,13 @@ export const getProductsInCollection = async (): Promise<
   `;
 
   const res: IHomePageCollectionModel = await shopifyData(query);
-
-  return res.data.collection.products.edges;
+  const products = res.data.collection.products.edges.map(({ node }) => {
+    return { ...node, images: node.images.edges.map(({ node }) => node) };
+  });
+  return products;
 };
 
-export const getAllProducts = async (): Promise<
-  Array<IgetAllProductsReturn>
-> => {
+export const getAllProducts = async () => {
   const query = `{
     products(first: 25) {
       edges {
@@ -122,11 +117,11 @@ export const getAllProducts = async (): Promise<
   }
   `;
   const res: IallProductsQuery = await shopifyData(query);
-
-  return res.data.products.edges;
+  const allProducts = res.data.products.edges.map(({ node }) => node);
+  return allProducts;
 };
 
-export const getProduct = async (handle: string): Promise<IProductModel> => {
+export const getProduct = async (handle: string) => {
   const query = `{
     product(handle: "${handle}") {
       id
@@ -169,12 +164,17 @@ export const getProduct = async (handle: string): Promise<IProductModel> => {
   }`;
 
   const res: getProductQueryType = await shopifyData(query);
-  return res.data.product;
+  const product = {
+    ...res.data.product,
+    images: res.data.product.images.edges.map(({ node }) => node),
+    variants: res.data.product.variants.edges.map(({ node }) => node),
+  };
+  return product;
 };
 
 export const createCheckout = async (
   lineItems: Array<{ id: string; quantity: number }>
-): Promise<Omit<ICheckoutModel, 'lineItems'>> => {
+) => {
   const lineItemsObject = lineItems.map((item) => {
     return `{
       variantId: "${item.id}",
@@ -234,13 +234,7 @@ export const updateCheckout = async (
   }
 };
 
-export const getRecomendedProducts = async (
-  handle: string
-): Promise<
-  {
-    node: Omit<IProductModel, 'variants' | 'options'>;
-  }[]
-> => {
+export const getRecomendedProducts = async (handle: string) => {
   const query = `{
     product(handle: "${handle}") {
       collections(first: 1) {
@@ -277,6 +271,63 @@ export const getRecomendedProducts = async (
 
   `;
   const res: IRecommendedProducts = await shopifyData(query);
+  const recProducts =
+    res.data.product.collections.edges[0].node.products.edges.map(
+      ({ node }) => {
+        const images = node.images.edges.map(({ node }) => node);
+        return {
+          ...node,
+          images,
+        };
+      }
+    );
+  return recProducts;
+};
 
-  return res.data.product.collections.edges[0].node.products.edges;
+export const getAllCollections = async () => {
+  const query = `{
+    collections(first: 250) {
+      edges {
+        node {
+          handle
+          products(first: 250) {
+            edges {
+              node {
+                id
+                title
+                description
+                handle
+                priceRange {
+                  minVariantPrice {
+                    amount
+                  }
+                }
+                images(first: 5) {
+                  edges {
+                    node {
+                      url
+                      altText
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }`;
+
+  const res: IAllCollections = await shopifyData(query);
+  const handleAndProductsPairs = res.data.collections.edges.map(({ node }) => {
+    const products = node.products.edges.map(({ node }) => {
+      const images = node.images.edges.map(({ node }) => node);
+      return { ...node, images };
+    });
+    return {
+      collectionHandle: node.handle,
+      products,
+    };
+  });
+  return handleAndProductsPairs;
 };

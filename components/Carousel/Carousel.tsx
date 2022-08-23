@@ -49,7 +49,7 @@ export const Carousel = ({
             }
             return (
               <Suspense
-                key={`suspense-${product.node.id}`}
+                key={`suspense-${product.id}`}
                 fallback={`Loading...`}
               >
                 <DynamicProductCard
@@ -58,8 +58,8 @@ export const Carousel = ({
                   selectedCard={selectedElement.index}
                   cardsLength={products.length - 1}
                   cardStyle={position}
-                  key={`productCard-${product.node.id}`}
-                  product={product.node}
+                  key={`productCard-${product.id}`}
+                  product={product}
                   transitionDuration={transitionDuration}
                   onClick={() => {
                     return !isGrabbing

@@ -4,7 +4,6 @@ import { floatToUSDCurrency } from '../../utils/helpers';
 import {
   allOptionsType,
   ProductFormProps,
-  IVariant,
 } from './ProductForm.props';
 import { CartContext } from '../../context/shopContext';
 import { IOptionModel } from '../../interfaces/products.interface';
@@ -18,10 +17,9 @@ export const ProductForm = ({
   const [variantQuantity, setVariantQuantity] = useState<number>(0);
   const [isAddingItemToCart, setIsAddingItemToCart] = useState<boolean>(false);
 
-  const allVariantOptions: Array<IVariant> =
-    product.variants.edges &&
-    product.variants.edges.map(({ node }) => {
-      const variant = node;
+  const allVariantOptions =
+    product.variants &&
+    product.variants.map((variant) => {
       const allOptions: allOptionsType = {};
 
       variant.selectedOptions.map((option) => {
@@ -92,7 +90,7 @@ export const ProductForm = ({
       <div>
         <h2 className="text-3xl font-bold my-1 text-accent">{product.title}</h2>
         <span className="text-2xl">
-          {floatToUSDCurrency(product.variants.edges[0].node.priceV2.amount)}
+          {floatToUSDCurrency(product.variants[0].priceV2.amount)}
         </span>
       </div>
       <div className="my-5">

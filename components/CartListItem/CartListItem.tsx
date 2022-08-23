@@ -6,12 +6,12 @@ import { CartListItemProps } from './CartListItem.props';
 import { useLayoutEffect, useState } from 'react';
 
 export const CartListItem = ({
-  product,
+  productVariant,
   setCartOpen,
   removeCartItem,
   updateQty,
 }: CartListItemProps): JSX.Element => {
-  const [qty, setQty] = useState<number>(product.quantity);
+  const [qty, setQty] = useState<number>(productVariant.quantity);
   const [isChangingQty, setIsChangingQty] = useState<boolean>(false);
 
   const minQty = 0;
@@ -22,19 +22,19 @@ export const CartListItem = ({
     if (isChangingQty) {
       if (qty === 0) {
         timer = setTimeout(() => {
-          void removeCartItem(product.id);
+          void removeCartItem(productVariant.id);
           setIsChangingQty(false);
         }, 200);
       } else {
         timer = setTimeout(() => {
-          void updateQty(product, qty);
+          void updateQty(productVariant, qty);
           setIsChangingQty(false);
         }, 300);
       }
     }
 
     return () => clearTimeout(timer);
-  }, [isChangingQty, product, qty, removeCartItem, updateQty]);
+  }, [isChangingQty, productVariant, qty, removeCartItem, updateQty]);
 
   const handleOnChange = (evt: React.FormEvent<HTMLInputElement>) => {
     evt.preventDefault();
@@ -61,11 +61,11 @@ export const CartListItem = ({
   const iconClasses = 'w-4 h-4 hover:stroke-accent active:stroke-accent';
 
   return (
-    <li key={product.id} className="flex py-6">
+    <li key={productVariant.id} className="flex py-6">
       <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
         <Image
-          src={product.image}
-          alt={product.title}
+          src={productVariant.image}
+          alt={productVariant.title}
           layout="fill"
           objectFit="cover"
           quality={40}
@@ -76,20 +76,20 @@ export const CartListItem = ({
           <div className="flex justify-between items-center text-base font-medium text-gray-900">
             <h3>
               <CustomLink
-                href={`/products/${product.handle}`}
+                href={`/products/${productVariant.handle}`}
                 className="text-sm sm:text-md"
               >
                 <span
                   className="text-primary hover:text-accent"
                   onClick={() => setCartOpen(false)}
                 >
-                  {product.title}
+                  {productVariant.title}
                 </span>
               </CustomLink>
             </h3>
-            <p className="ml-4">{floatToUSDCurrency(product.variantPrice)}</p>
+            <p className="ml-4">{floatToUSDCurrency(productVariant.variantPrice)}</p>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{product.variantTitle}</p>
+          <p className="mt-1 text-sm text-gray-500">{productVariant.variantTitle}</p>
         </div>
         <div className="flex sm:flex-1 flex-col justify-between text-sm">
           <fieldset>
@@ -105,7 +105,7 @@ export const CartListItem = ({
                 max={maxQty}
                 name="quantity"
                 type="number"
-                placeholder={product.quantity.toString()}
+                placeholder={productVariant.quantity.toString()}
                 value={qty.toString()}
                 onChange={handleOnChange}
               />
@@ -118,7 +118,7 @@ export const CartListItem = ({
           <div className="flex self-end">
             <Button
               onClick={() => {
-                void removeCartItem(product.id);
+                void removeCartItem(productVariant.id);
               }}
               transparent
               type="button"

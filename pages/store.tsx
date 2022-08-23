@@ -1,30 +1,25 @@
 import type { NextPage } from 'next';
-import { getProductsInCollection } from '../lib/shopify';
-import { IProductModel } from '../interfaces/products.interface';
+import { getAllCollections } from '../lib/shopify';
 import { StorePage } from '../page-components/index';
+import { StorePageProps } from '../page-components/StorePageComponent/StorePage.props';
 
-const Store: NextPage<StoreProps> = ({
-  products,
+const Store: NextPage<StorePageProps> = ({
+  collections,
   ...props
-}: StoreProps): JSX.Element => {
-  return (
-    <StorePage products={products} {...props} />
-  );
+}: StorePageProps): JSX.Element => {
+  return <StorePage collections={collections} {...props} />;
 };
 
 export default Store;
 
 export async function getStaticProps() {
-  const products = await getProductsInCollection();
-  if (!products) {
+  const collections = await getAllCollections();
+  if (!collections) {
     return {
       notFound: true,
     };
   }
   return {
-    props: { products },
+    props: { collections },
   };
-}
-export interface StoreProps extends Record<string, unknown> {
-  products: Array<{ node: IProductModel }>;
 }

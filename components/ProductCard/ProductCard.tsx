@@ -27,8 +27,8 @@ export const ProductCard = ({
       : setDirectionOfHiddenCard('right');
   }, [currentIndex, directionOfHiddenCard, selectedCard]);
 
-  const { handle, title, description } = product;
-  const { url, altText } = product.images.edges[0].node;
+  const { handle, title, description, images } = product;
+  const { url, altText } = images[0];
 
   const price = floatToUSDCurrency(product.priceRange.minVariantPrice.amount);
 

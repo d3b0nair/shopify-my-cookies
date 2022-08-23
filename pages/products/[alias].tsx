@@ -9,10 +9,10 @@ import type {
   GetStaticPropsContext,
   NextPage,
 } from 'next';
-import { IProductModel } from '../../interfaces/products.interface';
 import { ParsedUrlQuery } from 'querystring';
 import { ProductPageComponent } from '../../page-components';
 import { RecommendedList } from '../../components';
+import { IProduct } from '../../interfaces/products.interface';
 
 const ProductPage: NextPage<ProductPageProps> = ({
   selectedProduct,
@@ -21,7 +21,10 @@ const ProductPage: NextPage<ProductPageProps> = ({
   return (
     <div className="flex flex-col">
       <ProductPageComponent product={selectedProduct} />
-      <RecommendedList selectedProduct={selectedProduct} recomendedProducts={recomendedProducts} />
+      <RecommendedList
+        selectedProduct={selectedProduct}
+        recomendedProducts={recomendedProducts}
+      />
     </div>
   );
 };
@@ -29,7 +32,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
 export const getStaticPaths: GetStaticPaths = async () => {
   const products = await getAllProducts();
   const paths = products.map((item) => {
-    const productHandler = item.node.handle;
+    const productHandler = item.handle;
     return { params: { alias: productHandler.toString() } };
   });
   return {
@@ -64,11 +67,9 @@ export const getStaticProps: GetStaticProps<ProductPageProps> = async ({
   };
 };
 
-interface ProductPageProps {
-  selectedProduct: IProductModel;
-  recomendedProducts: {
-    node: Omit<IProductModel, 'variants' | 'options'>;
-  }[];
+interface ProductPageProps extends Record<string, unknown> {
+  selectedProduct: IProduct;
+  recomendedProducts: Omit<IProduct, 'variants' | 'options'>[];
 }
 
 export default ProductPage;

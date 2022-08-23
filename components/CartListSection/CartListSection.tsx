@@ -18,7 +18,7 @@ export const CartListSection = ({
             {cart.map((product, i) => (
               <CartListItem
                 key={`CartItem-${product.id} ${i}}`}
-                product={product}
+                productVariant={product}
                 setCartOpen={setCartOpen}
                 removeCartItem={removeCartItem}
                 updateQty={updateQty}
