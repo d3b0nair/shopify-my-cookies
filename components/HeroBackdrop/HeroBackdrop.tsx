@@ -32,7 +32,7 @@ export const HeroBackdrop = (): JSX.Element => {
   };
 
   return (
-    <div className="z-30 flex relative h-[75%] w-full order-first sm:order-last animate-showDownSection opacity-0">
+    <div className="z-30 flex relative min-h-[325px] h-[75%] w-full order-first sm:order-last animate-showDownSection opacity-0">
       <div
         style={{ borderRadius: '0% 100% 0% 100% / 0% 0% 100% 100%' }}
         className="flex text-white bg-accentLighter flex-col justify-evenly absolute  items-end top-[-17%] right-[-12%] w-[112%] h-[117%] sm:right-[-38%] sm:top-[-59%] sm:w-[202%] md:w-[200%] lg:w-[191%] sm:h-[159%] 2xl:w-[171%] 2xl:right-[-40%] select-none"

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { PlusIcon, MinusIcon } from '@heroicons/react/outline';
 import { floatToUSDCurrency } from '../../utils/helpers';
-import { Button, CustomLink, Input } from '../index';
+import { Button, CustomLink, CustomInput } from '../index';
 import { CartListItemProps } from './CartListItem.props';
 import { useLayoutEffect, useState } from 'react';
 
@@ -99,14 +99,14 @@ export const CartListItem = ({
                 <MinusIcon strokeWidth={1} className={`${iconClasses}`} />
                 <span className="sr-only">Decrease product quantity</span>
               </button>
-              <Input
+              <CustomInput
                 className="text-center outline-none"
                 min={minQty}
                 max={maxQty}
                 name="quantity"
                 type="number"
                 placeholder={productVariant.quantity.toString()}
-                value={qty}
+                value={qty.toString()}
                 onChange={handleOnChange}
               />
               <button onClick={increaseQty}>
