@@ -9,12 +9,15 @@ const DynamicProductForm = dynamic(
 
 export const ProductPageComponent = ({
   product,
+  className,
   ...props
 }: ProductPageComponentProps): JSX.Element => {
   const { altText, url } = product.images[0];
   return (
     <div
-      className="grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] max-w-[864px] gap-[20px] mx-auto mt-28"
+      className={`${
+        className ? className : ''
+      } grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] max-w-[864px] gap-[20px] mx-auto mt-28`}
       {...props}
     >
       <ProductPageImage altText={altText} url={url} />

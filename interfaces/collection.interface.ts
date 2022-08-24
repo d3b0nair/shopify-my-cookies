@@ -20,7 +20,7 @@ export interface IAllCollections {
       edges: [
         {
           node: {
-            handle: string;
+            title: string;
             products: {
               edges: [
                 {

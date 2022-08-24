@@ -19,7 +19,7 @@ const Header = (): JSX.Element => {
     <header
       className={`top-0 z-[40] absolute sm:relative w-full  ${
         currentPage !== '/'
-          ? 'md:bg-accentLighter py-1'
+          ? 'bg-darkestGrey py-1 border-b-4 border-primary'
           : 'md:animate-showDownSection py-8'
       }`}
     >

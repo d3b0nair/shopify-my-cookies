@@ -20,6 +20,7 @@ export const Carousel = ({
   const transitionDuration = 300;
   const [isGrabbing, handleEventFunction, selectedElement, slideTo] =
     useCarousel(products.length, transitionDuration);
+  const { index, setIndex } = selectedElement;
 
   return (
     <div {...props} className={`${className ? className : ''}`}>
@@ -30,32 +31,31 @@ export const Carousel = ({
             isSmallSize ? 'h-[350px]' : 'h-[450px] sm:h-[500px] lg:h-[550px]'
           } `}
         >
-            <CarouselSliderButton
-              action={() => slideTo('left')}
-              direction={'left'}
-              isSmallSize={isSmallSize}
-            />
+          <CarouselSliderButton
+            action={() => slideTo('left')}
+            direction={'left'}
+            isSmallSize={isSmallSize}
+          />
           {products.map((product, i) => {
             let position: 'activeCard' | 'prevCard' | 'nextCard' | 'hidden';
-            if (Math.abs(selectedElement.index - i) < 2) {
+            if (products.length === 1) {
+              position = 'activeCard';
+            } else if (Math.abs(index - i) < 2) {
               position =
-                i === selectedElement.index
+                i === index
                   ? 'activeCard'
-                  : i > selectedElement.index
+                  : i > index
                   ? 'nextCard'
                   : 'prevCard';
             } else {
               position = 'hidden';
             }
             return (
-              <Suspense
-                key={`suspense-${product.id}`}
-                fallback={`Loading...`}
-              >
+              <Suspense key={`suspense-${product.id}`} fallback={`Loading...`}>
                 <DynamicProductCard
                   isSmallSize={isSmallSize}
                   currentIndex={i}
-                  selectedCard={selectedElement.index}
+                  selectedCard={index}
                   cardsLength={products.length - 1}
                   cardStyle={position}
                   key={`productCard-${product.id}`}
@@ -81,20 +81,20 @@ export const Carousel = ({
               </Suspense>
             );
           })}
-            <CarouselSliderButton
-              action={() => slideTo('right')}
-              direction={'right'}
-              isSmallSize={isSmallSize}
-            />
-        </div>
-          <Paginator
-            dataLength={products.length}
-            activeIndex={selectedElement.index}
-            selectProduct={selectedElement.setIndex}
-            slideRight={() => slideTo('right')}
-            slideLeft={() => slideTo('left')}
+          <CarouselSliderButton
+            action={() => slideTo('right')}
+            direction={'right'}
             isSmallSize={isSmallSize}
           />
+        </div>
+        <Paginator
+          dataLength={products.length}
+          activeIndex={index}
+          selectProduct={setIndex}
+          slideRight={() => slideTo('right')}
+          slideLeft={() => slideTo('left')}
+          isSmallSize={isSmallSize}
+        />
       </div>
     </div>
   );

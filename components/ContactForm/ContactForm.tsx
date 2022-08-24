@@ -60,7 +60,7 @@ export const ContactForm = () => {
           type={'firstName'}
           error={errors.firstName}
         >
-          <CustomInput id="firstName" placeholder={'First name'} />
+          <CustomInput id="firstName" placeholder={'Enter your first name'} />
         </FieldWithController>
         <FieldWithController
           required
@@ -70,7 +70,7 @@ export const ContactForm = () => {
           type={'lastName'}
           error={errors.lastName}
         >
-          <CustomInput id="lastName" placeholder={'Last name'} />
+          <CustomInput id="lastName" placeholder={'Enter your last name'} />
         </FieldWithController>
       </div>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-0 md:gap-x-2 mb-0 xl:mb-4">
@@ -78,7 +78,7 @@ export const ContactForm = () => {
           required
           control={control as unknown as ControlType}
           className="mb-4 xl:mb-0"
-          label={'Email'}
+          label={'Email address'}
           type={'email'}
           customPattern={{
             value:
@@ -87,13 +87,13 @@ export const ContactForm = () => {
           }}
           error={errors.email}
         >
-          <CustomInput id="email" placeholder={'Enter your email'} />
+          <CustomInput id="email" placeholder={'Enter your email address'} />
         </FieldWithController>
         <FieldWithController
           required
           control={control as unknown as ControlType}
           className="mb-4 xl:mb-0"
-          label={'Phone'}
+          label={'Phone number'}
           type={'phone'}
           customPattern={{
             value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
