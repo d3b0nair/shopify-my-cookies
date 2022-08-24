@@ -4,8 +4,10 @@ import FacebookSVG from '../../assets/svg/Facebook.svg';
 import InstagramSVG from '../../assets/svg/Instagram.svg';
 import TwitterSVG from '../../assets/svg/Twitter.svg';
 import { CustomLink, SubscriptionForm } from '../../components';
+import { useFetchOS } from '../../hooks/useFetchOS';
 
 const Footer = (): JSX.Element => {
+  const [isAndroidOrIPhone] = useFetchOS();
   const Section = ({
     title,
     className,
@@ -20,6 +22,7 @@ const Footer = (): JSX.Element => {
       </div>
     );
   };
+
   const IconContainer = ({ children }: ISimpleDivComponent): JSX.Element => {
     return (
       <div className="w-[44px] h-[44px] transition-all hover:scale-110 active:scale-100 hover:cursor-pointer ml-4">
@@ -27,10 +30,14 @@ const Footer = (): JSX.Element => {
       </div>
     );
   };
+
+  const contactInfoClasses =
+    'block !font-normal text-base hover:text-accent active:text-accentLighter';
+
   return (
     <footer className="z-20 overflow-hidden mt-[50px] relative mx-auto bg-darkestGrey border-t-4 border-primary text-white p-12 lg:p-0 lg:py-14">
       <div className="flex flex-col max-w-[1000px] mx-auto">
-        <div className="grid xl:grid-cols-4 xl:grid-rows-none sm:grid-rows-2 sm:grid-cols-2 grid-cols-1 gap-y-8 sm:gap-y-0 gap-x-0 xl:gap-x-8 sm:justify-between">
+        <div className="grid xl:grid-cols-4 xl:grid-rows-none sm:grid-rows-2 sm:grid-cols-2 grid-cols-1 gap-y-8 xl:gap-y-0 gap-x-0 xl:gap-x-8 sm:justify-between">
           <Section title="navigation">
             <nav className="flex flex-col">
               {menuList.map(({ url, title }) => {
@@ -58,9 +65,22 @@ const Footer = (): JSX.Element => {
             </p>
           </Section>
           <Section title="address">
-            <p>1600 Pennsylvania Avenue NW,</p>
-            <p>Washington, DC 20500</p>
-            <p>Tel: 123-456-7890</p>
+            <CustomLink
+              href={`${
+                isAndroidOrIPhone
+                  ? 'geo:38.897876222583534,-77.03657390000001'
+                  : 'https://goo.gl/maps/ti2oreJBbUpZwMxr7'
+              }`}
+              className={`${contactInfoClasses} `}
+            >
+              <span>1600 Pennsylvania Avenue NW, Washington, DC 20500</span>
+            </CustomLink>
+            <CustomLink
+              href="tel:+11234567890"
+              className={`${contactInfoClasses}`}
+            >
+              Tel: +1 123-456-7890
+            </CustomLink>
           </Section>
           <Section title="get it fresh" className="!mr-0">
             <p className="pb-8">

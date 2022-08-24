@@ -13,7 +13,6 @@ export interface CartContianerProps
   cartTotal: number;
   setCartOpen: Dispatch<SetStateAction<boolean>>;
   removeCartItem: (itemToRemove: string) => Promise<void>;
-  updateQty: (itemToUpdate: IVariant, qty: number) => Promise<void>;
   checkOutUrl?: string;
   resetCart: () => void;
 }

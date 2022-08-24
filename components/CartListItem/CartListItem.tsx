@@ -1,64 +1,15 @@
 import Image from 'next/image';
-import { PlusIcon, MinusIcon } from '@heroicons/react/outline';
 import { floatToUSDCurrency } from '../../utils/helpers';
-import { Button, CustomLink, CustomInput } from '../index';
+import { Button, CustomLink } from '../index';
 import { CartListItemProps } from './CartListItem.props';
-import { useLayoutEffect, useState } from 'react';
+import { useQtyController } from '../../hooks/useQtyController';
 
 export const CartListItem = ({
   productVariant,
   setCartOpen,
   removeCartItem,
-  updateQty,
 }: CartListItemProps): JSX.Element => {
-  const [qty, setQty] = useState<number>(productVariant.quantity);
-  const [isChangingQty, setIsChangingQty] = useState<boolean>(false);
-
-  const minQty = 0;
-  const maxQty = 99;
-
-  useLayoutEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    if (isChangingQty) {
-      if (qty === 0) {
-        timer = setTimeout(() => {
-          void removeCartItem(productVariant.id);
-          setIsChangingQty(false);
-        }, 200);
-      } else {
-        timer = setTimeout(() => {
-          void updateQty(productVariant, qty);
-          setIsChangingQty(false);
-        }, 300);
-      }
-    }
-
-    return () => clearTimeout(timer);
-  }, [isChangingQty, productVariant, qty, removeCartItem, updateQty]);
-
-  const handleOnChange = (evt: React.FormEvent<HTMLInputElement>) => {
-    evt.preventDefault();
-    const value = parseInt(evt.currentTarget.value);
-    if (value && value < maxQty && value > minQty) {
-      setIsChangingQty(true);
-      setQty(value);
-    }
-  };
-
-  const increaseQty = () => {
-    if (qty < 99) {
-      setIsChangingQty(true);
-      setQty(qty + 1);
-    }
-  };
-  const decreaseQty = () => {
-    if (qty > 0) {
-      setIsChangingQty(true);
-      setQty(qty - 1);
-    }
-  };
-
-  const iconClasses = 'w-4 h-4 hover:stroke-accent active:stroke-accent';
+  const [QtyControllerComponent] = useQtyController(1, productVariant);
 
   return (
     <li key={productVariant.id} className="flex py-6">
@@ -87,32 +38,19 @@ export const CartListItem = ({
                 </span>
               </CustomLink>
             </h3>
-            <p className="ml-4">{floatToUSDCurrency(productVariant.variantPrice)}</p>
+            <p className="ml-4">
+              {floatToUSDCurrency(productVariant.variantPrice)}
+            </p>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{productVariant.variantTitle}</p>
+          <p className="mt-1 text-sm text-gray-500">
+            {productVariant.variantTitle}
+          </p>
         </div>
         <div className="flex sm:flex-1 flex-col justify-between text-sm">
           <fieldset>
             <div className="flex flex-row items-center">
               <legend className="text-gray-500 mr-4">Qty:</legend>
-              <button onClick={decreaseQty}>
-                <MinusIcon strokeWidth={1} className={`${iconClasses}`} />
-                <span className="sr-only">Decrease product quantity</span>
-              </button>
-              <CustomInput
-                className="text-center outline-none"
-                min={minQty}
-                max={maxQty}
-                name="quantity"
-                type="number"
-                placeholder={productVariant.quantity.toString()}
-                value={qty.toString()}
-                onChange={handleOnChange}
-              />
-              <button onClick={increaseQty}>
-                <PlusIcon strokeWidth={1} className={`${iconClasses}`} />
-                <span className="sr-only">Increase product quantity</span>
-              </button>
+              <QtyControllerComponent />
             </div>
           </fieldset>
           <div className="flex self-end">
