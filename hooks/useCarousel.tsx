@@ -1,11 +1,18 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 export default function useCarousel(
   length: number,
   transitionDuration: number
 ) {
-  const [index, setIndex] = useState<number>(2);
+  const firstCard = length === 1 ? 0 : Math.floor(length / 2);
+  const [index, setIndex] = useState<number>(firstCard);
   const [isGrabbing, setIsGrabbing] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (length) {
+      setIndex(firstCard);
+    }
+  }, [firstCard, length, setIndex]);
 
   const handleEventFunction = (
     evt: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>

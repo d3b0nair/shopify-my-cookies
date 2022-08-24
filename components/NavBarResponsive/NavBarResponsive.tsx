@@ -58,17 +58,17 @@ export const NavBarResponsive = ({
     );
   });
 
-  const buttonStyle = `bg-zinc-50 fixed rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-in-out duration-300 text-grey hover:text-accent`;
+  const buttonStyle = `bg-zinc-50 fixed rounded-full border-2 border-accent transition-all hover:border-grey hover:scale-110 ease-in-out duration-300 hover:text-accent`;
 
   const OpenButton = () => (
     <div className={`${currentPage !== '/' ? 'my-4' : ''}`}>
       <div className={`${currentPage !== '/' ? 'flex flex-row-reverse' : ''}`}>
-        <Popover.Button aria-label="open navigation" className={buttonStyle}>
+        <Popover.Button aria-label="open navigation" className={`${buttonStyle} text-darkestGrey`}>
           <OpenIcon width={44} height={44} />
         </Popover.Button>
       </div>
       {currentPage !== '/' ? (
-        <Logo className="flex justify-center sm:justify-start fill-accent stroke-accentLighter w-full" />
+        <Logo className="flex justify-start fill-white stroke-white text-white w-[calc(100%-50px)]" />
       ) : null}
     </div>
   );
@@ -78,7 +78,7 @@ export const NavBarResponsive = ({
       aria-label="close navigation"
       className={`${
         open ? 'opacity-1' : 'opacity-0'
-      }  ${buttonStyle} absolute bottom-0 mb-32 right-1/2 translate-x-1/2`}
+      }  ${buttonStyle} text-grey absolute bottom-0 mb-32 right-1/2 translate-x-1/2`}
     >
       <CloseIcon width={44} height={44} />
     </button>

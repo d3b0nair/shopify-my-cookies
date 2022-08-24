@@ -43,15 +43,15 @@ a {
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #61423c;
+  background: #f87171;
   border: 0px none #ffffff;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #ef4444;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #61423c;
+  background: #fca5a5;
 }
 ::-webkit-scrollbar-track {
   background: #c2c2c2;
@@ -75,4 +75,18 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-block::-webkit-scrollbar {
+  display: block;
+}
+
+@media screen and (max-width: 425px) {
+  .scrollbar-block::-webkit-scrollbar {
+    display: none;
+  }
 }

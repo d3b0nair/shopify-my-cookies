@@ -289,7 +289,7 @@ export const getAllCollections = async () => {
     collections(first: 250) {
       edges {
         node {
-          handle
+          title
           products(first: 250) {
             edges {
               node {
@@ -325,7 +325,7 @@ export const getAllCollections = async () => {
       return { ...node, images };
     });
     return {
-      collectionHandle: node.handle,
+      collectionTitle: node.title,
       products,
     };
   });

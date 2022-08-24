@@ -20,8 +20,9 @@ const ProductPage: NextPage<ProductPageProps> = ({
 }): JSX.Element => {
   return (
     <div className="flex flex-col">
-      <ProductPageComponent product={selectedProduct} />
+      <ProductPageComponent className="mb-8" product={selectedProduct} />
       <RecommendedList
+        className="border-t-2"
         selectedProduct={selectedProduct}
         recomendedProducts={recomendedProducts}
       />

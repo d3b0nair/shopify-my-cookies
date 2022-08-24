@@ -1,10 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Button, ProductOption } from '..';
 import { floatToUSDCurrency } from '../../utils/helpers';
-import {
-  allOptionsType,
-  ProductFormProps,
-} from './ProductForm.props';
+import { allOptionsType, ProductFormProps } from './ProductForm.props';
 import { CartContext } from '../../context/shopContext';
 import { IOptionModel } from '../../interfaces/products.interface';
 
@@ -30,6 +27,7 @@ export const ProductForm = ({
         id: variant.id,
         title: product.title,
         handle: product.handle,
+        description: product.description,
         image: variant.image ? variant.image.url : '',
         options: allOptions,
         variantTitle: variant.title,

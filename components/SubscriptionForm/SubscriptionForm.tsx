@@ -78,7 +78,7 @@ export const SubscriptionForm = () => {
           />
         ) : (
           <SendIcon
-            className={`${actionButtonStyle} stroke-offGrey hover:stroke-accentLighter active:stroke-accent`}
+            className={`${actionButtonStyle} stroke-offGrey active:stroke-accentLighter hover:stroke-accent`}
           />
         )}
       </button>

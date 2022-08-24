@@ -28,7 +28,7 @@ const Footer = (): JSX.Element => {
     );
   };
   return (
-    <footer className="z-20 overflow-hidden mt-[50px] relative mx-auto bg-accentLighter text-white p-12 lg:p-0 lg:py-14">
+    <footer className="z-20 overflow-hidden mt-[50px] relative mx-auto bg-darkestGrey border-t-4 border-primary text-white p-12 lg:p-0 lg:py-14">
       <div className="flex flex-col max-w-[1000px] mx-auto">
         <div className="grid xl:grid-cols-4 xl:grid-rows-none sm:grid-rows-2 sm:grid-cols-2 grid-cols-1 gap-y-8 sm:gap-y-0 gap-x-0 xl:gap-x-8 sm:justify-between">
           <Section title="navigation">
@@ -36,7 +36,7 @@ const Footer = (): JSX.Element => {
               {menuList.map(({ url, title }) => {
                 return (
                   <CustomLink
-                    className="font-normal hover:text-darkestGrey"
+                    className="font-normal hover:text-accent active:text-accentLighter"
                     key={`headerLink-${url}`}
                     href={url}
                   >
