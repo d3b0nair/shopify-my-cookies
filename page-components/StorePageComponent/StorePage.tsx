@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Button, Carousel } from '../../components';
+import { useFetchOS } from '../../hooks/useFetchOS';
 import { useWindowSize } from '../../hooks/useWindowDimensions';
 import { StorePageProps } from './StorePage.props';
 
 export const StorePage = ({ collections, ...props }: StorePageProps) => {
+  const [isAndroidOrIPhone] = useFetchOS();
   const { width } = useWindowSize();
   const categories = collections.map(({ collectionTitle }) => collectionTitle);
   let bestSellersIndex = 0;
@@ -47,7 +49,11 @@ export const StorePage = ({ collections, ...props }: StorePageProps) => {
               ? 'grid-cols-1 gap-x-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-3  xl:grid-cols-6 2xl:grid-cols-8'
               : 'grid-flow-col justify-start overflow-x-scroll overflow-y-hidden'
           } ${
-            emptySpaceInCategorySection > 0 ? 'no-scrollbar' : 'scrollbar-block'
+            isAndroidOrIPhone
+              ? 'no-scrollbar'
+              : emptySpaceInCategorySection > 0
+              ? 'no-scrollbar'
+              : 'scrollbar-block'
           } select-none transition-all snap-x snap-mandatory`}
         >
           {categories.map(

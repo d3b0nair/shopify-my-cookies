@@ -8,7 +8,6 @@ export const Cart = ({ cart }: { cart: IVariant[] }) => {
     cartOpen,
     setCartOpen,
     removeCartItem,
-    updateQty,
     checkOutUrl,
     resetCart,
   } = useContext(CartContext);
@@ -23,7 +22,6 @@ export const Cart = ({ cart }: { cart: IVariant[] }) => {
       cartTotal={cartTotal}
       setCartOpen={setCartOpen}
       removeCartItem={removeCartItem}
-      updateQty={updateQty}
       checkOutUrl={checkOutUrl}
       resetCart={resetCart}
     />

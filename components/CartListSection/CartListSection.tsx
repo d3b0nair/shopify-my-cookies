@@ -8,7 +8,6 @@ export const CartListSection = ({
   cartTotal,
   setCartOpen,
   removeCartItem,
-  updateQty,
 }: CartListSectionProps) => {
   return (
     <div className="mt-8">
@@ -21,7 +20,6 @@ export const CartListSection = ({
                 productVariant={product}
                 setCartOpen={setCartOpen}
                 removeCartItem={removeCartItem}
-                updateQty={updateQty}
               />
             ))}
           </ul>

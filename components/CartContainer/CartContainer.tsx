@@ -11,7 +11,6 @@ export const CartContainer = ({
   setCartOpen,
   cartTotal,
   removeCartItem,
-  updateQty,
   checkOutUrl,
   resetCart,
 }: CartContianerProps) => {
@@ -76,7 +75,6 @@ export const CartContainer = ({
                         cartTotal={cartTotal}
                         setCartOpen={setCartOpen}
                         removeCartItem={removeCartItem}
-                        updateQty={updateQty}
                       />
                     </div>
                     <CartPriceSection
