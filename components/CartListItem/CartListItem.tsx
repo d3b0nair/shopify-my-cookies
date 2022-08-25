@@ -46,9 +46,9 @@ export const CartListItem = ({
             {productVariant.variantTitle}
           </p>
         </div>
-        <div className="flex sm:flex-1 flex-col justify-between text-sm">
-          <fieldset>
-            <div className="flex flex-row items-center">
+        <div className="flex flex-1 flex-col sm:flex-row items-end justify-between text-sm">
+          <fieldset className='self-start sm:self-auto'>
+            <div className="flex flex-row items-center my-0.5">
               <legend className="text-gray-500 mr-4">Qty:</legend>
               <QtyControllerComponent />
             </div>
@@ -60,7 +60,7 @@ export const CartListItem = ({
               }}
               transparent
               type="button"
-              className="font-medium text-base mt-6 sm:mt-0 text-primary"
+              className="font-medium text-base text-primary"
             >
               Remove
             </Button>
