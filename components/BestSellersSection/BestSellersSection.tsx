@@ -33,14 +33,17 @@ export const BestSellersSection = ({
           />
         </AnimateWithInView>
       </div>
-      <AnimateWithInView
-        animation={'animate-showUpSection delay-300'}
-        defaultState={'opacity-0'}
+      <div
         className="min-h-[100vh] sm:min-h-0 mb-0 sm:mb-[168px]" //168px height of FeaturesInfo component
       >
-        <Htag>FEATURES</Htag>
-        <FeaturesInfo />
-      </AnimateWithInView>
+        <AnimateWithInView
+          animation={'animate-showUpSection delay-300'}
+          defaultState={'opacity-0'}
+        >
+          <Htag>FEATURES</Htag>
+          <FeaturesInfo />
+        </AnimateWithInView>
+      </div>
     </>
   );
 };
