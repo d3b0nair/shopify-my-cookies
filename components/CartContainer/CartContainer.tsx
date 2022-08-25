@@ -18,7 +18,7 @@ export const CartContainer = ({
     <Transition.Root show={cartOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed z-50"
+        className="fixed z-50 selection:bg-pink-400 selection:text-white"
         onClose={() => {
           setCartOpen(!cartOpen);
         }}
