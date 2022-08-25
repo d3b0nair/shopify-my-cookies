@@ -40,7 +40,7 @@ export const Paginator = ({
   return (
     <nav
       tabIndex={0}
-      className="relative z-0 flex my-0 sm:my-16 justify-center rounded-md -space-x-px "
+      className="relative z-0 flex my-0 sm:my-16 justify-center rounded-md -space-x-px select-none"
       aria-label="Pagination"
     >
       <span

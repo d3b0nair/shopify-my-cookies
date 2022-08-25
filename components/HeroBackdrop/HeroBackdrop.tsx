@@ -66,7 +66,7 @@ export const HeroBackdrop = (): JSX.Element => {
               >
                 <Image
                   key={`selectedImage-${new Date().getTime().toString()}`}
-                  className={'object-center md:object-left lg:object-right'}
+                  className={'object-center md:object-left lg:object-right pointer-events-none select-none'}
                   src={imageUrl}
                   alt="Cookie sample"
                   layout="fill"

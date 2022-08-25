@@ -22,7 +22,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   };
   return (
     <>
-      <div className="scroll-smooth 2xl:mx-auto max-w-none max-h-max font-sans overflow-hidden">
+      <div className="scroll-smooth 2xl:mx-auto max-w-none max-h-max font-sans overflow-hidden selection:bg-pink-400 selection:text-white">
         <span
           className={`${
             isSkipLinkDisplayed

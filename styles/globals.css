@@ -6,8 +6,29 @@
   .writing-vertical-lr {
     writing-mode: vertical-lr;
   }
+
   .writing-vertical-rl {
     writing-mode: vertical-rl;
+  }
+
+  .line-between-element::after,
+  .line-between-element::before {
+    content: '';
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+
+  .line-between-element::after {
+    margin-right: -50%;
+    left: 0.5em;
+  }
+
+  .line-between-element::before {
+    margin-left: -50%;
+    right: 0.5em;
   }
 }
 

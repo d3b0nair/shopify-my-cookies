@@ -14,7 +14,11 @@ const Footer = (): JSX.Element => {
     children,
   }: ISimpleDivComponent): JSX.Element => {
     return (
-      <div className={`${className ? className : ''} flex flex-col`}>
+      <div
+        className={`${
+          className ? className : ''
+        } flex flex-col selection:bg-pink-400 selection:text-white`}
+      >
         <h2 className="text-xl mb-8 font-bold text-acce">
           {title?.toUpperCase()}:
         </h2>
@@ -90,7 +94,7 @@ const Footer = (): JSX.Element => {
           </Section>
         </div>
         <div className="flex flex-col-reverse items-center md:flex-row mt-8 md:justify-between md:items-start">
-          <span className="md:self-end">
+          <span className="md:self-end selection:bg-pink-400 selection:text-white">
             Copyright © {new Date().getFullYear()} Arsen Krochak
           </span>
           <div className="flex flex-row mb-4 sm:mb-0">
