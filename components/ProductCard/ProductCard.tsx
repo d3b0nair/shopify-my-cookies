@@ -63,7 +63,7 @@ export const ProductCard = ({
             <div className={`relative w-full ${cardClasses.setImageSizeClass}`}>
               <Image
                 draggable="false"
-                className="pointer-events-none"
+                className="pointer-events-none select-none"
                 src={url}
                 alt={altText ? altText : 'product image'}
                 layout="fill"

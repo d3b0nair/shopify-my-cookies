@@ -42,10 +42,10 @@ export const HeroSection = ({
               ripple
               primary
               style={{ transitionProperty: 'width' }}
-              className="w-full lg:w-1/2 hover:lg:w-3/5 2xl:w-1/3 hover:2xl:w-2/5 !p-0 rounded-none"
+              className="w-full lg:w-1/2 hover:lg:w-3/5 2xl:w-1/3 hover:2xl:w-2/5 !p-0 rounded-none mb-5 sm:mb-0"
             >
               <span className="flex items-center justify-between">
-                <span className="p-4 whitespace-nowrap">SHOP NOW</span>
+                <span className="p-4 whitespace-nowrap select-none">SHOP NOW</span>
                 <span className="border-l-2 ml-0 p-4">
                   <ChevronRightIcon className={`${iconClasses}`} width={1} />
                 </span>

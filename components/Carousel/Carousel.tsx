@@ -23,7 +23,12 @@ export const Carousel = ({
   const { index, setIndex } = selectedElement;
 
   return (
-    <div {...props} className={`${className ? className : ''}`}>
+    <div
+      {...props}
+      className={`${
+        className ? className : ''
+      }`}
+    >
       <div className={`${isSmallSize ? ' max-w-[864px] mx-auto' : ''}`}>
         <div
           style={{ transformStyle: 'preserve-3d' }}

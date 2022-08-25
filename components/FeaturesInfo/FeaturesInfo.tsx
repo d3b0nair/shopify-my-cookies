@@ -60,7 +60,7 @@ export const FeaturesInfo = ({
     <div
       className={`${
         className ? className : ''
-      } hidden md:flex flex-row w-full justify-around max-w-[980px] mx-auto bg-white rounded-full shadow-inner`}
+      } flex flex-col sm:flex-row w-full justify-around max-w-[980px] mx-auto sm:bg-white border-2 rounded-2xl sm:rounded-full shadow-inner`}
     >
       {featuresList.map(({ title, description, icon }, i) => {
         return (
@@ -68,10 +68,10 @@ export const FeaturesInfo = ({
             key={`feature-${title}`}
             className={`${
               i === 0
-                ? 'border-r-2'
+                ? 'sm:border-r-2 border-b-2 sm:border-b-0'
                 : i === featuresList.length - 1
-                ? 'border-l-2'
-                : ''
+                ? 'sm:border-l-2'
+                : 'border-b-2 sm:border-b-0'
             }`}
             title={title}
             description={description}

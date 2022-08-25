@@ -5,3 +5,11 @@ export interface BestSellersSectionProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   products: Array<Omit<IProduct, 'variants' | 'options'>>;
 }
+
+export interface HtagProps
+  extends DetailedHTMLProps<
+    HTMLAttributes<HTMLHeadingElement>,
+    HTMLHeadingElement
+  > {
+  children: React.ReactNode;
+}
